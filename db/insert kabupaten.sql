@@ -1,0 +1,15 @@
+INSERT INTO kabupaten (kodekabupaten, namakabupaten) VALUES
+('6101', 'Kabupaten Sambas'),
+('6102', 'Kabupaten Bengkayang'),
+('6103', 'Kabupaten Landak'),
+('6104', 'Kabupaten Mempawah'),
+('6105', 'Kabupaten Sanggau'),
+('6106', 'Kabupaten Ketapang'),
+('6107', 'Kabupaten Sintang'),
+('6108', 'Kabupaten Kapuas Hulu'),
+('6109', 'Kabupaten Sekadau'),
+('6110', 'Kabupaten Melawi'),
+('6111', 'Kabupaten Kayong Utara'),
+('6112', 'Kabupaten Kubu Raya'),
+('6171', 'Kota Pontianak'),
+('6172', 'Kota Singkawang');

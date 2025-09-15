@@ -1,5 +1,5 @@
 /*
-SQLyog Ultimate v10.42 
+SQLyog Enterprise v10.42 
 MySQL - 8.0.30 : Database - sipeka
 *********************************************************************
 */
@@ -21,51 +21,50 @@ USE `sipeka`;
 DROP TABLE IF EXISTS `kabupaten`;
 
 CREATE TABLE `kabupaten` (
-  `idkabupaten` int NOT NULL AUTO_INCREMENT,
-  `kodekabupaten` char(5) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `namakabupaten` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `idpropinsi` int DEFAULT NULL,
-  PRIMARY KEY (`idkabupaten`),
-  UNIQUE KEY `kodekabupaten` (`kodekabupaten`),
-  KEY `idpropinsi` (`idpropinsi`),
-  CONSTRAINT `kabupaten_ibfk_1` FOREIGN KEY (`idpropinsi`) REFERENCES `propinsi` (`idpropinsi`)
+  `kodekabupaten` char(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `namakabupaten` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`kodekabupaten`),
+  UNIQUE KEY `kodekabupaten` (`kodekabupaten`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `kabupaten` */
+
+insert  into `kabupaten`(`kodekabupaten`,`namakabupaten`) values ('6101','Kabupaten Sambas'),('6102','Kabupaten Bengkayang'),('6103','Kabupaten Landak'),('6104','Kabupaten Mempawah'),('6105','Kabupaten Sanggau'),('6106','Kabupaten Ketapang'),('6107','Kabupaten Sintang'),('6108','Kabupaten Kapuas Hulu'),('6109','Kabupaten Sekadau'),('6110','Kabupaten Melawi'),('6111','Kabupaten Kayong Utara'),('6112','Kabupaten Kubu Raya'),('6171','Kota Pontianak'),('6172','Kota Singkawang');
 
 /*Table structure for table `kecamatan` */
 
 DROP TABLE IF EXISTS `kecamatan`;
 
 CREATE TABLE `kecamatan` (
-  `idkecamatan` int NOT NULL AUTO_INCREMENT,
-  `kodekecamatan` char(8) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `namakecamatan` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `idkabupaten` int DEFAULT NULL,
-  PRIMARY KEY (`idkecamatan`),
-  UNIQUE KEY `kodekecamatan` (`kodekecamatan`),
-  KEY `idkabupaten` (`idkabupaten`),
-  CONSTRAINT `kecamatan_ibfk_1` FOREIGN KEY (`idkabupaten`) REFERENCES `kabupaten` (`idkabupaten`)
+  `kodekecamatan` char(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `namakecamatan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `kodekabupaten` char(5) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tglberdiri` date DEFAULT NULL,
+  PRIMARY KEY (`kodekecamatan`),
+  KEY `kodekabupaten` (`kodekabupaten`),
+  CONSTRAINT `kecamatan_ibfk_1` FOREIGN KEY (`kodekabupaten`) REFERENCES `kabupaten` (`kodekabupaten`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `kecamatan` */
+
+insert  into `kecamatan`(`kodekecamatan`,`namakecamatan`,`kodekabupaten`,`tglberdiri`) values ('610101','Sambas','6101','1950-01-01'),('610102','Tebas','6101','1950-01-01'),('610103','Selakau','6101','1950-01-01'),('610104','Galing','6101','1950-01-01'),('610105','Tekarang','6101','1950-01-01'),('610201','Bengkayang','6102','1950-01-01'),('610202','Samalantan','6102','1950-01-01'),('610203','Ledo','6102','1950-01-01'),('610204','Lumar','6102','1950-01-01'),('610205','Suti Semarang','6102','1950-01-01'),('610206','Sungai Betung','6102','1950-01-01'),('610301','Ngabang','6103','1950-01-01'),('610302','Menjalin','6103','1950-01-01'),('610303','Mempawah Hulu','6103','1950-01-01'),('610304','Menyuke','6103','1950-01-01'),('610305','Sengah Temila','6103','1950-01-01'),('610306','Jelimpo','6103','1950-01-01'),('610401','Toho','6104','1950-01-01'),('610402','Sadaniang','6104','1950-01-01'),('610403','Segedong','6104','1950-01-01'),('610404','Mempawah Hilir','6104','1950-01-01'),('610501','Kapuas','6105','1950-01-01'),('610502','Parindu','6105','1950-01-01'),('610503','Tayan Hulu','6105','1950-01-01'),('610504','Tayan Hilir','6105','1950-01-01'),('610505','Toba','6105','1950-01-01'),('610506','Noyan','6105','1950-01-01'),('610507','Mukok','6105','1950-01-01'),('610508','Balai','6105','1950-01-01'),('610509','Jangkang','6105','1950-01-01'),('610601','Ketapang','6106','1950-01-01'),('610602','Hulu Sungai','6106','1950-01-01'),('610603','Simpang Dua','6106','1950-01-01'),('610604','Pemahan','6106','1950-01-01'),('610605','Simpang Hulu','6106','1950-01-01'),('610701','Sintang','6107','1950-01-01'),('610702','Binjai Hulu','6107','1950-01-01'),('610703','Serawai','6107','1950-01-01'),('610704','Ketungau Tengah','6107','1950-01-01'),('610705','Ketungau Hilir','6107','1950-01-01'),('610706','Kayen Hulu','6107','1950-01-01'),('610707','Kayen Hilir','6107','1950-01-01'),('610708','Sepauk','6107','1950-01-01'),('610801','Putussibau Selatan','6108','1950-01-01'),('610802','Putussibau Utara','6108','1950-01-01'),('610803','Badau','6108','1950-01-01'),('610804','Batang Lupar','6108','1950-01-01'),('610805','Embaloh Hulu','6108','1950-01-01'),('610806','Seberuang','6108','1950-01-01'),('610807','Semitau','6108','1950-01-01'),('610808','Bunut Hulu','6108','1950-01-01'),('610809','Suhaid','6108','1950-01-01'),('610810','Pengkadan','6108','1950-01-01'),('610811','Silat Hilir','6108','1950-01-01'),('610812','Silat Hulu','6108','1950-01-01'),('610813','Jongkong','6108','1950-01-01'),('610901','Sekadau Hilir','6109','1950-01-01'),('610902','Sekadau Hulu','6109','1950-01-01'),('610903','Nanga Taman','6109','1950-01-01'),('611001','Nanga Pinang','6110','1950-01-01'),('611002','Belimbing','6110','1950-01-01'),('611003','Ella Hilir','6110','1950-01-01'),('611004','Menukung','6110','1950-01-01'),('611005','Sokan','6110','1950-01-01'),('611006','Sayan','6110','1950-01-01'),('611101','Simpang Hilir','6111','1950-01-01'),('611102','Pulau Maya','6111','1950-01-01'),('611103','Simpang Terus','6111','1950-01-01'),('611201','Kubu','6112','1950-01-01'),('611202','Teluk Pakedai','6112','1950-01-01'),('611203','Terentang','6112','1950-01-01'),('611204','Batu Ampar','6112','1950-01-01'),('611205','Sungai Raya','6112','1950-01-01'),('611206','Sungai Ambawang','6112','1950-01-01'),('617101','Pontianak Selatan','6171','1950-01-01'),('617102','Pontianak Timur','6171','1950-01-01'),('617103','Pontianak Barat','6171','1950-01-01'),('617104','Pontianak Utara','6171','1950-01-01'),('617105','Pontianak Kota','6171','1950-01-01'),('617201','Singkawang Tengah','6172','1950-01-01'),('617202','Singkawang Utara','6172','1950-01-01'),('617203','Singkawang Selatan','6172','1950-01-01'),('617204','Singkawang Barat','6172','1950-01-01'),('617205','Singkawang Timur','6172','1950-01-01');
 
 /*Table structure for table `kelurahan` */
 
 DROP TABLE IF EXISTS `kelurahan`;
 
 CREATE TABLE `kelurahan` (
-  `idkelurahan` int NOT NULL AUTO_INCREMENT,
-  `kodekelurahan` char(13) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `namakelurahan` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `idkecamatan` int DEFAULT NULL,
-  PRIMARY KEY (`idkelurahan`),
-  UNIQUE KEY `kodekelurahan` (`kodekelurahan`),
-  KEY `idkecamatan` (`idkecamatan`),
-  CONSTRAINT `kelurahan_ibfk_1` FOREIGN KEY (`idkecamatan`) REFERENCES `kecamatan` (`idkecamatan`)
+  `kodekelurahan` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `namakelurahan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `kodekecamatan` char(8) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`kodekelurahan`),
+  KEY `kodekecamatan` (`kodekecamatan`),
+  CONSTRAINT `kelurahan_ibfk_1` FOREIGN KEY (`kodekecamatan`) REFERENCES `kecamatan` (`kodekecamatan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `kelurahan` */
+
+insert  into `kelurahan`(`kodekelurahan`,`namakelurahan`,`kodekecamatan`) values ('6101031001','Sungai Rusa','610103'),('6101031002','Pangkalan Bemban','610103'),('6101031003','Sungai Nyirih','610103'),('6101041001','Ratu Sepudak','610104'),('6101041002','Sungai Palah','610104'),('6101041003','Sagu','610104'),('6101051001','Tekarang','610105'),('6101051002','Sempadian','610105'),('6101051003','Cepala','610105'),('6102041001','Seran Selimbau','610204'),('6102051001','Tapen','610205'),('6102051002','Kelayu','610205'),('6103011001','Pak Mayam','610301'),('6103011002','Sebirang','610301'),('6103011003','Ambayo Selatan','610301'),('6103011004','Hilir Kantor','610301'),('6103011005','Ambayo Inti','610301'),('6103011006','Ambayo Utara','610301'),('6103021001','Rees','610302'),('6103021002','Tempoak','610302'),('6103031001','Sampuro','610303'),('6103041001','Ongkol Padang','610304'),('6103041002','Taas','610304'),('6103041003','Mamek','610304'),('6103041004','Anik Dingir','610304'),('6103041005','Sungai Lubang','610304'),('6103041006','Tolok','610304'),('6103041007','Ansang','610304'),('6103041008','Angkaras','610304'),('6103041009','Songga','610304'),('6103041010','Lintah Betung','610304'),('6103041011','Sidan','610304'),('6103041012','Berinang Mayun','610304'),('6103051001','Aur Sampuk','610305'),('6103051002','Senakin','610305'),('6103051003','Palaoan','610305'),('6103061001','Nyiin','610306'),('6103061002','Papung','610306'),('6103061003','Sekais','610306'),('6104011001','Toho Hilir','610401'),('6104021001','Pentek','610402'),('6104021002','Sekabuk','610402'),('6104031001','Segedong Baru','610403'),('6104031002','Segedong Lama','610403'),('6104041001','Pasiran','610404'),('6104041002','Mempawah Kota','610404'),('6104041003','Sungai Asam','610404'),('6105011001','Beringin','610501'),('6105011002','Bunut','610501'),('6105011003','Lape','610501'),('6105011004','Tapang Dulang','610501'),('6105011005','Botuh Lintang','610501'),('6105021001','Suka Gerundi','610502'),('6105021002','Suka Mulya','610502'),('6105021003','Palem Jaya','610502'),('6105021004','Pusat Damai','610502'),('6105021005','Sebara','610502'),('6105021006','Hibun','610502'),('6105091001','Selampung','610509'),('6105091002','Sape','610509'),('6105091003','Semirau','610509'),('6106021001','Riam Dadap','610602'),('6106021002','Sekukun','610602'),('6106021003','Batu Lapis','610602'),('6106051001','Paoh Concong','610605'),('6106051002','Legong','610605'),('6106051003','Kenanga','610605'),('6107031001','Nanga Bihe','610703'),('6107031002','Nanga Tekungai','610703'),('6107031003','Talian Sahabung','610703'),('6107031004','Batu Ketebung','610703'),('6107031005','Muara Kota','610703'),('6107031006','Mekar Sari','610703'),('6107051001','Setungkup','610705'),('6107051002','Nanga Ketungau','610705'),('6107081001','Temiang Kapuas','610708'),('6107081002','Ensabang','610708'),('6107081003','Buluh Kuning','610708'),('6107081004','Temawang Muntai','610708'),('6107081005','Tawang Sari','610708'),('6107081006','Gernis Jaya','610708'),('6107081007','Paoh Benua','610708'),('6107081008','Bedayan','610708'),('6107081009','Tanjung Hulu','610708'),('6107081010','Sukau Bersatu','610708'),('6107081011','Kemantan','610708'),('6107081012','Peninsung','610708'),('6107081013','Sepulut','610708'),('6107081014','Temawang Bulai','610708'),('6107081015','Sungai Segak','610708'),('6107081016','Riam Kempadik','610708'),('6107081017','Nanga Layung','610708'),('6107081018','Limau Bakti','610708'),('6108011001','Ingko Tambe','610801'),('6108011002','Sayut','610801'),('6108011003','Beringin Jaya','610801'),('6108011004','Bungan Jaya','610801'),('6108011005','Tanjunglokang','610801'),('6108011006','Urang Unsa','610801'),('6108011007','Kedamin Darat','610801'),('6108011008','Tanjung Jati','610801'),('6108011009','Sungai Uluk','610801'),('6108011010','Kedamin Hilir','610801'),('6108021001','Putussibau Kota','610802'),('6108021002','Pala Pulau','610802'),('6108021003','Nanga Sambus','610802'),('6108021004','Ariung Mendalam','610802'),('6108031001','Seriang','610803'),('6108031002','Badau','610803'),('6108031003','Sebindang','610803'),('6108031004','Tinting Seligi','610803'),('6108031005','Tajum','610803'),('6108041001','Setulang','610804'),('6108041002','Labian Ira`ang','610804'),('6108051001','Pulau Manak','610805'),('6108061001','Ranyai','610806'),('6108061002','Bati','610806'),('6108061003','Seneban','610806'),('6108061004','Belikai','610806'),('6108061005','Pala Kota','610806'),('6108061006','Emperiang','610806'),('6108061007','Nanga Lot','610806'),('6108061008','Jerunjung','610806'),('6108061009','Bekuan','610806'),('6108061010','Nanga Pala','610806'),('6108071001','Kepenai Komplek','610807'),('6108071002','Entipan','610807'),('6108071003','Semitaу Hilir','610807'),('6108071004','Nanga Kepenai','610807'),('6108071005','Tua Abang','610807'),('6108071006','Nanga Lemedak','610807'),('6108071007','Nanga Seberuang','610807'),('6108071008','Kenerak','610807'),('6108071009','Semitaу Hulu','610807'),('6108081001','Semangut Utara','610808'),('6108081002','Segitak','610808'),('6108091001','Mensusai','610809'),('6108091002','Mantan','610809'),('6108091003','Nanga Suhaid','610809'),('6108091004','Tanjung Harapan','610809'),('6108101001','Pengkadan Hilir','610810'),('6108101002','Sira Jaya','610810'),('6108111001','Setunggul','610811'),('6108111002','Sungai Sena','610811'),('6108111003','Sentabai','610811'),('6108111004','Rumbih','610811'),('6108111005','Bukit Penai','610811'),('6108121001','Belimbung','610812'),('6108121002','Nanga Dangkan','610812'),('6112041001','Sungaijawi','611204'),('6112041002','Sungaibesar','611204'),('6112041003','Tasik Malaya','611204'),('6112041004','Padang Tikar Satu','611204'),('6112041005','Padang Tikar Dua','611204'),('6112041006','Batu Ampar','611204'),('6112041007','Sungai Kerawang','611204'),('6112051001','Limbung','611205'),('6112051002','Telukkapuas','611205'),('6112051003','Madu Sari','611205'),('6112061001','Durian','611206'),('6112061002','Simpang Kanan','611206'),('6112061003','Puguk','611206');
 
 /*Table structure for table `migrations` */
 
@@ -73,7 +72,7 @@ DROP TABLE IF EXISTS `migrations`;
 
 CREATE TABLE `migrations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -87,9 +86,9 @@ insert  into `migrations`(`id`,`migration`,`batch`) values (1,'2025_09_15_143053
 DROP TABLE IF EXISTS `penataan`;
 
 CREATE TABLE `penataan` (
-  `idpenataan` char(2) COLLATE utf8mb4_general_ci NOT NULL,
-  `namapenataan` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `statusaktif` enum('Aktif','Tidak Aktif') COLLATE utf8mb4_general_ci DEFAULT 'Aktif',
+  `idpenataan` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `namapenataan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `statusaktif` enum('Aktif','Tidak Aktif') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Aktif',
   PRIMARY KEY (`idpenataan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -100,10 +99,10 @@ CREATE TABLE `penataan` (
 DROP TABLE IF EXISTS `pengajuan`;
 
 CREATE TABLE `pengajuan` (
-  `idpengajuan` char(15) COLLATE utf8mb4_general_ci NOT NULL,
+  `idpengajuan` char(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `tglpengajuan` date DEFAULT NULL,
-  `idpengguna` char(6) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `deskripsi` text COLLATE utf8mb4_general_ci,
+  `idpengguna` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `deskripsi` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `inserted_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`idpengajuan`)
@@ -116,42 +115,50 @@ CREATE TABLE `pengajuan` (
 DROP TABLE IF EXISTS `pengguna`;
 
 CREATE TABLE `pengguna` (
-  `idpengguna` char(6) COLLATE utf8mb4_general_ci NOT NULL,
-  `idkabupaten` int DEFAULT NULL,
-  `nip` char(18) COLLATE utf8mb4_general_ci NOT NULL,
-  `namalengkap` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `gelardepan` varchar(25) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `gelarbelakang` varchar(25) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `idpangkat` char(2) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `jabatan` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `nomorwa` char(25) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `email` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `username` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `nomorsk` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `idpengguna` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `kodekabupaten` char(5) COLLATE utf8mb4_general_ci NOT NULL,
+  `nip` char(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `namalengkap` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `gelardepan` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `gelarbelakang` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `idpangkat` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `jabatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nomorwa` char(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nomorsk` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `tglsk` date DEFAULT NULL,
-  `filesk` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `filesk` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `inserted_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
   `lastlogin` datetime DEFAULT NULL,
+  `foto` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `statusaktif` enum('Aktif','Tidak Aktif') COLLATE utf8mb4_general_ci DEFAULT 'Aktif',
   PRIMARY KEY (`idpengguna`),
+  UNIQUE KEY `nip` (`nip`),
+  UNIQUE KEY `email` (`email`),
   KEY `idpangkat` (`idpangkat`),
-  CONSTRAINT `pengguna_ibfk_1` FOREIGN KEY (`idpangkat`) REFERENCES `refpangkat` (`idpangkat`)
+  KEY `kodekabupaten` (`kodekabupaten`),
+  CONSTRAINT `pengguna_ibfk_1` FOREIGN KEY (`idpangkat`) REFERENCES `refpangkat` (`idpangkat`),
+  CONSTRAINT `pengguna_ibfk_2` FOREIGN KEY (`kodekabupaten`) REFERENCES `kabupaten` (`kodekabupaten`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `pengguna` */
+
+insert  into `pengguna`(`idpengguna`,`kodekabupaten`,`nip`,`namalengkap`,`gelardepan`,`gelarbelakang`,`idpangkat`,`jabatan`,`nomorwa`,`email`,`username`,`password`,`nomorsk`,`tglsk`,`filesk`,`inserted_date`,`updated_date`,`lastlogin`,`foto`,`statusaktif`) values ('KM5JZ0','6101','000000000000000000','Admin',NULL,NULL,'301','Pranata Komputer','081200000000','admin@gmail.com',NULL,'$2y$12$juWDZbNPLfRW9PeVagsLsOF3vZplspfZQY43zqvBzPs5SDgxWvKIK','3243242','1999-01-01','surat_perjanjian_sewa_bangunan.pdf','2025-09-15 22:14:42','2025-09-15 22:14:42','2025-09-15 22:15:43',NULL,'Aktif');
 
 /*Table structure for table `persyaratanadministratif` */
 
 DROP TABLE IF EXISTS `persyaratanadministratif`;
 
 CREATE TABLE `persyaratanadministratif` (
-  `idpersyaratanadministratif` char(3) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `namapersyaratanadministratif` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `idpersyaratanadministratif` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `namapersyaratanadministratif` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `inserted_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
-  `idpengguna` char(6) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `statusaktif` enum('Aktif','Tidak Aktif') COLLATE utf8mb4_general_ci DEFAULT 'Aktif'
+  `idpengguna` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `statusaktif` enum('Aktif','Tidak Aktif') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Aktif'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `persyaratanadministratif` */
@@ -161,14 +168,14 @@ CREATE TABLE `persyaratanadministratif` (
 DROP TABLE IF EXISTS `persyaratandasar`;
 
 CREATE TABLE `persyaratandasar` (
-  `idpersyaratandasar` char(3) COLLATE utf8mb4_general_ci NOT NULL,
-  `namapersyaratandasar` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `idpersyaratandasar` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `namapersyaratandasar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `batasminimalkabupaten` int DEFAULT NULL,
   `batasminimalkota` int DEFAULT NULL,
   `inserted_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
-  `idpengguna` char(6) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `statusaktif` enum('Aktif','Tidak Aktif') COLLATE utf8mb4_general_ci DEFAULT 'Aktif',
+  `idpengguna` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `statusaktif` enum('Aktif','Tidak Aktif') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Aktif',
   PRIMARY KEY (`idpersyaratandasar`),
   KEY `idpengguna` (`idpengguna`),
   CONSTRAINT `persyaratandasar_ibfk_1` FOREIGN KEY (`idpengguna`) REFERENCES `pengguna` (`idpengguna`)
@@ -181,11 +188,11 @@ CREATE TABLE `persyaratandasar` (
 DROP TABLE IF EXISTS `persyaratanteknis`;
 
 CREATE TABLE `persyaratanteknis` (
-  `idpersyaratanteknis` char(3) COLLATE utf8mb4_general_ci NOT NULL,
-  `namapersyaratanteknis` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `idpersyaratanteknis` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `namapersyaratanteknis` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `inserted_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
-  `idpengguna` char(6) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `idpengguna` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `statusaktif` enum('Aktif','Tidak Aktif') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Aktif',
   PRIMARY KEY (`idpersyaratanteknis`),
   KEY `idpengguna` (`idpengguna`),
@@ -200,8 +207,8 @@ DROP TABLE IF EXISTS `propinsi`;
 
 CREATE TABLE `propinsi` (
   `idpropinsi` int NOT NULL AUTO_INCREMENT,
-  `kodepropinsi` char(2) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `namapropinsi` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `kodepropinsi` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `namapropinsi` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`idpropinsi`),
   UNIQUE KEY `kodepropinsi` (`kodepropinsi`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -213,24 +220,44 @@ CREATE TABLE `propinsi` (
 DROP TABLE IF EXISTS `refpangkat`;
 
 CREATE TABLE `refpangkat` (
-  `idpangkat` char(3) COLLATE utf8mb4_general_ci NOT NULL,
-  `namapangkat` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `golongan` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `idpangkat` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `namapangkat` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `golongan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`idpangkat`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `refpangkat` */
+
+insert  into `refpangkat`(`idpangkat`,`namapangkat`,`golongan`) values ('201','II/a',NULL),('202','II/b',NULL),('203','II/c',NULL),('204','II/d',NULL),('301','III/a',NULL),('302','III/b',NULL),('303','III/c',NULL),('401','IV/a',NULL),('402','IV/b',NULL),('403','IV/c',NULL),('404','IV/d',NULL);
+
+/*Table structure for table `riwayataktifitas` */
+
+DROP TABLE IF EXISTS `riwayataktifitas`;
+
+CREATE TABLE `riwayataktifitas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deskripsi` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `namapengguna` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `inserted_date` datetime DEFAULT NULL,
+  `namatabel` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `namafunction` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2941 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+/*Data for the table `riwayataktifitas` */
+
+insert  into `riwayataktifitas`(`id`,`deskripsi`,`namapengguna`,`inserted_date`,`namatabel`,`namafunction`) values (2931,'{\"idpengguna\":\"S0FUMA\",\"kodekabupaten\":\"6103\",\"nip\":\"123\",\"namalengkap\":\"sfdsfsd\",\"gelardepan\":\"sdf\",\"gelarbelakang\":\"dsf\",\"idpangkat\":\"202\",\"jabatan\":\"sdf\",\"nomorwa\":\"34343\",\"email\":\"dsf@gmail.com\",\"username\":\"sdf\",\"password\":\"$2y$12$1rRDsU3Hrta8jmzBsjhwyON2e8ioWsufWp4qWauc2.o09CNbRN116\",\"nomorsk\":\"dsf\",\"tglsk\":\"1999-01-01\",\"foto\":null,\"filesk\":\"surat_perjanjian_sewa_bangunan5.pdf\",\"statusaktif\":\"Aktif\",\"inserted_date\":\"2025-09-15 19:17:11\",\"updated_date\":\"2025-09-15 19:17:11\"}',NULL,'2025-09-15 19:17:12','pengguna','simpanDatapengguna'),(2932,'{\"idpengguna\":\"S0FUMA\",\"kodekabupaten\":\"6103\",\"nip\":\"123\",\"namalengkap\":\"sfdsfsd\",\"gelardepan\":\"sdf\",\"gelarbelakang\":\"dsf\",\"idpangkat\":\"202\",\"jabatan\":\"sdf\",\"nomorwa\":\"34343\",\"email\":\"dsf@gmail.com\",\"username\":\"sdf\",\"password\":\"$2y$12$1rRDsU3Hrta8jmzBsjhwyON2e8ioWsufWp4qWauc2.o09CNbRN116\",\"nomorsk\":\"dsf\",\"tglsk\":\"1999-01-01\",\"filesk\":\"surat_perjanjian_sewa_bangunan5.pdf\",\"inserted_date\":\"2025-09-15 19:17:11\",\"updated_date\":\"2025-09-15 19:17:11\",\"lastlogin\":null,\"foto\":null,\"statusaktif\":\"Aktif\"}',NULL,'2025-09-15 21:42:12','pengguna','hapusDatapengguna'),(2933,'{\"idpengguna\":\"3J5VNC\",\"kodekabupaten\":\"6101\",\"nip\":\"291029019229102901\",\"namalengkap\":\"Budi\",\"gelardepan\":\"ww\",\"gelarbelakang\":\"ST\",\"idpangkat\":\"301\",\"jabatan\":\"Penata Umum\",\"nomorwa\":\"081200000000\",\"email\":\"budi@gmail.com\",\"username\":\"budi123\",\"password\":\"$2y$12$IOcwoqR6eBNyaRQqN0x3fOmjMuHkveJsowroMS.cMa4a1seplOlE.\",\"nomorsk\":\"12929100\",\"tglsk\":\"1999-01-01\",\"foto\":\"whatsapp_image_2025_08_05_at_222613.jpeg\",\"filesk\":\"surat_perjanjian_sewa_bangunan6.pdf\",\"statusaktif\":\"Aktif\",\"inserted_date\":\"2025-09-15 21:44:37\",\"updated_date\":\"2025-09-15 21:44:37\"}',NULL,'2025-09-15 21:44:37','pengguna','simpanDatapengguna'),(2934,'{\"idpengguna\":\"3J5VNC\",\"kodekabupaten\":\"6101\",\"nip\":\"291029019229102901\",\"namalengkap\":\"Budi\",\"gelardepan\":\"ww\",\"gelarbelakang\":\"ST\",\"idpangkat\":\"301\",\"jabatan\":\"Penata Umum\",\"nomorwa\":\"081200000000\",\"email\":\"budi@gmail.com\",\"username\":\"budi123\",\"password\":\"$2y$12$btIwlVLotz4EJNA9GLZ2zeV0vbv3oJlCxYVDMsgPauDj3pfr2Owqm\",\"nomorsk\":\"12929100\",\"tglsk\":\"1999-01-01\",\"foto\":\"whatsapp_image_2025_08_05_at_222613.jpeg\",\"filesk\":\"surat_perjanjian_sewa_bangunan6.pdf\",\"statusaktif\":\"Aktif\",\"inserted_date\":\"2025-09-15 21:49:02\",\"updated_date\":\"2025-09-15 21:49:02\"}',NULL,'2025-09-15 21:49:02','pengguna','updateDatapengguna'),(2935,'{\"idpengguna\":\"3J5VNC\",\"kodekabupaten\":\"6101\",\"nip\":\"291029019229102901\",\"namalengkap\":\"Budi\",\"gelardepan\":\"ww\",\"gelarbelakang\":\"ST\",\"idpangkat\":\"301\",\"jabatan\":\"Penata Umum\",\"nomorwa\":\"081200000000\",\"email\":\"budi@gmail.com\",\"username\":\"budi123\",\"password\":\"$2y$12$APx7hqaQN13BAIz074hM6.bzRSkBgqx3xP1KSIfI3LT1P6EnVux8e\",\"nomorsk\":\"12929100\",\"tglsk\":\"1999-01-01\",\"foto\":\"download.jpg\",\"filesk\":\"surat_perjanjian_sewa_bangunan6.pdf\",\"statusaktif\":\"Aktif\",\"inserted_date\":\"2025-09-15 21:50:08\",\"updated_date\":\"2025-09-15 21:50:08\"}',NULL,'2025-09-15 21:50:09','pengguna','updateDatapengguna'),(2936,'{\"idpengguna\":\"3J5VNC\",\"kodekabupaten\":\"6101\",\"nip\":\"291029019229102901\",\"namalengkap\":\"Budi\",\"gelardepan\":\"ww\",\"gelarbelakang\":\"ST\",\"idpangkat\":\"301\",\"jabatan\":\"Penata Umum\",\"nomorwa\":\"081200000000\",\"email\":\"budi@gmail.com\",\"username\":\"budi123\",\"password\":\"$2y$12$APx7hqaQN13BAIz074hM6.bzRSkBgqx3xP1KSIfI3LT1P6EnVux8e\",\"nomorsk\":\"12929100\",\"tglsk\":\"1999-01-01\",\"filesk\":\"surat_perjanjian_sewa_bangunan6.pdf\",\"inserted_date\":\"2025-09-15 21:50:08\",\"updated_date\":\"2025-09-15 21:50:08\",\"lastlogin\":null,\"foto\":\"download.jpg\",\"statusaktif\":\"Aktif\"}',NULL,'2025-09-15 21:51:17','pengguna','hapusDatapengguna'),(2937,'{\"idpengguna\":\"6YYN3B\",\"kodekabupaten\":\"6101\",\"nip\":\"000000000000000000\",\"namalengkap\":\"Admin\",\"gelardepan\":null,\"gelarbelakang\":null,\"idpangkat\":\"301\",\"jabatan\":\"Pranata Komputer Ahli\",\"nomorwa\":\"0812000000000\",\"email\":\"admin@gmail.com\",\"username\":\"admin\",\"password\":\"$2y$12$9kKOBzibyeJwlnGkHV.4N.1mFChkUfxP6hMxXxDUAoFBTOLotIrAm\",\"nomorsk\":\"012345\",\"tglsk\":\"1999-01-01\",\"foto\":\"photo_1633332755192_727a05c4013d.jpg\",\"filesk\":\"surat_perjanjian_sewa_bangunan.pdf\",\"statusaktif\":\"Aktif\",\"inserted_date\":\"2025-09-15 21:55:26\",\"updated_date\":\"2025-09-15 21:55:26\"}',NULL,'2025-09-15 21:55:27','pengguna','simpanDatapengguna'),(2938,'{\"idpengguna\":\"6YYN3B\",\"kodekabupaten\":\"6101\",\"nip\":\"000000000000000000\",\"namalengkap\":\"Admin\",\"gelardepan\":null,\"gelarbelakang\":null,\"idpangkat\":\"301\",\"jabatan\":\"Pranata Komputer Ahli\",\"nomorwa\":\"0812000000000\",\"email\":\"admin@gmail.com\",\"username\":\"admin\",\"password\":\"$2y$12$Em2ejP142g0sAiqPwH7Ypebh4YZR2JIw\\/ZhYOSimoz\\/Pu\\/xN43Igm\",\"nomorsk\":\"012345\",\"tglsk\":\"1999-01-01\",\"foto\":\"photo_1633332755192_727a05c4013d.jpg\",\"filesk\":\"surat_perjanjian_sewa_bangunan.pdf\",\"statusaktif\":\"Aktif\",\"inserted_date\":\"2025-09-15 21:56:24\",\"updated_date\":\"2025-09-15 21:56:24\"}',NULL,'2025-09-15 21:56:24','pengguna','updateDatapengguna'),(2939,'{\"idpengguna\":\"6YYN3B\",\"kodekabupaten\":\"6101\",\"nip\":\"000000000000000000\",\"namalengkap\":\"Admin\",\"gelardepan\":null,\"gelarbelakang\":null,\"idpangkat\":\"301\",\"jabatan\":\"Pranata Komputer Ahli\",\"nomorwa\":\"0812000000000\",\"email\":\"admin@gmail.com\",\"username\":\"admin\",\"password\":\"$2y$12$Em2ejP142g0sAiqPwH7Ypebh4YZR2JIw\\/ZhYOSimoz\\/Pu\\/xN43Igm\",\"nomorsk\":\"012345\",\"tglsk\":\"1999-01-01\",\"filesk\":\"surat_perjanjian_sewa_bangunan.pdf\",\"inserted_date\":\"2025-09-15 21:56:24\",\"updated_date\":\"2025-09-15 21:56:24\",\"lastlogin\":null,\"foto\":\"photo_1633332755192_727a05c4013d.jpg\",\"statusaktif\":\"Aktif\"}',NULL,'2025-09-15 22:11:46','pengguna','hapusDatapengguna'),(2940,'{\"idpengguna\":\"KM5JZ0\",\"kodekabupaten\":\"6101\",\"nip\":\"000000000000000000\",\"namalengkap\":\"Admin\",\"gelardepan\":null,\"gelarbelakang\":null,\"idpangkat\":\"301\",\"jabatan\":\"Pranata Komputer\",\"nomorwa\":\"081200000000\",\"email\":\"admin@gmail.com\",\"username\":null,\"password\":\"$2y$12$juWDZbNPLfRW9PeVagsLsOF3vZplspfZQY43zqvBzPs5SDgxWvKIK\",\"nomorsk\":\"3243242\",\"tglsk\":\"1999-01-01\",\"foto\":null,\"filesk\":\"surat_perjanjian_sewa_bangunan.pdf\",\"statusaktif\":\"Aktif\",\"inserted_date\":\"2025-09-15 22:14:42\",\"updated_date\":\"2025-09-15 22:14:42\"}',NULL,'2025-09-15 22:14:42','pengguna','simpanDatapengguna');
 
 /*Table structure for table `sessions` */
 
 DROP TABLE IF EXISTS `sessions`;
 
 CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint unsigned DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_activity` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `sessions_user_id_index` (`user_id`),
@@ -239,7 +266,77 @@ CREATE TABLE `sessions` (
 
 /*Data for the table `sessions` */
 
-insert  into `sessions`(`id`,`user_id`,`ip_address`,`user_agent`,`payload`,`last_activity`) values ('Qj0jgvMddk0bHySdGlOwj9uqAsURlRVofzwJ7CNw',NULL,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoiRlY3TThKV1BCRWJGS0p6cDFrM1l6eHpxU01oRFluWGhlUkxQME5pWCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wZW5nZ3VuYSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1757924538);
+insert  into `sessions`(`id`,`user_id`,`ip_address`,`user_agent`,`payload`,`last_activity`) values ('MsxO1q1SU0bKNmG4i5FYnNkARBj8Lmm5KsiHYfwf',NULL,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36','YTo3OntzOjY6Il90b2tlbiI7czo0MDoiRGpYalVURWUxUWJLUW5iRHhyMzEzNExhcVVaV0xVWDU0VHNXeFVybCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wZW5nZ3VuYSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTA6ImlkcGVuZ2d1bmEiO3M6NjoiS001SlowIjtzOjExOiJuYW1hbGVuZ2thcCI7czo1OiJBZG1pbiI7czo1OiJlbWFpbCI7czoxNToiYWRtaW5AZ21haWwuY29tIjtzOjQ6ImZvdG8iO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9pbWFnZXMvdXNlcnMucG5nIjt9',1757955951);
+
+/*Table structure for table `settings` */
+
+DROP TABLE IF EXISTS `settings`;
+
+CREATE TABLE `settings` (
+  `prefix` char(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `values` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `deskripsi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `inserted_date` datetime DEFAULT NULL,
+  `updated_date` datetime DEFAULT NULL,
+  `issystem` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`prefix`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+/*Data for the table `settings` */
+
+/* Function  structure for function  `create_idpengguna` */
+
+/*!50003 DROP FUNCTION IF EXISTS `create_idpengguna` */;
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `create_idpengguna`() RETURNS char(6) CHARSET utf8mb4
+BEGIN
+    DECLARE created_id CHAR(6);
+    DECLARE id_exists INT DEFAULT 1; -- Inisialisasi dengan nilai 1 (anggap ID sudah ada)
+    -- Loop sampai ID unik ditemukan
+    WHILE id_exists = 1 DO
+        SET created_id = create_random_upper_case(6);
+        -- Cek apakah ID sudah ada di tabel
+        SELECT COUNT(*) INTO id_exists
+        FROM pengguna
+        WHERE idpengguna = created_id;
+    END WHILE;
+    -- Mengembalikan ID unik
+    RETURN created_id;
+END */$$
+DELIMITER ;
+
+/* Function  structure for function  `create_random_upper_case` */
+
+/*!50003 DROP FUNCTION IF EXISTS `create_random_upper_case` */;
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `create_random_upper_case`(`var_length` INT(11)) RETURNS varchar(255) CHARSET utf8mb4
+BEGIN
+    DECLARE var_return VARCHAR(255);
+    DECLARE var_char CHAR(1);
+    DECLARE i INT(11);
+    
+    -- Inisialisasi variabel
+    SET var_return = '';
+    SET i = 0;
+    
+    -- Loop untuk menghasilkan karakter acak sebanyak var_length
+    WHILE i < var_length DO
+        -- Menghasilkan angka acak antara 0 dan 35 (36 kemungkinan karakter: A-Z, 0-9)
+        SET var_char = SUBSTRING('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', FLOOR(RAND() * 36) + 1, 1);
+        
+        -- Menambahkan karakter acak ke hasil
+        SET var_return = CONCAT(var_return, var_char);
+        
+        -- Increment counter
+        SET i = i + 1;
+    END WHILE;
+    
+    -- Mengembalikan string acak
+    RETURN var_return;
+END */$$
+DELIMITER ;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

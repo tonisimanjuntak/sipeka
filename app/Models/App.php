@@ -25,57 +25,23 @@ class App extends Model
         return true;
     }
 
-    public static function getKategori($idkategori = '')
+    public static function getPangkat($idpangkat = '')
     {
-        $rsTemp = DB::table('kategori');
-        if (!empty($idkategori)) {
-            $rsTemp->where('idkategori', $idkategori);
+        $rsTemp = DB::table('refpangkat');
+        if (!empty($idpangkat)) {
+            $rsTemp->where('idpangkat', $idpangkat);
         }
         return $rsTemp->get();
     }
 
-    public static function getJenisPendidikan($idjenispendidikan = '')
+    public static function getKabupaten($kodekabupaten = '')
     {
-        $rsTemp = DB::table('jenispendidikan');
-        if (!empty($idjenispendidikan)) {
-            $rsTemp->where('idjenispendidikan', $idjenispendidikan);
+        $rsTemp = DB::table('kabupaten');
+        if (!empty($kodekabupaten)) {
+            $rsTemp->where('kodekabupaten', $kodekabupaten);
         }
         return $rsTemp->get();
     }
 
-    public static function getJenisTryOut()
-    {
-        return DB::table('jenistryout')
-            ->where('statusaktif', 'Aktif')
-            ->orderBy('idjenistryout', 'Asc')
-            ->get();
-    }
-
-    public static function getFormasiAsn()
-    {
-        return DB::table('formasiasn')
-            ->where('statusaktif', 'Aktif')
-            ->orderBy('idformasibidang', 'Asc')
-            ->orderBy('namaformasiasn', 'Asc')
-            ->get();
-    }
-
-    public static function getBank()
-    {
-        return DB::table('bank')
-            ->where('idbank', 'B01')
-            ->first();
-    }
-
-    public static function getPaket($idjenispaket = '')
-    {
-        $query = DB::table('jenispaket');
-        if (!empty($idjenispaket)) {
-            $query->where('idjenispaket', $idjenispaket);
-        }
-        $query->orderBy('idjenispaket', 'Asc');
-
-        return $query->get();
-    }
     
 }

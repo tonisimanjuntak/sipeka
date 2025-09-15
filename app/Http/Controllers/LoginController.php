@@ -23,7 +23,7 @@ class LoginController extends Controller
 
         $nama_aplikasi = Pengaturan::getValues('nama_aplikasi');
         $data['nama_aplikasi'] = $nama_aplikasi;
-        return view('admin.login', $data);
+        return view('login', $data);
     }
 
     public function login(Request $request)
@@ -31,12 +31,12 @@ class LoginController extends Controller
         $user = $this->LoginModel->cekEmail($request->email);
 
         if ($user && Hash::check($request->password, $user->password)) {
-            Session::put('idadmin', $user->idadmin);
-            Session::put('namaadmin', $user->namaadmin);
+            Session::put('idpengguna', $user->idpengguna);
+            Session::put('namalengkap', $user->namalengkap);
             Session::put('email', $user->email);
 
             if (!empty($user->foto)) {
-                $foto = asset('uploads/admin/' . $user->foto);
+                $foto = asset('uploads/pengguna/' . $user->foto);
                 Session::put('foto', $foto);
             } else {
                 $foto = asset('images/users.png');
@@ -51,9 +51,9 @@ class LoginController extends Controller
             $dataLogin = array(
                 'lastlogin' => date('Y-m-d H:i:s'),
             );
-            $this->LoginModel->updateData($dataLogin, $user->idadmin);
+            $this->LoginModel->updateData($dataLogin, $user->idpengguna);
 
-            return redirect('admin');
+            return redirect('dashboard');
         } else {
             return back()->with(['message' => 'email atau password salah']);
         }
@@ -62,6 +62,6 @@ class LoginController extends Controller
     public function logout()
     {
         Session::flush();
-        return redirect('admin/login');
+        return redirect('login');
     }
 }

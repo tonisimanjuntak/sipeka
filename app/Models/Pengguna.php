@@ -35,7 +35,6 @@ class Pengguna extends Model
 
             $this->App->riwayatAktifitas($data, 'pengguna', 'simpanDatapengguna');
 
-
             return ['status' => 'success', 'message' => "Data berhasil disimpan"];
         } catch (QueryException $e) {
             return ['status' => 'error', 'message' => $e->getMessage()];

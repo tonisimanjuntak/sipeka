@@ -19,9 +19,8 @@ class Controller extends BaseController
     protected function isLogin()
     {
         $this->middleware(function ($request, Closure $next) {
-            if (!Session::has('idadmin')) {
-                // return redirect('adminlogin')->with('message', 'Silakan login terlebih dahulu.');
-                return redirect('admin/login');
+            if (!Session::has('idpengguna')) {
+                return redirect('login');
             }
             return $next($request);
         });

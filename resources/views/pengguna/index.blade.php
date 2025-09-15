@@ -1,4 +1,4 @@
-@extends('admin/template/layout')
+@extends('template/layout')
 
 @section('content')
 
@@ -52,6 +52,7 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 5%; text-align:center;">NO</th>
+                                        <th style="width: 10%; text-align:center;">FOTO</th>
                                         <th style="width: 10%; text-align:center;">ID PENGGUNA</th>
                                         <th style="text-align:center;">NAMA PENGGUNA</th>
                                         <th style="width: 15%; text-align:center;">STATUS</th>
@@ -104,14 +105,20 @@
                     searchable: false
                 },
                 {
-                    data: 'idkategori',
-                    name: 'idkategori',
+                    data: 'foto',
+                    name: 'foto',
                     className: 'dt-body-center',
                     orderable: true,
                 },
                 {
-                    data: 'namakategori',
-                    name: 'namakategori',
+                    data: 'idpengguna',
+                    name: 'idpengguna',
+                    className: 'dt-body-center',
+                    orderable: true,
+                },
+                {
+                    data: 'namalengkap',
+                    name: 'namalengkap',
                     className: 'dt-body-center',
                     orderable: true,
                 },

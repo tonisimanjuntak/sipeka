@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SIPEKA</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/sb-admin-2') }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -164,6 +164,10 @@
         $(".nik").mask("0000000000000000", {
             reverse: true,
             placeholder: "Nomor induk kependudukan"
+        });
+        $(".nip").mask("000000000000000000", {
+            reverse: true,
+            placeholder: "Nomor Induk Pegawai"
         });
         $(".notelp").mask("00000000000000000000", {
             reverse: true,
