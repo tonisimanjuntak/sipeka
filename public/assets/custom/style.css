@@ -1,0 +1,73 @@
+.label-aksi {
+    color: #898989;
+}
+
+.has-error .help-block {
+    color: red;
+}
+
+.required label {
+    font-weight: bold;
+}
+
+.required label:after {
+    color: #e32;
+    content: " *";
+    font-style: italic;
+    font-size: 12px;
+    display: inline;
+}
+
+/* select2 */
+.select2-container {
+    width: 100% !important;
+}
+
+.select2,
+.select2-search__field,
+.select2-results__option {
+    font-size: 1em !important;
+}
+
+.select2-selection__rendered {
+    line-height: 2.3em !important;
+    color: #787878 !important;
+}
+
+.select2-container .select2-selection--single {
+    /*height: 2em !important;*/
+    height: 40px;
+}
+
+.select2-selection__arrow {
+    height: 2.5em !important;
+}
+
+.form-group > .select2-container {
+    width: 100% !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 40px !important;
+}
+
+/* table */
+
+#tableIndex th {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+#tableIndex td {
+    font-size: 11px;
+    padding: 3px;
+    vertical-align: middle;
+}
+
+.label-counter {
+    margin-left: 5px; 
+    position: relative; 
+    top: -5px; 
+    font-size: 0.6em;
+}
