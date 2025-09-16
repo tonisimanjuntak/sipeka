@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers;
 
-use App\Models\Kategori;
-use App\Models\Formasiasn;
+use App\Models\Kabupaten;
+use App\Models\Kecamatan;
+use App\Models\Kelurahan;
 use App\Models\App;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -18,57 +19,67 @@ class Select2Controller extends Controller
         $this->App = new App;
     }
 
-    public function kategori(Request $request)
+    public function searchKabupaten(Request $request)
     {
-        $search = $request->input('q');
+        $search = $request->input('q'); // Ambil parameter pencarian
 
-        $results = Kategori::where('namakategori', 'LIKE', "%{$search}%")
-            ->where('statusaktif', 'Aktif')
+        // Query pencarian
+        $results = Kabupaten::where('namakabupaten', 'LIKE', "%{$search}%")
+            ->orWhere('kodekabupaten', 'LIKE', "%{$search}%")
             ->limit(50)
             ->get();
 
+        // Format data untuk Select2
         $formattedResults = $results->map(function ($item) {
             return [
-                'id' => $item->idkategori,
-                'text' => $item->namakategori,
+                'id' => $item->kodekabupaten,
+                'text' => $item->kodekabupaten . ' - ' . $item->namakabupaten,
             ];
         });
 
         return response()->json(['results' => $formattedResults]);
     }
 
-    
-    public function formasiasn(Request $request)
+    public function searchKecamatan(Request $request)
     {
-        $search = $request->input('q');
-        $idjenistryout = $request->input('idjenistryout');
+        $search = $request->input('q'); // Ambil parameter pencarian
 
-        $query = Formasiasn::where('namaformasiasn', 'LIKE', "%{$search}%")
-            ->where('statusaktif', 'Aktif');
+        // Query pencarian
+        $results = Kecamatan::where('namakecamatan', 'LIKE', "%{$search}%")
+            ->orWhere('kodekecamatan', 'LIKE', "%{$search}%")
+            ->limit(50)
+            ->get();
 
-        switch ($idjenistryout) {
-            case '002': //Guru
-                $query->where('jenis', 'Guru');
-                break;
-            case '003': //Kesehatan
-                $query->where('jenis', 'Kesehatan');
-                break;
-            case '004': //teknis
-                $query->where('jenis', 'Teknis');
-                break;            
-            default:
-                // Tidak ada filter tambahan jika idjenistryout tidak sesuai
-                break;
-        }
-        $results = $query->limit(50)->get();
-
+        // Format data untuk Select2
         $formattedResults = $results->map(function ($item) {
             return [
-                'id' => $item->idformasiasn,
-                'text' => $item->namaformasiasn,
+                'id' => $item->kodekecamatan,
+                'text' => $item->kodekecamatan . ' - ' . $item->namakecamatan,
             ];
         });
 
         return response()->json(['results' => $formattedResults]);
     }
+
+    public function searchKelurahan(Request $request)
+    {
+        $search = $request->input('q'); // Ambil parameter pencarian
+
+        // Query pencarian
+        $results = Kelurahan::where('namakelurahan', 'LIKE', "%{$search}%")
+            ->orWhere('kodekelurahan', 'LIKE', "%{$search}%")
+            ->limit(50)
+            ->get();
+
+        // Format data untuk Select2
+        $formattedResults = $results->map(function ($item) {
+            return [
+                'id' => $item->kodekelurahan,
+                'text' => $item->kodekelurahan . ' - ' . $item->namakelurahan,
+            ];
+        });
+
+        return response()->json(['results' => $formattedResults]);
+    }
+
 }

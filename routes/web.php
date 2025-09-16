@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\admin\DashboardController;
-use App\Http\Controllers\admin\LoginController;
-use App\Http\Controllers\admin\PengaturanController;
-use App\Http\Controllers\admin\PenggunaController;
-use App\Http\Controllers\admin\Select2Controller;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PengaturanController;
+use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\KabupatenController;
+use App\Http\Controllers\KecamatanController;
+use App\Http\Controllers\Select2Controller;
 use Illuminate\Support\Facades\Route;
 
 
@@ -14,8 +16,9 @@ use Illuminate\Support\Facades\Route;
     });
 
     Route::controller(Select2Controller::class)->group(function () {
-        Route::get('/select2/kategori', 'kategori');
-        Route::get('/select2/formasiasn', 'formasiasn');
+        Route::get('/select2/searchKabupaten', 'searchKabupaten');
+        Route::get('/select2/searchKecamatan', 'searchKecamatan');
+        Route::get('/select2/searchKelurahan', 'searchKelurahan');
     });
 
     Route::controller(LoginController::class)->group(function () {
@@ -32,4 +35,24 @@ use Illuminate\Support\Facades\Route;
         Route::get('/pengguna/hapus/{IdPrimary}', 'hapus');
         Route::get('/pengguna/getId/', 'getId');
         Route::post('/pengguna/simpan', 'simpan');
+    });
+
+    Route::controller(KabupatenController::class)->group(function () {
+        Route::get('/kabupaten', 'index');
+        Route::get('/kabupaten/tambah', 'tambah');
+        Route::get('/kabupaten/edit/{IdPrimary}', 'edit');
+        Route::get('/kabupaten/listindex', 'listindex');
+        Route::get('/kabupaten/hapus/{IdPrimary}', 'hapus');
+        Route::get('/kabupaten/getId/', 'getId');
+        Route::post('/kabupaten/simpan', 'simpan');
+    });
+
+    Route::controller(KecamatanController::class)->group(function () {
+        Route::get('/kecamatan', 'index');
+        Route::get('/kecamatan/tambah', 'tambah');
+        Route::get('/kecamatan/edit/{IdPrimary}', 'edit');
+        Route::get('/kecamatan/listindex', 'listindex');
+        Route::get('/kecamatan/hapus/{IdPrimary}', 'hapus');
+        Route::get('/kecamatan/getId/', 'getId');
+        Route::post('/kecamatan/simpan', 'simpan');
     });

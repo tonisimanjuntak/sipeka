@@ -29,6 +29,22 @@
 
     <link href="{{ asset('') }}assets/custom/style.css" rel="stylesheet" />
 
+    <style>
+
+        
+        .loader {
+			position: fixed;
+			left: 0px;
+			top: 0px;
+			width: 50%;
+			height: 50%;
+			z-index: 9999;
+			background: url("{{ asset('images/Loading.gif') }}") 100% 100% no-repeat;
+		}
+
+
+    </style>
+
 </head>
 
 <body id="page-top">
@@ -92,6 +108,9 @@
         </div>
     </div>
 
+    <div class="loader" style="display: none;"></div>
+
+
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('assets/sb-admin-2') }}/vendor/jquery/jquery.min.js"></script>
     <script src="{{ asset('assets/sb-admin-2') }}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -144,7 +163,36 @@
     </script>
     @endif
     
-    
+    <script>
+        // 🔥 ON AJAX START: Tampilkan loading saat AJAX dimulai
+        $(document).ajaxStart(function() {
+            $('.loader').show();
+            // Nonaktifkan semua tombol submit agar tidak double klik
+            $('button[type="submit"]').prop('disabled', true);
+        });
+
+        // 🔥 ON AJAX STOP: Sembunyikan loading saat semua AJAX selesai
+        $(document).ajaxStop(function() {
+            $('.loader').hide();
+            // Aktifkan kembali tombol submit
+            $('button[type="submit"]').prop('disabled', false);
+        });
+
+        // 🔥 ON AJAX ERROR (Opsional): Tampilkan error umum
+        $(document).ajaxError(function(event, xhr, options, error) {
+            let errorMessage = 'Terjadi kesalahan pada permintaan.';
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+                errorMessage = xhr.responseJSON.message;
+            }
+
+            swal({
+                icon: 'error',
+                title: 'Error!',
+                text: errorMessage
+            });
+        });
+        
+    </script>
 
     <script>
         $(".rupiah").mask("000,000,000,000", {
@@ -180,6 +228,18 @@
         $(".npwp").mask("000000000000000", {
             reverse: true,
             placeholder: "Nomor pokok wajib pajak"
+        });
+        $(".kode-kabupaten").mask("0000", {
+            reverse: true,
+            placeholder: "Kode kabupaten"
+        });
+        $(".kode-kecamatan").mask("000000", {
+            reverse: true,
+            placeholder: "Kode kecamatan"
+        });
+        $(".kode-kelurahan").mask("0000000000", {
+            reverse: true,
+            placeholder: "Kode kabupaten"
         });
 
         function format_decimal(number, decPlaces, decSep, thouSep) {
@@ -235,8 +295,77 @@
         }
     </script>
 
-
     @yield('javascript')
+
+    <script>
+
+        $(document).ready(function () {
+            
+            $('.searchKabupaten').select2({
+                placeholder: '-- Nama kabupaten --',
+                minimumInputLength: 0, // Minimal karakter untuk memulai pencarian
+                ajax: {
+                    url: "{{ url('select2/searchKabupaten') }}", // URL untuk pencarian
+                    dataType: 'json',
+                    delay: 250, // Delay saat mengetik (ms)
+                    data: function(params) {
+                        return {
+                            q: params.term, // Parameter pencarian
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data.results, // Format data untuk Select2
+                        };
+                    },
+                    cache: true
+                },
+            });
+
+            $('.searchKecamatan').select2({
+                placeholder: '-- Nama kecamatan --',
+                minimumInputLength: 0, // Minimal karakter untuk memulai pencarian
+                ajax: {
+                    url: "{{ url('select2/searchKecamatan') }}", // URL untuk pencarian
+                    dataType: 'json',
+                    delay: 250, // Delay saat mengetik (ms)
+                    data: function(params) {
+                        return {
+                            q: params.term, // Parameter pencarian
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data.results, // Format data untuk Select2
+                        };
+                    },
+                    cache: true
+                },
+            });
+
+            $('.searchKelurahan').select2({
+                placeholder: '-- Nama kelurahan --',
+                minimumInputLength: 0, // Minimal karakter untuk memulai pencarian
+                ajax: {
+                    url: "{{ url('select2/searchKelurahan') }}", // URL untuk pencarian
+                    dataType: 'json',
+                    delay: 250, // Delay saat mengetik (ms)
+                    data: function(params) {
+                        return {
+                            q: params.term, // Parameter pencarian
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data.results, // Format data untuk Select2
+                        };
+                    },
+                    cache: true
+                },
+            });
+
+        });
+    </script>
 
 </body>
 

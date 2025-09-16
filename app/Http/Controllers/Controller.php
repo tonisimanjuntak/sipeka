@@ -2,7 +2,7 @@
 
 
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers;
 
 use Closure;
 use Illuminate\Support\Facades\Session;

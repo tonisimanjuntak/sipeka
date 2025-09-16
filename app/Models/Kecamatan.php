@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 
-class Kabupaten extends Model
+class Kecamatan extends Model
 {
     use HasFactory;
 
-    protected $table = 'kabupaten';
-    protected $primaryKey = 'kodekabupaten';
+    protected $table = 'v_kecamatan';
+    protected $primaryKey = 'kodekecamatan';
     protected $keyType = 'char';
 
     public $timestamps = false; // Menonaktifkan timestamps
@@ -30,10 +30,10 @@ class Kabupaten extends Model
     public function simpanData($data)
     {
         try {
-            DB::table('kabupaten')
+            DB::table('kecamatan')
                 ->insert($data);
 
-            $this->App->riwayatAktifitas($data, 'kabupaten', 'simpanDataKabupaten');
+            $this->App->riwayatAktifitas($data, 'kecamatan', 'simpanDataKecamatan');
 
             return ['status' => 'success', 'message' => "Data berhasil disimpan"];
         } catch (QueryException $e) {
@@ -43,14 +43,14 @@ class Kabupaten extends Model
         }
     }
 
-    public function updateData($data, $kodekabupaten)
+    public function updateData($data, $kodekecamatan)
     {
         try {
             DB::beginTransaction();
-            DB::table('kabupaten')
-                ->where('kodekabupaten', $kodekabupaten)
+            DB::table('kecamatan')
+                ->where('kodekecamatan', $kodekecamatan)
                 ->update($data);
-            $this->App->riwayatAktifitas($data, 'kabupaten', 'updateDataKabupaten');
+            $this->App->riwayatAktifitas($data, 'kecamatan', 'updateDataKecamatan');
 
             DB::commit();
             return ['status' => 'success', 'message' => "Data berhasil disimpan"];
@@ -63,16 +63,16 @@ class Kabupaten extends Model
         }
     }
 
-    public function hapusData($kodekabupaten, $rskabupaten)
+    public function hapusData($kodekecamatan, $rskecamatan)
     {
         try {
             DB::beginTransaction();
 
-            DB::table('kabupaten')
-                ->where('kodekabupaten', $kodekabupaten)
+            DB::table('kecamatan')
+                ->where('kodekecamatan', $kodekecamatan)
                 ->delete();
 
-            $this->App->riwayatAktifitas($rskabupaten, 'kabupaten', 'hapusDataKabupaten');
+            $this->App->riwayatAktifitas($rskecamatan, 'kecamatan', 'hapusDataKecamatan');
 
             DB::commit();
             return ['status' => 'success', 'message' => "Data berhasil dihapus"];
@@ -87,6 +87,6 @@ class Kabupaten extends Model
 
     public function createID()
     {
-        return DB::select("SELECT create_kodekabupaten() AS id")[0]->id;
+        return DB::select("SELECT create_kodekecamatan() AS id")[0]->id;
     }
 }
