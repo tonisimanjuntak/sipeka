@@ -6,6 +6,7 @@ use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\KabupatenController;
 use App\Http\Controllers\KecamatanController;
+use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\Select2Controller;
 use Illuminate\Support\Facades\Route;
 
@@ -55,4 +56,14 @@ use Illuminate\Support\Facades\Route;
         Route::get('/kecamatan/hapus/{IdPrimary}', 'hapus');
         Route::get('/kecamatan/getId/', 'getId');
         Route::post('/kecamatan/simpan', 'simpan');
+    });
+
+    Route::controller(KelurahanController::class)->group(function () {
+        Route::get('/kelurahan', 'index');
+        Route::get('/kelurahan/tambah', 'tambah');
+        Route::get('/kelurahan/edit/{IdPrimary}', 'edit');
+        Route::get('/kelurahan/listindex', 'listindex');
+        Route::get('/kelurahan/hapus/{IdPrimary}', 'hapus');
+        Route::get('/kelurahan/getId/', 'getId');
+        Route::post('/kelurahan/simpan', 'simpan');
     });

@@ -7,7 +7,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">KABUPATEN</h1>
+        <h1 class="h3 mb-0 text-gray-800">KELURAHAN/ DESA</h1>
     </div>
 
     <div class="row">
@@ -18,8 +18,8 @@
                 <!-- Card Header - Dropdown -->
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">LIST DATA KABUPATEN</h6>
-                    <a href="{{ url('kabupaten/tambah') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>
+                    <h6 class="m-0 font-weight-bold text-primary">LIST DATA KELURAHAN/ DESA</h6>
+                    <a href="{{ url('kelurahan/tambah') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -31,7 +31,7 @@
                                     <tr>
                                         <th style="width: 5%; text-align:center;">NO</th>
                                         <th style="width: 10%; text-align:center;">KODE</th>
-                                        <th style="text-align:left;">NAMA KABUPATEN</th>
+                                        <th style="text-align:left;">NAMA KELURAHAN/ DESA</th>
                                         <th style="width: 10%; text-align:center;">AKSI</th>
                                     </tr>
                                 </thead>
@@ -62,7 +62,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ url('kabupaten/listindex') }}",
+                url: "{{ url('kelurahan/listindex') }}",
                 type: 'GET',
             },
             pageLength: 10,
@@ -78,14 +78,14 @@
                     searchable: false
                 },
                 {
-                    data: 'kodekabupaten',
-                    name: 'kodekabupaten',
+                    data: 'kodekelurahan',
+                    name: 'kodekelurahan',
                     className: 'dt-body-center',
                     orderable: true,
                 },
                 {
-                    data: 'namakabupaten',
-                    name: 'namakabupaten',
+                    data: 'namakelurahan',
+                    name: 'namakelurahan',
                     className: 'dt-body-left',
                     orderable: true,
                 },
@@ -134,7 +134,6 @@
             .then((willDelete) => {
                 if (willDelete) {
 
-                    
                     $.ajax({
                         url: link,
                         type: 'GET',
@@ -143,7 +142,7 @@
                             if (response.success) {
                                 swal('Berhasil!', 'Data berhasil dihapus.', 'success')
                                 .then(() => {
-                                    window.location.href = "{{ url('kabupaten') }}";
+                                    window.location.href = "{{ url('kelurahan') }}";
                                 });
                             } else {
                                 swal('Gagal!', response.message, 'error');
@@ -161,6 +160,8 @@
                             swal('Error!', message, 'error');
                         }
                     });
+
+
                 }
             });
 

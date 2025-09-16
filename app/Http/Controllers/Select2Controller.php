@@ -43,9 +43,11 @@ class Select2Controller extends Controller
     public function searchKecamatan(Request $request)
     {
         $search = $request->input('q'); // Ambil parameter pencarian
+        $kodekabupaten = $request->input('kodekabupaten');
 
         // Query pencarian
-        $results = Kecamatan::where('namakecamatan', 'LIKE', "%{$search}%")
+        $results = Kecamatan::where('kodekabupaten', $kodekabupaten)
+            ->where('namakecamatan', 'LIKE', "%{$search}%")
             ->orWhere('kodekecamatan', 'LIKE', "%{$search}%")
             ->limit(50)
             ->get();

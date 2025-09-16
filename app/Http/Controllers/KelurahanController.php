@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
+use App\Models\Kelurahan;
 use App\Models\App;
 use App\Models\Uploads;
 use Illuminate\Http\Request;
@@ -11,57 +12,59 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Hash;
 
-class KecamatanController extends Controller
+class KelurahanController extends Controller
 {
     var $kabupaten;
     var $kecamatan;
+    var $kelurahan;
 
     public function __construct()
     {
-        $this->kecamatan = new Kabupaten;
+        $this->kabupaten = new Kabupaten;
         $this->kecamatan = new Kecamatan;
+        $this->kelurahan = new Kelurahan;
         $this->isLogin();
     }
 
     public function index()
     {
-        $data['menu'] = 'kecamatan';
-        return view('kecamatan.index', $data);
+        $data['menu'] = 'kelurahan';
+        return view('kelurahan.index', $data);
     }
 
     public function tambah()
     {
-        $data['kodekecamatan'] = '';
-        $data['menu'] = 'kecamatan';
+        $data['kodekelurahan'] = '';
+        $data['menu'] = 'kelurahan';
         $data['ltambah'] = true;
-        return view('kecamatan.form', $data);
+        return view('kelurahan.form', $data);
     }
 
-    public function edit($kodekecamatan)
+    public function edit($kodekelurahan)
     {
         try {
-            $kodekecamatan = Crypt::decrypt($kodekecamatan);
-            $rsKecamatan = Kecamatan::findOrFail($kodekecamatan);
+            $kodekelurahan = Crypt::decrypt($kodekelurahan);
+            $rsKelurahan = Kelurahan::findOrFail($kodekelurahan);
         } catch (ModelNotFoundException $e) {
-            return redirect('kecamatan')->with('other', 'Data tidak ditemukan!');
+            return redirect('kelurahan')->with('other', 'Data tidak ditemukan!');
         }
-        $data['menu'] = 'kecamatan';
-        $data['kodekecamatan'] = $kodekecamatan;
+        $data['menu'] = 'kelurahan';
+        $data['kodekelurahan'] = $kodekelurahan;
         $data['ltambah'] = false;
-        return view('kecamatan.form', $data);
+        return view('kelurahan.form', $data);
     }
 
     public function listindex(Request $request)
     {
         // Query dasar
-        $query = Kecamatan::select("*");
+        $query = Kelurahan::select("*");
 
         // Cek apakah ada pencarian
         if ($request->has('search') && !empty($request->input('search.value'))) {
             $search = $request->input('search.value');
-            $query->where('kodekecamatan', 'LIKE', "%{$search}%")
-                ->orWhere('namakecamatan', 'LIKE', "%{$search}%")
-                ->orWhere('namakabupaten', 'LIKE', "%{$search}%");
+            $query->where('kodekelurahan', 'LIKE', "%{$search}%")
+                ->orWhere('namakelurahan', 'LIKE', "%{$search}%")
+                ->orWhere('namakecamatan', 'LIKE', "%{$search}%");
         }
 
         // Sorting berdasarkan kolom yang diklik
@@ -70,21 +73,21 @@ class KecamatanController extends Controller
             $orderDirection = $request->input('order.0.dir'); // Arah sorting (asc/desc)
 
             // Daftar kolom yang bisa di-sort
-            $columns = [null, 'kodekecamatan', 'namakecamatan', null];
+            $columns = [null, 'kodekelurahan', 'namakelurahan', null];
 
             // Pastikan index kolom valid
             if (isset($columns[$orderColumn])) {
                 $query->orderBy($columns[$orderColumn], $orderDirection);
             } else {
-                $query->orderBy('kodekecamatan', 'Asc');
+                $query->orderBy('kodekelurahan', 'Asc');
             }
         } else {
-            $query->orderBy('kodekecamatan', 'Asc');
+            $query->orderBy('kodekelurahan', 'Asc');
         }
 
 
         // Hitung total data tanpa filter
-        $totalData = Kecamatan::count();
+        $totalData = Kelurahan::count();
 
         // Hitung total data setelah filter (jika ada pencarian)
         $totalFiltered = $query->count();
@@ -106,18 +109,18 @@ class KecamatanController extends Controller
 
             $data[] = [
                 'no' => $no++,
-                'kodekecamatan' => $row->kodekecamatan,
-                'namakecamatan' => $row->namakecamatan.'<br><small>'.$row->namakabupaten.'</small>',
+                'kodekelurahan' => $row->kodekelurahan,
+                'namakelurahan' => $row->namakelurahan.'<br><small>Kec. '.$row->namakecamatan . ' ' . $row->namakabupaten.'</small>',
                 'action' => '<div class="btn-group btn-block">
                                 <div class="btn-group dropleft" role="group">
                                     <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="sr-only">Toggle Dropleft</span>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a href="' . url('kecamatan/hapus/' . Crypt::encrypt($row->kodekecamatan)) . '" class="dropdown-item" id="btnHapus">Hapus</a>
+                                        <a href="' . url('kelurahan/hapus/' . Crypt::encrypt($row->kodekelurahan)) . '" class="dropdown-item" id="btnHapus">Hapus</a>
                                     </div>
                                 </div>
-                                <a href="' . url('kecamatan/edit/' . Crypt::encrypt($row->kodekecamatan)) . '" class="btn btn-warning">Edit</a>                                
+                                <a href="' . url('kelurahan/edit/' . Crypt::encrypt($row->kodekelurahan)) . '" class="btn btn-warning">Edit</a>                                
                             </div>',
 
             ];
@@ -135,8 +138,8 @@ class KecamatanController extends Controller
     public function simpan(Request $request)
     {
         $kodekabupaten = $request->get('kodekabupaten');
-        $kodekecamatan = $request->get('kodekecamatan');
-        $namakecamatan = $request->get('namakecamatan');
+        $kodekelurahan = $request->get('kodekelurahan');
+        $namakelurahan = $request->get('namakelurahan');
         $tglberdiri = $request->get('tglberdiri');
         $ltambah = $request->get('ltambah');
         $inserted_date = date('Y-m-d H:i:s');
@@ -145,19 +148,19 @@ class KecamatanController extends Controller
         if ($ltambah) {
             $data = array(
                 'kodekabupaten' => $kodekabupaten,
-                'kodekecamatan' => $kodekecamatan,
-                'namakecamatan' => $namakecamatan,
+                'kodekelurahan' => $kodekelurahan,
+                'namakelurahan' => $namakelurahan,
                 'tglberdiri' => $tglberdiri,
             );
-            $simpan = $this->kecamatan->simpanData($data);
+            $simpan = $this->kelurahan->simpanData($data);
         } else {
             $data = array(
                 'kodekabupaten' => $kodekabupaten,
-                'kodekecamatan' => $kodekecamatan,
-                'namakecamatan' => $namakecamatan,
+                'kodekelurahan' => $kodekelurahan,
+                'namakelurahan' => $namakelurahan,
                 'tglberdiri' => $tglberdiri,
             );
-            $simpan = $this->kecamatan->updateData($data, $kodekecamatan);
+            $simpan = $this->kelurahan->updateData($data, $kodekelurahan);
         }
 
         // dd(htmlspecialchars($simpan['message']));
@@ -170,16 +173,16 @@ class KecamatanController extends Controller
 
 
 
-    public function hapus($kodekecamatan)
+    public function hapus($kodekelurahan)
     {
-        $kodekecamatan = Crypt::decrypt($kodekecamatan);
+        $kodekelurahan = Crypt::decrypt($kodekelurahan);
         try {
-            $rsKecamatan = Kecamatan::findOrFail($kodekecamatan);
+            $rsKelurahan = Kelurahan::findOrFail($kodekelurahan);
         } catch (ModelNotFoundException $e) {
-            return redirect('kecamatan')->with('other', 'Data tidak ditemukan!');
+            return redirect('kelurahan')->with('other', 'Data tidak ditemukan!');
         }
 
-        $hapus = $this->kecamatan->hapusData($kodekecamatan, $rsKecamatan);
+        $hapus = $this->kelurahan->hapusData($kodekelurahan, $rsKelurahan);
         if ($hapus['status'] == 'success') {
             return response()->json([
                 'success' => true
@@ -194,8 +197,8 @@ class KecamatanController extends Controller
 
     public function getId(Request $request)
     {
-        $kodekecamatan = $request->input('kodekecamatan');
-        $rsKecamatan = Kecamatan::find($kodekecamatan);
-        return response()->json($rsKecamatan);
+        $kodekelurahan = $request->input('kodekelurahan');
+        $rsKelurahan = Kelurahan::find($kodekelurahan);
+        return response()->json($rsKelurahan);
     }
 }

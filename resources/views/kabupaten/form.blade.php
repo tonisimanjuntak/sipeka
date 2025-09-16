@@ -10,7 +10,7 @@
         <h1 class="h3 mb-0 text-gray-800">KABUPATEN</h1>
     </div>
 
-    <form action="{{ url('kabupaten/simpan') }}" method="POST" id="form" enctype="multipart/form-data">
+    <form method="POST" id="form" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="ltambah" id="ltambah" value="{{ $ltambah }}">
         <div class="row">
@@ -133,7 +133,48 @@
                 }
             })
             .on('success.form.bv', function(e) {
-                $('#btnSimpan').attr("disabled", true);
+                e.preventDefault(); // Cegah submit default
+
+                const $form = $(e.target);
+                const formData = $form.serialize(); // Ambil semua input
+
+                $('#btnSimpan').prop('disabled', true).html('<i class="fa fa-spin fa-spinner"></i> Menyimpan...');
+
+                // Kirim via AJAX
+                $.ajax({
+                    url: "{{ url('kabupaten/simpan') }}",
+                    type: 'POST',
+                    data: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        $('#btnSimpan').prop('disabled', false).html('<i class="fa fa-save mr-1"></i>Simpan');
+
+                        if (response.success) {
+                            swal('Berhasil!', 'Data berhasil disimpan.', 'success')
+                            .then(() => {
+                                window.location.href = "{{ url('kabupaten') }}";
+                            });
+                        } else {
+                            swal('Gagal!', response.message, 'error');
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#btnSimpan').prop('disabled', false).html('<i class="fa fa-save mr-1"></i>Simpan');
+
+                        let message = 'Terjadi kesalahan.';
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            message = xhr.responseJSON.message;
+                        } else if (xhr.status === 422) {
+                            // Validation errors
+                            const errors = xhr.responseJSON.errors;
+                            message = Object.values(errors).flat().join('<br>');
+                        }
+
+                        swal('Error!', message, 'error');
+                    }
+                });
             });
 
         $("form").attr('autocomplete', 'off');

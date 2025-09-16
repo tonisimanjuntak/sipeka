@@ -332,6 +332,7 @@
                     data: function(params) {
                         return {
                             q: params.term, // Parameter pencarian
+                            kodekabupaten: $('#kodekabupaten').val(),
                         };
                     },
                     processResults: function(data) {

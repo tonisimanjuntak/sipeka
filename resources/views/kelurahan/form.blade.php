@@ -7,7 +7,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">KECAMATAN</h1>
+        <h1 class="h3 mb-0 text-gray-800">KELURAHAN/ DESA</h1>
     </div>
 
     <form method="POST" id="form" enctype="multipart/form-data">
@@ -20,7 +20,7 @@
                     <!-- Card Header - Dropdown -->
                     <div
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary label-judul"><a href="{{ url('kecamatan') }}">LIST DATA KECAMATAN</a> / <span class="label-aksi"></span> </h6><span class="float-end id-primary"></span>
+                        <h6 class="m-0 font-weight-bold text-primary label-judul"><a href="{{ url('kelurahan') }}">LIST DATA KELURAHAN/ DESA</a> / <span class="label-aksi"></span> </h6><span class="float-end id-primary"></span>
                     </div>
                     
                     <!-- Card Body -->
@@ -38,37 +38,38 @@
 
                             <div class="col-12 required">
                                 <div class="form-group row">
-                                    <label for="kodekecamatan" class="col-md-3 col-form-label">Kode Kecamatan</label>
-                                    <div class="col-md-3">
-                                        <input type="text" class="form-control kode-kecamatan" name="kodekecamatan" id="kodekecamatan" placeholder="Kode kecamatan" autofocus>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 required">
-                                <div class="form-group row">
-                                    <label for="namakecamatan" class="col-md-3 col-form-label">Nama Kecamatan</label>
+                                    <label for="kodekecamatan" class="col-md-3 col-form-label">Nama Kecamatan</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="namakecamatan" id="namakecamatan" placeholder="Nama kecamatan">
+                                        <select name="kodekecamatan" id="kodekecamatan" class="form-control searchKecamatan"></select>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12 required">
                                 <div class="form-group row">
-                                    <label for="tglberdiri" class="col-md-3 col-form-label">Tanggal Berdiri</label>
-                                    <div class="col-md-4">
-                                        <input type="date" class="form-control" name="tglberdiri" id="tglberdiri">
+                                    <label for="kodekelurahan" class="col-md-3 col-form-label">Kode Kelurahan/ Desa</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control kode-kelurahan" name="kodekelurahan" id="kodekelurahan" placeholder="Kode kelurahan/ desa" autofocus>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-12 required">
+                                <div class="form-group row">
+                                    <label for="namakelurahan" class="col-md-3 col-form-label">Nama Kelurahan/ Desa</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="namakelurahan" id="namakelurahan" placeholder="Nama kelurahan/ desa">
+                                    </div>
+                                </div>
+                            </div>
+
                             
                         </div>
                     </div>
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success btn-sm float-right" id="btnSimpan"><i class="fa fa-save mr-1"></i>Simpan</button>
-                        <a href="{{ url('kecamatan') }}" class="btn btn-default btn-sm float-right mr-3">Kembali</a>
+                        <a href="{{ url('kelurahan') }}" class="btn btn-default btn-sm float-right mr-3">Kembali</a>
                     </div>
                 </div>
             </div>
@@ -88,30 +89,30 @@
 @section('javascript')
     
 <script>
-    var kodekecamatan = "{{ $kodekecamatan }}";
+    var kodekelurahan = "{{ $kodekelurahan }}";
 
     $(document).ready(function() {
 
         $('.select2').select2();
 
-        if (kodekecamatan != "") {
-            $('#kodekecamatan').val(kodekecamatan);
-            $('.id-primary').html('ID: ' + kodekecamatan);
+        if (kodekelurahan != "") {
+            $('#kodekelurahan').val(kodekelurahan);
+            $('.id-primary').html('ID: ' + kodekelurahan);
             $('.label-judul .label-aksi').html('Edit');
 
             $.ajax({
-                    url: "{{ url('kecamatan/getId') }}",
+                    url: "{{ url('kelurahan/getId') }}",
                     type: 'GET',
                     dataType: 'json',
                     data: {
-                        'kodekecamatan': kodekecamatan
+                        'kodekelurahan': kodekelurahan
                     },
                 })
                 .done(function(response) {
                     // console.log(response);
                     addSelectOption('kodekabupaten', response.kodekabupaten, response.kodekabupaten + ' - ' + response.namakabupaten);
                     $('#kodekabupaten').val(response['kodekabupaten']).trigger('change');
-                    $('#namakecamatan').val(response['namakecamatan']);
+                    $('#namakelurahan').val(response['namakelurahan']);
                     $('#tglberdiri').val(response['tglberdiri']);
                 })
                 .fail(function() {
@@ -140,6 +141,13 @@
                             notEmpty: {
                                 message: 'kode kecamatan tidak boleh kosong'
                             },
+                        }
+                    },
+                    kodekelurahan: {
+                        validators: {
+                            notEmpty: {
+                                message: 'kode kelurahan tidak boleh kosong'
+                            },
                             stringLength: {
                                 min: 6,
                                 max: 6,
@@ -147,21 +155,14 @@
                             },
                         }
                     },
-                    namakecamatan: {
+                    namakelurahan: {
                         validators: {
                             notEmpty: {
-                                message: 'nama kecamatan tidak boleh kosong'
+                                message: 'nama kelurahan tidak boleh kosong'
                             },
                             stringLength: {
                                 max: 100,
                                 message: 'maksimal 100 karakter'
-                            },
-                        }
-                    },
-                    tglberdiri: {
-                        validators: {
-                            notEmpty: {
-                                message: 'tanggal kecamatan berdiri tidak boleh kosong'
                             },
                         }
                     },
@@ -177,7 +178,7 @@
 
                 // Kirim via AJAX
                 $.ajax({
-                    url: "{{ url('kecamatan/simpan') }}",
+                    url: "{{ url('kelurahan/simpan') }}",
                     type: 'POST',
                     data: formData,
                     headers: {
@@ -189,7 +190,7 @@
                         if (response.success) {
                             swal('Berhasil!', 'Data berhasil disimpan.', 'success')
                             .then(() => {
-                                window.location.href = "{{ url('kecamatan') }}";
+                                window.location.href = "{{ url('kelurahan') }}";
                             });
                         } else {
                             swal('Gagal!', response.message, 'error');

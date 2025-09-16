@@ -152,9 +152,13 @@ class KabupatenController extends Controller
 
         // dd(htmlspecialchars($simpan['message']));
         if ($simpan['status'] == 'success') {
-            return redirect('kabupaten')->with('success', $simpan['message']);
+            return response()->json([
+                'success' => true,
+            ]);
         } else {
-            return redirect('kabupaten')->with('fail', 'Data gagal disimpan! Error: ' . $simpan['message']);
+            return response()->json([
+                'message' => 'Data gagal disimpan! Error: ' . $simpan['message'],
+            ]);
         }
     }
 
@@ -171,9 +175,13 @@ class KabupatenController extends Controller
 
         $hapus = $this->kabupaten->hapusData($kodekabupaten, $rsKabupaten);
         if ($hapus['status'] == 'success') {
-            return redirect('kabupaten')->with('success', $hapus['message']);
+            return response()->json([
+                'success' => true,
+            ]);            
         } else {
-            return redirect('kabupaten')->with('fail', 'Data gagal dihapus! Error: ' . $hapus['message']);
+            return response()->json([
+                'message' => 'Data gagal dihapus! Error: ' . $hapus['message'],
+            ]);
         }
     }
 
