@@ -7,6 +7,9 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\KabupatenController;
 use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\KelurahanController;
+use App\Http\Controllers\PersyaratandasarController;
+use App\Http\Controllers\PersyaratanadministratifController;
+use App\Http\Controllers\PersyaratanteknisController;
 use App\Http\Controllers\Select2Controller;
 use Illuminate\Support\Facades\Route;
 
@@ -66,4 +69,44 @@ use Illuminate\Support\Facades\Route;
         Route::get('/kelurahan/hapus/{IdPrimary}', 'hapus');
         Route::get('/kelurahan/getId/', 'getId');
         Route::post('/kelurahan/simpan', 'simpan');
+    });
+
+    Route::controller(PengaturanController::class)->group(function () {
+        Route::get('/pengaturan', 'index');
+        Route::get('/pengaturan/tambah', 'tambah');
+        Route::get('/pengaturan/edit/{IdPrimary}', 'edit');
+        Route::get('/pengaturan/listindex', 'listindex');
+        Route::get('/pengaturan/hapus/{IdPrimary}', 'hapus');
+        Route::get('/pengaturan/getId/', 'getId');
+        Route::post('/pengaturan/simpan', 'simpan');
+    });
+
+    Route::controller(PersyaratandasarController::class)->group(function () {
+        Route::get('/persyaratandasar', 'index');
+        Route::get('/persyaratandasar/tambah', 'tambah');
+        Route::get('/persyaratandasar/edit/{IdPrimary}', 'edit');
+        Route::get('/persyaratandasar/listindex', 'listindex');
+        Route::get('/persyaratandasar/hapus/{IdPrimary}', 'hapus');
+        Route::get('/persyaratandasar/getId/', 'getId');
+        Route::post('/persyaratandasar/simpan', 'simpan');
+    });
+
+    Route::controller(PersyaratanadministratifController::class)->group(function () {
+        Route::get('/persyaratanadministratif', 'index');
+        Route::get('/persyaratanadministratif/tambah', 'tambah');
+        Route::get('/persyaratanadministratif/edit/{IdPrimary}', 'edit');
+        Route::get('/persyaratanadministratif/listindex', 'listindex');
+        Route::get('/persyaratanadministratif/hapus/{IdPrimary}', 'hapus');
+        Route::get('/persyaratanadministratif/getId/', 'getId');
+        Route::post('/persyaratanadministratif/simpan', 'simpan');
+    });
+
+    Route::controller(PersyaratanteknisController::class)->group(function () {
+        Route::get('/persyaratanteknis', 'index');
+        Route::get('/persyaratanteknis/tambah', 'tambah');
+        Route::get('/persyaratanteknis/edit/{IdPrimary}', 'edit');
+        Route::get('/persyaratanteknis/listindex', 'listindex');
+        Route::get('/persyaratanteknis/hapus/{IdPrimary}', 'hapus');
+        Route::get('/persyaratanteknis/getId/', 'getId');
+        Route::post('/persyaratanteknis/simpan', 'simpan');
     });

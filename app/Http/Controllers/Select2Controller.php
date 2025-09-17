@@ -48,7 +48,6 @@ class Select2Controller extends Controller
         // Query pencarian
         $results = Kecamatan::where('kodekabupaten', $kodekabupaten)
             ->where('namakecamatan', 'LIKE', "%{$search}%")
-            ->orWhere('kodekecamatan', 'LIKE', "%{$search}%")
             ->limit(50)
             ->get();
 

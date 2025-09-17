@@ -64,7 +64,8 @@ class KelurahanController extends Controller
             $search = $request->input('search.value');
             $query->where('kodekelurahan', 'LIKE', "%{$search}%")
                 ->orWhere('namakelurahan', 'LIKE', "%{$search}%")
-                ->orWhere('namakecamatan', 'LIKE', "%{$search}%");
+                ->orWhere('namakecamatan', 'LIKE', "%{$search}%")
+                ->orWhere('namakabupaten', 'LIKE', "%{$search}%");
         }
 
         // Sorting berdasarkan kolom yang diklik
@@ -110,7 +111,7 @@ class KelurahanController extends Controller
             $data[] = [
                 'no' => $no++,
                 'kodekelurahan' => $row->kodekelurahan,
-                'namakelurahan' => $row->namakelurahan.'<br><small>Kec. '.$row->namakecamatan . ' ' . $row->namakabupaten.'</small>',
+                'namakelurahan' => $row->namakelurahan.'<br><small>Kec. '.$row->namakecamatan . ', ' . $row->namakabupaten.'</small>',
                 'action' => '<div class="btn-group btn-block">
                                 <div class="btn-group dropleft" role="group">
                                     <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -138,6 +139,7 @@ class KelurahanController extends Controller
     public function simpan(Request $request)
     {
         $kodekabupaten = $request->get('kodekabupaten');
+        $kodekecamatan = $request->get('kodekecamatan');
         $kodekelurahan = $request->get('kodekelurahan');
         $namakelurahan = $request->get('namakelurahan');
         $tglberdiri = $request->get('tglberdiri');
@@ -147,18 +149,16 @@ class KelurahanController extends Controller
 
         if ($ltambah) {
             $data = array(
-                'kodekabupaten' => $kodekabupaten,
+                'kodekecamatan' => $kodekecamatan,
                 'kodekelurahan' => $kodekelurahan,
                 'namakelurahan' => $namakelurahan,
-                'tglberdiri' => $tglberdiri,
             );
             $simpan = $this->kelurahan->simpanData($data);
         } else {
             $data = array(
-                'kodekabupaten' => $kodekabupaten,
+                'kodekecamatan' => $kodekecamatan,
                 'kodekelurahan' => $kodekelurahan,
                 'namakelurahan' => $namakelurahan,
-                'tglberdiri' => $tglberdiri,
             );
             $simpan = $this->kelurahan->updateData($data, $kodekelurahan);
         }

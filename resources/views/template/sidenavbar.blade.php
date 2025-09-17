@@ -33,29 +33,10 @@
                     <span>Data Operator</span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link {{ $menu == 'kabupaten' ? 'active' : '' }}" href="{{ url('kabupaten') }}">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Kabupaten</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link {{ $menu == 'kecamatan' ? 'active' : '' }}" href="{{ url('kecamatan') }}">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Kecamatan</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link {{ $menu == 'kelurahan' ? 'active' : '' }}" href="{{ url('kelurahan') }}">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Kelurahan</span></a>
-            </li>
-
-
-            {{-- @php
+            @php
                 $active = '';
                 $menuopen = '';
-                if (in_array($menu, ['jenistryout', 'kategori', 'banksoal', 'formasiasn', 'formasibidang'])) {
+                if (in_array($menu, ['kabupaten', 'kecamatan', 'kelurahan'])) {
                     $isactive = true;                
                 }else{
                     $isactive = false;
@@ -67,18 +48,42 @@
                 <a class="nav-link @if (!$isactive) collapsed @endif" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="@if ($isactive) false @else true @endif" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Lainnya</span>
+                    <span>Lokasi</span>
                 </a>
                 <div id="collapseTwo" class="collapse @if ($isactive) show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item {{ $menu == 'formasibidang' ? 'active' : '' }}" href="{{ url('formasibidang') }}">Bidang Formasi ASN</a>
-                        <a class="collapse-item {{ $menu == 'formasiasn' ? 'active' : '' }}" href="{{ url('formasiasn') }}">Formasi ASN</a>
-                        <a class="collapse-item {{ $menu == 'jenistryout' ? 'active' : '' }}" href="{{ url('jenistryout') }}">Jenis Tryout</a>
-                        <a class="collapse-item {{ $menu == 'kategori' ? 'active' : '' }}" href="{{ url('kategori') }}">Kategori Soal</a>
-                        <a class="collapse-item {{ $menu == 'banksoal' ? 'active' : '' }}" href="{{ url('banksoal') }}">Bank Soal</a>
+                        <a class="collapse-item {{ $menu == 'kabupaten' ? 'active' : '' }}" href="{{ url('kabupaten') }}">Kabupaten</a>
+                        <a class="collapse-item {{ $menu == 'kecamatan' ? 'active' : '' }}" href="{{ url('kecamatan') }}">Kecamatan</a>
+                        <a class="collapse-item {{ $menu == 'kelurahan' ? 'active' : '' }}" href="{{ url('kelurahan') }}">Kelurahan/ Desa</a>
                     </div>
                 </div>
-            </li> --}}
+            </li>
+
+            @php
+                $active = '';
+                $menuopen = '';
+                if (in_array($menu, ['persyaratandasar', 'persyaratanadministratif', 'persyaratanteknis'])) {
+                    $isactive = true;                
+                }else{
+                    $isactive = false;
+                }
+            @endphp
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link @if (!$isactive) collapsed @endif" href="#" data-toggle="collapse" data-target="#collapseThree"
+                    aria-expanded="@if ($isactive) false @else true @endif" aria-controls="collapseThree">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Syarat</span>
+                </a>
+                <div id="collapseThree" class="collapse @if ($isactive) show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item {{ $menu == 'persyaratandasar' ? 'active' : '' }}" href="{{ url('persyaratandasar') }}">Persyaratan Dasar</a>
+                        <a class="collapse-item {{ $menu == 'persyaratanadministratif' ? 'active' : '' }}" href="{{ url('persyaratanadministratif') }}">Persyaratan Administratif</a>
+                        <a class="collapse-item {{ $menu == 'persyaratanteknis' ? 'active' : '' }}" href="{{ url('persyaratanteknis') }}">Persyaratan Teknis</a>
+                    </div>
+                </div>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link {{ $menu == 'pengaturan' ? 'active' : '' }}" href="{{ url('pengaturan') }}">

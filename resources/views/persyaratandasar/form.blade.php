@@ -7,7 +7,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">KELURAHAN/ DESA</h1>
+        <h1 class="h3 mb-0 text-gray-800">PERSYARATAN DASAR</h1>
     </div>
 
     <form method="POST" id="form" enctype="multipart/form-data">
@@ -20,7 +20,7 @@
                     <!-- Card Header - Dropdown -->
                     <div
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary label-judul"><a href="{{ url('kelurahan') }}">LIST DATA KELURAHAN/ DESA</a> / <span class="label-aksi"></span> </h6><span class="float-end id-primary"></span>
+                        <h6 class="m-0 font-weight-bold text-primary label-judul"><a href="{{ url('persyaratandasar') }}">LIST DATA PERSYARATAN DASAR</a> / <span class="label-aksi"></span> </h6><span class="float-end id-primary"></span>
                     </div>
                     
                     <!-- Card Body -->
@@ -29,47 +29,58 @@
                             
                             <div class="col-12 required">
                                 <div class="form-group row">
-                                    <label for="kodekabupaten" class="col-md-3 col-form-label">Nama Kabupaten</label>
-                                    <div class="col-md-9">
-                                        <select name="kodekabupaten" id="kodekabupaten" class="form-control searchKabupaten"></select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 required">
-                                <div class="form-group row">
-                                    <label for="kodekecamatan" class="col-md-3 col-form-label">Nama Kecamatan</label>
-                                    <div class="col-md-9">
-                                        <select name="kodekecamatan" id="kodekecamatan" class="form-control"></select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 required">
-                                <div class="form-group row">
-                                    <label for="kodekelurahan" class="col-md-3 col-form-label">Kode Kelurahan/ Desa</label>
+                                    <label for="idpersyaratandasar" class="col-md-3 col-form-label">Kode Persyaratan</label>
                                     <div class="col-md-3">
-                                        <input type="text" class="form-control kode-kelurahan" name="kodekelurahan" id="kodekelurahan" placeholder="Kode kelurahan/ desa" autofocus>
+                                        <input type="text" class="form-control" name="idpersyaratandasar" id="idpersyaratandasar" placeholder="Kode persyaratan" autofocus>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12 required">
                                 <div class="form-group row">
-                                    <label for="namakelurahan" class="col-md-3 col-form-label">Nama Kelurahan/ Desa</label>
+                                    <label for="namapersyaratandasar" class="col-md-3 col-form-label">Nama Persyaratan</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="namakelurahan" id="namakelurahan" placeholder="Nama kelurahan/ desa">
+                                        <input type="text" class="form-control" name="namapersyaratandasar" id="namapersyaratandasar" placeholder="Nama persyaratan">
                                     </div>
                                 </div>
                             </div>
 
+                            <div class="col-12 required">
+                                <div class="form-group row">
+                                    <label for="batasminimalkabupaten" class="col-md-3 col-form-label">Jumlah Minimal Untuk Kabupaten</label>
+                                    <div class="col-md-3">
+                                        <input type="number" class="form-control" name="batasminimalkabupaten" id="batasminimalkabupaten" placeholder="0">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 required">
+                                <div class="form-group row">
+                                    <label for="batasminimalkota" class="col-md-3 col-form-label">Jumlah Minimal Untuk Kotamadya</label>
+                                    <div class="col-md-3">
+                                        <input type="number" class="form-control" name="batasminimalkota" id="batasminimalkota" placeholder="0">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 required" id="divstatus">
+                                <div class="form-group row">
+                                    <label for="namapersyaratandasar" class="col-md-3 col-form-label">Status Aktif</label>
+                                    <div class="col-md-9">
+                                        <select name="statusaktif" id="statusaktif" class="form-control select2">
+                                            <option value="Aktif">Aktif</option>
+                                            <option value="Tidak Aktif">Tidak Aktif</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             
                         </div>
                     </div>
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success btn-sm float-right" id="btnSimpan"><i class="fa fa-save mr-1"></i>Simpan</button>
-                        <a href="{{ url('kelurahan') }}" class="btn btn-default btn-sm float-right mr-3">Kembali</a>
+                        <a href="{{ url('persyaratandasar') }}" class="btn btn-default btn-sm float-right mr-3">Kembali</a>
                     </div>
                 </div>
             </div>
@@ -89,38 +100,31 @@
 @section('javascript')
     
 <script>
-    var kodekelurahan = "{{ $kodekelurahan }}";
+    var idpersyaratandasar = "{{ $idpersyaratandasar }}";
 
     $(document).ready(function() {
 
         $('.select2').select2();
 
-        if (kodekelurahan != "") {
-            $('#kodekelurahan').val(kodekelurahan);
-            $('.id-primary').html('ID: ' + kodekelurahan);
+        if (idpersyaratandasar != "") {
+            $('#idpersyaratandasar').val(idpersyaratandasar);
+            $('.id-primary').html('ID: ' + idpersyaratandasar);
             $('.label-judul .label-aksi').html('Edit');
 
             $.ajax({
-                    url: "{{ url('kelurahan/getId') }}",
+                    url: "{{ url('persyaratandasar/getId') }}",
                     type: 'GET',
                     dataType: 'json',
                     data: {
-                        'kodekelurahan': kodekelurahan
+                        'idpersyaratandasar': idpersyaratandasar
                     },
                 })
                 .done(function(response) {
-                    // console.log(response);
-                    addSelectOption('kodekabupaten', response.kodekabupaten, response.kodekabupaten + ' - ' + response.namakabupaten);
-                    $('#kodekabupaten').val(response['kodekabupaten']).trigger('change');
-
-                    setInterval(() => {
-                        addSelectOption('kodekecamatan', response.kodekecamatan, response.kodekecamatan + ' - ' + response.namakecamatan);
-                        $('#kodekecamatan').val(response['kodekecamatan']).trigger('change');                        
-                    }, 500);
-
-
-                    $('#namakelurahan').val(response['namakelurahan']);
-                    $('#tglberdiri').val(response['tglberdiri']);
+                    console.log(response);
+                    $('#namapersyaratandasar').val(response['namapersyaratandasar']);
+                    $('#batasminimalkabupaten').val(response['batasminimalkabupaten']);
+                    $('#batasminimalkota').val(response['batasminimalkota']);
+                    $('#statusaktif').val(response['statusaktif']).trigger('change');
                 })
                 .fail(function() {
                     console.log('error getDataID');
@@ -136,40 +140,40 @@
                     validating: 'glyphicon glyphicon-refresh'
                 },
                 fields: {
-                    kodekabupaten: {
+                    idpersyaratandasar: {
                         validators: {
                             notEmpty: {
-                                message: 'kode kabupaten tidak boleh kosong'
-                            },
-                        }
-                    },
-                    kodekecamatan: {
-                        validators: {
-                            notEmpty: {
-                                message: 'kode kecamatan tidak boleh kosong'
-                            },
-                        }
-                    },
-                    kodekelurahan: {
-                        validators: {
-                            notEmpty: {
-                                message: 'kode kelurahan tidak boleh kosong'
+                                message: 'kode persyaratan tidak boleh kosong'
                             },
                             stringLength: {
-                                min: 10,
-                                max: 10,
-                                message: 'minimal 10 karakter'
+                                min: 3,
+                                max: 3,
+                                message: 'minimal 3 karakter'
                             },
                         }
                     },
-                    namakelurahan: {
+                    namapersyaratandasar: {
                         validators: {
                             notEmpty: {
-                                message: 'nama kelurahan tidak boleh kosong'
+                                message: 'nama persyaratan tidak boleh kosong'
                             },
                             stringLength: {
-                                max: 100,
-                                message: 'maksimal 100 karakter'
+                                max: 255,
+                                message: 'maksimal 255 karakter'
+                            },
+                        }
+                    },
+                    batasminimalkabupaten: {
+                        validators: {
+                            notEmpty: {
+                                message: 'batas minimal tidak boleh kosong'
+                            },
+                        }
+                    },
+                    batasminimalkota: {
+                        validators: {
+                            notEmpty: {
+                                message: 'batas minimal tidak boleh kosong'
                             },
                         }
                     },
@@ -185,7 +189,7 @@
 
                 // Kirim via AJAX
                 $.ajax({
-                    url: "{{ url('kelurahan/simpan') }}",
+                    url: "{{ url('persyaratandasar/simpan') }}",
                     type: 'POST',
                     data: formData,
                     headers: {
@@ -197,7 +201,7 @@
                         if (response.success) {
                             swal('Berhasil!', 'Data berhasil disimpan.', 'success')
                             .then(() => {
-                                window.location.href = "{{ url('kelurahan') }}";
+                                window.location.href = "{{ url('persyaratandasar') }}";
                             });
                         } else {
                             swal('Gagal!', response.message, 'error');
@@ -218,59 +222,13 @@
                         swal('Error!', message, 'error');
                     }
                 });
-
-            });
-        
-        $(document).on('change', '#kodekabupaten', function() {
-            $('#kodekecamatan').val("").trigger('change');
-        });
-
-        $('#kodekabupaten').select2({
-            placeholder: '-- Nama kabupaten --',
-            minimumInputLength: 0, 
-            ajax: {
-                url: "{{ url('select2/searchKabupaten') }}", 
-                dataType: 'json',
-                delay: 250, 
-                data: function(params) {
-                    return {
-                        q: params.term, 
-                    };
-                },
-                processResults: function(data) {                    
-                    return {
-                        results: data.results, 
-                    };
-                },
-                cache: true
-            },
-        });
-
-        $('#kodekecamatan').select2({
-                placeholder: '-- Nama kecamatan --',
-                minimumInputLength: 0, 
-                ajax: {
-                    url: "{{ url('select2/searchKecamatan') }}", 
-                    dataType: 'json',
-                    delay: 250, 
-                    data: function(params) {
-                        return {
-                            q: params.term, 
-                            kodekabupaten: $('#kodekabupaten').val(),
-                        };
-                    },
-                    processResults: function(data) {
-                        return {
-                            results: data.results, 
-                        };
-                    },
-                    cache: true
-                },
             });
 
         $("form").attr('autocomplete', 'off');
-        
-        
+        $("#idpersyaratandasar").mask("000", {
+            reverse: true,
+            placeholder: "Kode persyaratan"
+        });
     });
 
     

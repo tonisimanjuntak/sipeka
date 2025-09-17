@@ -21,7 +21,7 @@ class PengaturanController extends Controller
         $pengaturan = Pengaturan::all();
         $data['pengaturan'] = $pengaturan;
         $data['menu'] = 'pengaturan';
-        return view('admin.pengaturan.index', $data);
+        return view('pengaturan.index', $data);
     }
 
     public function tambah()
@@ -29,7 +29,7 @@ class PengaturanController extends Controller
         $data['menu'] = 'pengaturan';
         $data['prefix'] = "";
         $data['ltambah'] = "1";
-        return view('admin.pengaturan.form', $data);
+        return view('pengaturan.form', $data);
     }
 
     public function edit($prefix)
@@ -43,7 +43,7 @@ class PengaturanController extends Controller
         $data['menu'] = 'pengaturan';
         $data['prefix'] = $prefix;
         $data['ltambah'] = "0";
-        return view('admin.pengaturan.form', $data);
+        return view('pengaturan.form', $data);
     }
 
     public function listindex(Request $request)

@@ -1,4 +1,4 @@
-@extends('admin/template/layout')
+@extends('template/layout')
 
 @section('content')
 
@@ -10,7 +10,7 @@
         <h1 class="h3 mb-0 text-gray-800">PENGATURAN</h1>
     </div>
 
-    <form action="{{ url('admin/pengaturan/simpan') }}" method="POST" id="form" enctype="multipart/form-data">
+    <form action="{{ url('pengaturan/simpan') }}" method="POST" id="form" enctype="multipart/form-data">
         @csrf
 
         <div class="row">
@@ -20,7 +20,7 @@
                     <!-- Card Header - Dropdown -->
                     <div
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary label-judul"><a href="{{ url('admin/pengaturan') }}">LIST DATA PENGATURAN</a> / <span class="label-aksi"></span> </h6><span class="float-end id-primary"></span>
+                        <h6 class="m-0 font-weight-bold text-primary label-judul"><a href="{{ url('pengaturan') }}">LIST DATA PENGATURAN</a> / <span class="label-aksi"></span> </h6><span class="float-end id-primary"></span>
                     </div>
                     
                     <!-- Card Body -->
@@ -53,7 +53,7 @@
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success btn-sm float-right"><i class="fa fa-save mr-1"></i>Simpan</button>
-                        <a href="{{ url('admin/pengaturan') }}" class="btn btn-default btn-sm float-right mr-3">Kembali</a>
+                        <a href="{{ url('pengaturan') }}" class="btn btn-default btn-sm float-right mr-3">Kembali</a>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
             $('.label-judul .label-aksi').html('Edit');
 
             $.ajax({
-                    url: "{{ url('admin/pengaturan/getId') }}",
+                    url: "{{ url('pengaturan/getId') }}",
                     type: 'GET',
                     dataType: 'json',
                     data: {

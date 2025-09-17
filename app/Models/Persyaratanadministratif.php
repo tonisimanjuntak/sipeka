@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 
-class Kelurahan extends Model
+class Persyaratanadministratif extends Model
 {
     use HasFactory;
 
-    protected $table = 'v_kelurahan';
-    protected $primaryKey = 'kodekelurahan';
+    protected $table = 'persyaratanadministratif';
+    protected $primaryKey = 'idpersyaratanadministratif';
     protected $keyType = 'char';
 
     public $timestamps = false; // Menonaktifkan timestamps
@@ -30,10 +30,10 @@ class Kelurahan extends Model
     public function simpanData($data)
     {
         try {
-            DB::table('kelurahan')
+            DB::table('persyaratanadministratif')
                 ->insert($data);
 
-            $this->App->riwayatAktifitas($data, 'kelurahan', 'simpanDataKelurahan');
+            $this->App->riwayatAktifitas($data, 'persyaratanadministratif', 'simpanDataPersyaratanadministratif');
 
             return ['status' => 'success', 'message' => "Data berhasil disimpan"];
         } catch (QueryException $e) {
@@ -43,14 +43,14 @@ class Kelurahan extends Model
         }
     }
 
-    public function updateData($data, $kodekelurahan)
+    public function updateData($data, $idpersyaratanadministratif)
     {
         try {
             DB::beginTransaction();
-            DB::table('kelurahan')
-                ->where('kodekelurahan', $kodekelurahan)
+            DB::table('persyaratanadministratif')
+                ->where('idpersyaratanadministratif', $idpersyaratanadministratif)
                 ->update($data);
-            $this->App->riwayatAktifitas($data, 'kelurahan', 'updateDataKelurahan');
+            $this->App->riwayatAktifitas($data, 'persyaratanadministratif', 'updateDataPersyaratanadministratif');
 
             DB::commit();
             return ['status' => 'success', 'message' => "Data berhasil disimpan"];
@@ -63,16 +63,16 @@ class Kelurahan extends Model
         }
     }
 
-    public function hapusData($kodekelurahan, $rskelurahan)
+    public function hapusData($idpersyaratanadministratif, $rspersyaratanadministratif)
     {
         try {
             DB::beginTransaction();
 
-            DB::table('kelurahan')
-                ->where('kodekelurahan', $kodekelurahan)
+            DB::table('persyaratanadministratif')
+                ->where('idpersyaratanadministratif', $idpersyaratanadministratif)
                 ->delete();
 
-            $this->App->riwayatAktifitas($rskelurahan, 'kelurahan', 'hapusDatakelurahan');
+            $this->App->riwayatAktifitas($rspersyaratanadministratif, 'persyaratanadministratif', 'hapusDataPersyaratanadministratif');
 
             DB::commit();
             return ['status' => 'success', 'message' => "Data berhasil dihapus"];
@@ -87,6 +87,6 @@ class Kelurahan extends Model
 
     public function createID()
     {
-        return DB::select("SELECT create_kodekelurahan() AS id")[0]->id;
+        return DB::select("SELECT create_idpersyaratanadministratif() AS id")[0]->id;
     }
 }

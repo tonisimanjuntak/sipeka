@@ -7,7 +7,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">PENGATURAN</h1>
+        <h1 class="h3 mb-0 text-gray-800">PERSYARATAN DASAR</h1>
     </div>
 
     <div class="row">
@@ -18,8 +18,8 @@
                 <!-- Card Header - Dropdown -->
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">LIST DATA PENGATURAN</h6>
-                    <a href="{{ url('pengaturan/tambah') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>
+                    <h6 class="m-0 font-weight-bold text-primary">LIST DATA PERSYARATAN DASAR</h6>
+                    <a href="{{ url('persyaratandasar/tambah') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -48,14 +48,15 @@
                         </div>
 
                         <div class="col-12">
-                            <table class="table table-bordered" id="tableList">
-                                <thead class="">
+                            <table class="table table-bordered" id="tableIndex" width="100%">
+                                <thead>
                                     <tr>
-                                        <th style="width: 5%; text-align: center;">No</th>
-                                        <th style="width: 25%; text-left: center;">Prefix</th>
-                                        <th style="text-align: left;">Values</th>
-                                        <th style="text-align: left;">Deskripsi</th>
-                                        <th style="width: 10%; text-align: center;">Aksi</th>
+                                        <th style="width: 5%; text-align:center;">NO</th>
+                                        <th style="width: 10%; text-align:center;">KODE</th>
+                                        <th style="text-align:center;">NAMA PERSYARATAN</th>
+                                        <th style="text-align:center;">BATAS MINIMAL</th>
+                                        <th style="width: 15%; text-align:center;">STATUS</th>
+                                        <th style="width: 10%; text-align:center;">AKSI</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -81,44 +82,51 @@
     var table;
 
     $(document).ready(function() {
-
-        table = $('#tableList').DataTable({
+        table = $('#tableIndex').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ url('pengaturan/listindex') }}",
+                url: "{{ url('persyaratandasar/listindex') }}",
                 type: 'GET',
                 data: function(d) {
                     d.statusFilter = $('input[name="statusFilter"]:checked').val();
                 }
             },
-            pageLength: 50, // Jumlah data per halaman
+            pageLength: 10,
             lengthMenu: [
                 [10, 25, 50, 100],
                 [10, 25, 50, 100]
-            ], // Opsi jumlah data per halaman
+            ],
             columns: [{
                     data: 'no',
                     name: 'no',
-                    className: 'dt-body-center',
                     orderable: false,
+                    className: 'dt-body-center',
                     searchable: false
                 },
                 {
-                    data: 'prefix',
-                    name: 'prefix',
+                    data: 'idpersyaratandasar',
+                    name: 'idpersyaratandasar',
+                    className: 'dt-body-center',
+                    orderable: true,
+                },
+                {
+                    data: 'namapersyaratandasar',
+                    name: 'namapersyaratandasar',
                     className: 'dt-body-left',
                     orderable: true,
                 },
                 {
-                    data: 'values',
-                    name: 'values',
-                    orderable: false,
+                    data: 'batasminimal',
+                    name: 'batasminimal',
+                    className: 'dt-body-left',
+                    orderable: true,
                 },
                 {
-                    data: 'deskripsi',
-                    name: 'deskripsi',
-                    orderable: false,
+                    data: 'statusaktif',
+                    name: 'statusaktif',
+                    className: 'dt-body-center',
+                    orderable: true,
                 },
                 {
                     data: 'action',
@@ -164,7 +172,34 @@
             })
             .then((willDelete) => {
                 if (willDelete) {
-                    document.location.href = link;
+
+                    
+                    $.ajax({
+                        url: link,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success) {
+                                swal('Berhasil!', 'Data berhasil dihapus.', 'success')
+                                .then(() => {
+                                    window.location.href = "{{ url('persyaratandasar') }}";
+                                });
+                            } else {
+                                swal('Gagal!', response.message, 'error');
+                            }
+                        },
+                        error: function(xhr) {
+                            let message = 'Terjadi kesalahan.';
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                message = xhr.responseJSON.message;
+                            } else if (xhr.status === 422) {
+                                // Validation errors
+                                const errors = xhr.responseJSON.errors;
+                                message = Object.values(errors).flat().join('<br>');
+                            }
+                            swal('Error!', message, 'error');
+                        }
+                    });
                 }
             });
 
