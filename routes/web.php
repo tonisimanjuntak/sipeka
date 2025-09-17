@@ -10,6 +10,7 @@ use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\PersyaratandasarController;
 use App\Http\Controllers\PersyaratanadministratifController;
 use App\Http\Controllers\PersyaratanteknisController;
+use App\Http\Controllers\PembentukankecamatanController;
 use App\Http\Controllers\Select2Controller;
 use Illuminate\Support\Facades\Route;
 
@@ -109,4 +110,15 @@ use Illuminate\Support\Facades\Route;
         Route::get('/persyaratanteknis/hapus/{IdPrimary}', 'hapus');
         Route::get('/persyaratanteknis/getId/', 'getId');
         Route::post('/persyaratanteknis/simpan', 'simpan');
+    });
+
+
+    Route::controller(PembentukankecamatanController::class)->group(function () {
+        Route::get('/pembentukankecamatan', 'index');
+        Route::get('/pembentukankecamatan/tambah', 'tambah');
+        Route::get('/pembentukankecamatan/edit/{IdPrimary}', 'edit');
+        Route::get('/pembentukankecamatan/listindex', 'listindex');
+        Route::get('/pembentukankecamatan/hapus/{IdPrimary}', 'hapus');
+        Route::get('/pembentukankecamatan/getId/', 'getId');
+        Route::post('/pembentukankecamatan/simpan', 'simpan');
     });

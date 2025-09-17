@@ -101,9 +101,9 @@
 
 
             <li class="nav-item">
-                <a class="nav-link {{ $menu == 'pengajuan' ? 'active' : '' }}" href="{{ url('pengajuan') }}">
+                <a class="nav-link {{ $menu == 'pembentukankecamatan' ? 'active' : '' }}" href="{{ url('pembentukankecamatan') }}">
                     <i class="fab fa-first-order-alt"></i>
-                    <span>Pengajuan</span></a>
+                    <span>Pembentukan Kecamatan</span></a>
             </li>
 
 
