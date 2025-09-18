@@ -52,7 +52,7 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 5%; text-align:center;">NO</th>
-                                        <th style="width: 10%; text-align:center;">NO PENGAJUAN</th>
+                                        <th style="width: 15%; text-align:center;">NO PENGAJUAN</th>
                                         <th style="text-align:center;">KABUPATEN</th>
                                         <th style="text-align:center;">KECAMATAN</th>
                                         <th style="width: 15%; text-align:center;">STATUS</th>
@@ -105,20 +105,26 @@
                     searchable: false
                 },
                 {
-                    data: 'idpengajuan',
-                    name: 'idpengajuan',
+                    data: 'nopengajuan',
+                    name: 'nopengajuan',
                     className: 'dt-body-center',
                     orderable: true,
                 },
                 {
-                    data: 'namapersyaratanteknis',
-                    name: 'namapersyaratanteknis',
+                    data: 'namakabupaten',
+                    name: 'namakabupaten',
                     className: 'dt-body-left',
                     orderable: true,
                 },
                 {
-                    data: 'statusaktif',
-                    name: 'statusaktif',
+                    data: 'namakecamatan',
+                    name: 'namakecamatan',
+                    className: 'dt-body-left',
+                    orderable: true,
+                },
+                {
+                    data: 'statuspengajuan',
+                    name: 'statuspengajuan',
                     className: 'dt-body-center',
                     orderable: true,
                 },

@@ -49,7 +49,7 @@
                                 <div class="form-group row">
                                     <label for="batasminimalkabupaten" class="col-md-3 col-form-label">Jumlah Minimal Untuk Kabupaten</label>
                                     <div class="col-md-3">
-                                        <input type="number" class="form-control" name="batasminimalkabupaten" id="batasminimalkabupaten" placeholder="0">
+                                        <input type="text" class="form-control" name="batasminimalkabupaten" id="batasminimalkabupaten" placeholder="0">
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                                 <div class="form-group row">
                                     <label for="batasminimalkota" class="col-md-3 col-form-label">Jumlah Minimal Untuk Kotamadya</label>
                                     <div class="col-md-3">
-                                        <input type="number" class="form-control" name="batasminimalkota" id="batasminimalkota" placeholder="0">
+                                        <input type="text" class="form-control" name="batasminimalkota" id="batasminimalkota" placeholder="0">
                                     </div>
                                 </div>
                             </div>
@@ -228,6 +228,38 @@
         $("#idpersyaratandasar").mask("000", {
             reverse: true,
             placeholder: "Kode persyaratan"
+        });
+
+        document.getElementById('batasminimalkabupaten').addEventListener('input', function (event) {
+            let value = event.target.value;
+
+            // Hapus karakter yang tidak valid (hanya angka dan koma yang diperbolehkan)
+            value = value.replace(/[^0-9.]/g, '');
+
+            // Pastikan hanya ada satu koma
+            let parts = value.split('.');
+            if (parts.length > 2) {
+                value = parts[0] + '.' + parts[1];
+            }
+
+            // Update nilai input
+            event.target.value = value;
+        });
+
+        document.getElementById('batasminimalkota').addEventListener('input', function (event) {
+            let value = event.target.value;
+
+            // Hapus karakter yang tidak valid (hanya angka dan koma yang diperbolehkan)
+            value = value.replace(/[^0-9.]/g, '');
+
+            // Pastikan hanya ada satu koma
+            let parts = value.split('.');
+            if (parts.length > 2) {
+                value = parts[0] + '.' + parts[1];
+            }
+
+            // Update nilai input
+            event.target.value = value;
         });
     });
 

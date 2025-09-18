@@ -1,0 +1,61 @@
+kabupaten/kota
+
+idkabupaten*, kodekabupaten (unik), namakabupaten
+
+kecamatan
+idkecamatan*, idkabupaten**, kodekacamatan unik), namakecamatan, tglberdiri
+
+desa/kelurahan
+iddesa*, idkecamatan**, kodedesa (unik), namadesa
+
+
+pengguna
+idpengguna*, idkabupaten**, nip (unik), nama lengkap tanpa gelar, gelar depan, gelar belakang, pangkat, jabatan nowa, email, foto, username, password, konfirmasi password, nosk, tanggal sk, upload sk
+
+penataan kecamatan
+idpenataan*, namapenataan (isi cuma 3, pembentukan kecamatan, penggabungan kecamatan, penyesuaian kecamatan)
+
+
+persyaratandasar
+idsyaratdasar*, namasyarat, batasminimalkabupaten, batasminimal kota, fileupload
+
+persyaratanteknis
+idsyaratteknis, nama syarat, fileupload
+
+persyaratanadministratif
+idsyaratadministratif, nama syarat, fileupload
+
+
+transaksi pembentukan kecamatan
+kabupaten mengajukan permohonan dilengkapi dengan surat pengantar, syarat dasar, teknis dan administratif
+(terlepas dari memenuhi syarat atau tidak, tidak masalah)
+kemudian provinsi tentukan, apakah boleh upload ranperda
+selanjutnya kabupaten/kota upload ranperda
+provinsi telaah, telaahan teknis dan telaahan hukum
+jika status ranperdanya perbaikan, maka upload ulang
+jika statusnya memenuhi syarat (maka provinsi isi nomor register dan tanggal atas ranperda tersebut), provinsi tentukan status agar kabupaten bisa upload surat permohonan kode kecamatan (no, tanggal dan file)
+jika sesuai, maka provinsi upload rekomendasi gubernuur (no, tanggal dan file)
+setelah di upload, provinsi juga yang menentukan apakah sudah di kirim ke kemendagri atau belum
+jika kemendagri sudah menerbitkan surat, maka di upload di aplikasi (no, tanggal dan file dan status dari kemendagri)
+
+transaksi penggabungan dan penyesuaian
+kabupaten menentukan alasannya apa, kemudian upload surat pengantar, 1 file penggabungan/penyesuaian
+kemudian provinsi tentukan, apakah boleh upload ranperda
+selanjutnya kabupaten/kota upload ranperda
+provinsi telaah, telaahan teknis dan telaahan hukum
+jika status ranperdanya perbaikan, maka upload ulang
+jika statusnya memenuhi syarat (maka provinsi isi nomor register dan tanggal atas ranperda tersebut), provinsi tentukan status 
+jika sesuai, maka provinsi upload rekomendasi gubernuur (no, tanggal dan file)
+setelah di upload, provinsi juga yang menentukan apakah sudah di kirim ke kemendagri atau belum
+jika kemendagri sudah menerbitkan surat, maka di upload di aplikasi (no, tanggal dan file dan status dari kemendagri)
+
+
+
+
+
+
+ 
+
+
+
+

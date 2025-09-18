@@ -11,7 +11,7 @@ class Pembentukankecamatan extends Model
 {
     use HasFactory;
 
-    protected $table = 'pengajuan';
+    protected $table = 'v_pembentukankecamatan';
     protected $primaryKey = 'idpengajuan';
     protected $keyType = 'char';
 
@@ -30,10 +30,10 @@ class Pembentukankecamatan extends Model
     public function simpanData($data)
     {
         try {
-            DB::table('pengajuan')
+            DB::table('pembentukankecamatan')
                 ->insert($data);
 
-            $this->App->riwayatAktifitas($data, 'pengajuan', 'simpanDatapengajuan');
+            $this->App->riwayatAktifitas($data, 'pembentukankecamatan', 'simpanDatapembentukankecamatan');
 
             return ['status' => 'success', 'message' => "Data berhasil disimpan"];
         } catch (QueryException $e) {
@@ -47,10 +47,10 @@ class Pembentukankecamatan extends Model
     {
         try {
             DB::beginTransaction();
-            DB::table('pengajuan')
+            DB::table('pembentukankecamatan')
                 ->where('idpengajuan', $idpengajuan)
                 ->update($data);
-            $this->App->riwayatAktifitas($data, 'pengajuan', 'updateDatapengajuan');
+            $this->App->riwayatAktifitas($data, 'pembentukankecamatan', 'updateDatapembentukankecamatan');
 
             DB::commit();
             return ['status' => 'success', 'message' => "Data berhasil disimpan"];
@@ -68,11 +68,11 @@ class Pembentukankecamatan extends Model
         try {
             DB::beginTransaction();
 
-            DB::table('pengajuan')
+            DB::table('pembentukankecamatan')
                 ->where('idpengajuan', $idpengajuan)
                 ->delete();
 
-            $this->App->riwayatAktifitas($rspengajuan, 'pengajuan', 'hapusDatapengajuan');
+            $this->App->riwayatAktifitas($rspengajuan, 'pembentukankecamatan', 'hapusDatapembentukankecamatan');
 
             DB::commit();
             return ['status' => 'success', 'message' => "Data berhasil dihapus"];
@@ -88,5 +88,30 @@ class Pembentukankecamatan extends Model
     public function createID()
     {
         return DB::select("SELECT create_idpengajuan() AS id")[0]->id;
+    }
+
+    public function getPersyaratanDasar()
+    {
+        return DB::table('persyaratandasar')
+            ->where('statusaktif', 'Aktif')
+            ->orderBy('idpersyaratandasar', 'asc')
+            ->get();
+    }
+
+
+    public function getPersyaratanAdministratif()
+    {
+        return DB::table('persyaratanadministratif')
+            ->where('statusaktif', 'Aktif')
+            ->orderBy('idpersyaratanadministratif', 'asc')
+            ->get();
+    }
+
+    public function getPersyaratanTeknis()
+    {
+        return DB::table('persyaratanteknis')
+            ->where('statusaktif', 'Aktif')
+            ->orderBy('idpersyaratanteknis', 'asc')
+            ->get();
     }
 }
