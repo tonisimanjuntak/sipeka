@@ -10,9 +10,11 @@
         <h1 class="h3 mb-0 text-gray-800">PEMBENTUKAN KECAMATAN</h1>
     </div>
 
-    <form method="POST" id="form" enctype="multipart/form-data">
+    
         @csrf
         <input type="hidden" name="ltambah" id="ltambah" value="{{ $ltambah }}">
+        <input type="hidden" name="kodekabupaten" id="kodekabupaten" value="{{ session('kodekabupaten') }}">
+
         <div class="row">
             <!-- Area Chart -->
             <div class="col-12">
@@ -117,7 +119,7 @@
             <!-- Pie Chart -->
 
         </div>
-    </form>
+    
 
 
 </div>
@@ -212,13 +214,65 @@
         });
 
 
+        
+        $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+
+            // var form_data = $("#form" + stepNumber).serialize();
+            // console.log(stepNumber);
+            // console.log(stepDirection);
+
+
+            if (stepNumber == 0) {
+                if (stepDirection == 1) {
+
+                    const bootstrapValidator = $('#formPengajuan').data('bootstrapValidator');
+                    bootstrapValidator.validate();
+                    if (bootstrapValidator.isValid()) {
+                        simpanPengajuan();
+                        return true; // Lanjutkan ke langkah berikutnya
+                    } else {                        
+                        return false; // Hentikan navigasi jika form tidak valid
+                    }
+
+                    // return false;
+                } else {
+                    return true;
+                }
+            }
+
+
+
+            if (stepNumber == 2) {
+            if (stepDirection == 3) {
+                if (!table.data().count()) {
+                swal("Detail Tempat dan Tanggal!", "Detail tempat dan tanggal belum ada.", "info");
+                return false;
+                }
+            }
+            return true;
+            }
+
+            if (stepNumber == 3) {
+            return true;
+            }
+
+            if (stepNumber == 4) {
+            return true;
+            }
+
+            return false;
+
+        });
+
         $("form").attr('autocomplete', 'off');
         
     });
 
+    
         
 </script>
 
 @include('pembentukankecamatan.verifikasipropinsi_js')
+@include('pembentukankecamatan.pengajuan_js')
 
 @endsection

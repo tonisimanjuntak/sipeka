@@ -27,6 +27,9 @@
     <!-- select2 -->
     <link href="{{ asset('') }}assets/select2/css/select2.min.css" rel="stylesheet" />
 
+    <!-- CSS -->
+    <link href="https://unpkg.com/smartwizard@6/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />
+    
     <link href="{{ asset('') }}assets/custom/style.css" rel="stylesheet" />
 
     <style>
@@ -139,8 +142,7 @@
 
     <script type="text/javascript" src="{{ asset('') }}assets/custom/script.js"></script>
 
-    <!-- CSS -->
-    <link href="https://unpkg.com/smartwizard@6/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />
+    
 
     <!-- JavaScript -->
     <script src="https://unpkg.com/smartwizard@6/dist/js/jquery.smartWizard.min.js" type="text/javascript"></script>

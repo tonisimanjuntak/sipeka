@@ -150,11 +150,101 @@ class PembentukankecamatanController extends Controller
         ]);
     }
 
-    public function simpan(Request $request)
+    public function simpanPengajuan(Request $request)
     {
         $nopengajuan = $request->get('nopengajuan');
         $tglpengajuan = $request->get('tglpengajuan');
         $statusaktif = $request->get('statusaktif');
+
+
+        //file surat pengantar
+        $filesuratpengantar = $request->file('filesuratpengantar');
+        $filesuratpengantar_lama = $request->get('filesuratpengantar_lama');
+        $uploads = Uploads::startUpload('uploads/pengajuan', $filesuratpengantar, $filesuratpengantar_lama, 1000);
+        if ($uploads['status'] == 'success') {
+            $filesuratpengantar = $uploads['file_name'];
+        } else {
+            return response()->json([
+                'message' => 'File surat pengantar gagal disimpan! Error: ' . $uploads['message']
+            ]);
+        }
+
+        //file persyaratan dasar
+        $filepersyaratandasar = $request->file('filepersyaratandasar');
+        $filepersyaratandasar_lama = $request->get('filepersyaratandasar_lama');
+        $uploads = Uploads::startUpload('uploads/pengajuan', $filepersyaratandasar, $filepersyaratandasar_lama, 1000);
+        if ($uploads['status'] == 'success') {
+            $filepersyaratandasar = $uploads['file_name'];
+        } else {
+            return response()->json([
+                'message' => 'File persyaratan dasar gagal disimpan! Error: ' . $uploads['message']
+            ]);
+        }
+
+        //file surat kesepakatan
+        $filesuratkesepakatan = $request->file('filesuratkesepakatan');
+        $filesuratkesepakatan_lama = $request->get('filesuratkesepakatan_lama');
+        $uploads = Uploads::startUpload('uploads/pengajuan', $filesuratkesepakatan, $filesuratkesepakatan_lama, 1000);
+        if ($uploads['status'] == 'success') {
+            $filesuratkesepakatan = $uploads['file_name'];
+        } else {
+            return response()->json([
+                'message' => 'File surat kesepakatan gagal disimpan! Error: ' . $uploads['message']
+            ]);
+        }
+
+
+        //file kemampuan keuangan
+        $kemampuankeuangan = $request->file('kemampuankeuangan');
+        $kemampuankeuangan_lama = $request->get('kemampuankeuangan_lama');
+        $uploads = Uploads::startUpload('uploads/pengajuan', $kemampuankeuangan, $kemampuankeuangan_lama, 1000);
+        if ($uploads['status'] == 'success') {
+            $kemampuankeuangan = $uploads['file_name'];
+        } else {
+            return response()->json([
+                'message' => 'File kemampuan keuangan gagal disimpan! Error: ' . $uploads['message']
+            ]);
+        }
+
+        //file sarana prasarana
+        $saranaprasarana = $request->file('saranaprasarana');
+        $saranaprasarana_lama = $request->get('saranaprasarana_lama');
+        $uploads = Uploads::startUpload('uploads/pengajuan', $saranaprasarana, $saranaprasarana_lama, 1000);
+        if ($uploads['status'] == 'success') {
+            $saranaprasarana = $uploads['file_name'];
+        } else {
+            return response()->json([
+                'message' => 'File sarana prasarana gagal disimpan! Error: ' . $uploads['message']
+            ]);
+        }
+
+
+        //file batas wilayah
+        $bataswilayah = $request->file('bataswilayah');
+        $bataswilayah_lama = $request->get('bataswilayah_lama');
+        $uploads = Uploads::startUpload('uploads/pengajuan', $bataswilayah, $bataswilayah_lama, 1000);
+        if ($uploads['status'] == 'success') {
+            $bataswilayah = $uploads['file_name'];
+        } else {
+            return response()->json([
+                'message' => 'File batas wilayah gagal disimpan! Error: ' . $uploads['message']
+            ]);
+        }
+
+        //file calon ibukota
+        $lokasicalonibukota = $request->file('lokasicalonibukota');
+        $lokasicalonibukota_lama = $request->get('lokasicalonibukota_lama');
+        $uploads = Uploads::startUpload('uploads/pengajuan', $lokasicalonibukota, $lokasicalonibukota_lama, 1000);
+        if ($uploads['status'] == 'success') {
+            $lokasicalonibukota = $uploads['file_name'];
+        } else {
+            return response()->json([
+                'message' => 'File lokasi calon ibukota gagal disimpan! Error: ' . $uploads['message']
+            ]);
+        }
+
+
+
         $ltambah = $request->get('ltambah');
         $inserted_date = date('Y-m-d H:i:s');
         $updated_date = date('Y-m-d H:i:s');

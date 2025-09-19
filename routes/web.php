@@ -121,4 +121,5 @@ use Illuminate\Support\Facades\Route;
         Route::get('/pembentukankecamatan/hapus/{IdPrimary}', 'hapus');
         Route::get('/pembentukankecamatan/getId/', 'getId');
         Route::post('/pembentukankecamatan/simpan', 'simpan');
+        Route::post('/pembentukankecamatan/simpanPengajuan', 'simpanPengajuan');
     });
