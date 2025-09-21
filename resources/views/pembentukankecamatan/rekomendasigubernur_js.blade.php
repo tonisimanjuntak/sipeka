@@ -6,9 +6,11 @@
             if ($(this).val() == '2') {
                 $('.deskripsi-revisi-permohonankode').show();
                 $('.setujui-lanjutkan-permohonankode').hide();
+                $('#lbltglrekomendasigubernur').html('Tanggal Revisi')
             } else {
                 $('.deskripsi-revisi-permohonankode').hide();
                 $('.setujui-lanjutkan-permohonankode').show();
+                $('#lbltglrekomendasigubernur').html('Tanggal Rekomendasi')
             }
         });
         

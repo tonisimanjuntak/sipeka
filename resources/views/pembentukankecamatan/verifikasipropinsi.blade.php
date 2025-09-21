@@ -6,7 +6,7 @@
         <div class="card-body card-wizard">
             <div class="row">
                 <div class="col-12 mb-5">
-                    <h5 class="text-primary">VERIFIKASI PROPINSI KECAMATAN <button type="button"
+                    <h5 class="text-primary">VERIFIKASI PROVINSI KECAMATAN <button type="button"
                             class="btn btn-info btn-sm float-right btn-detail-pengajuan"
                             data-nopengajuan="{{ $nopengajuan }}">Lihat Detail Pengajuan</button>
                     </h5>
@@ -30,13 +30,13 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input radio-verifikasi-propinsi" type="radio"
                                     name="statusverifikasipropinsi" id="statusverifikasipropinsi1" value="1" checked>
-                                <label class="form-check-label" for="statusverifikasipropinsi1">Setujui dan
-                                    Lanjutkan</label>
+                                <label class="form-check-label" for="statusverifikasipropinsi1">Memenuhi Syarat</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input radio-verifikasi-propinsi" type="radio"
                                     name="statusverifikasipropinsi" id="statusverifikasipropinsi2" value="2">
-                                <label class="form-check-label" for="statusverifikasipropinsi2">Revisi Data</label>
+                                <label class="form-check-label" for="statusverifikasipropinsi2">Tidak Memenuhi
+                                    Syarat/ Revisi</label>
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
     <div class="card-body card-wizard">
         <div class="row">
             <div class="col-12 mb-5">
-                <h5 class="text-primary">VERIFIKASI PROPINSI KECAMATAN <button type="button"
+                <h5 class="text-primary">VERIFIKASI PROVINSI KECAMATAN <button type="button"
                         class="btn btn-info btn-sm float-right btn-detail-pengajuan"
                         data-nopengajuan="{{ $nopengajuan }}">Lihat Detail Pengajuan</button>
                 </h5>
@@ -74,7 +74,7 @@
 
 
             <div class="col-12 text-center mt-5">
-                <h5>Harap Menunggu. Sedang Diverifikasi di Propinsi</h5>
+                <h5>Harap Menunggu. Sedang Diverifikasi di Provinsi</h5>
             </div>
 
         </div>

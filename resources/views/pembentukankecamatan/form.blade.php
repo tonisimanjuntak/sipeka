@@ -31,13 +31,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#step-2">
                             <span class="num">2</span>
-                            VERIFIKASI PROPINSI
+                            VERIFIKASI PROVINSI
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#step-3">
                             <span class="num">3</span>
-                            UPLOAD RAPERDA
+                            UPLOAD RANPERDA
                         </a>
                     </li>
                     <li class="nav-item">

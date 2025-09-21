@@ -44,6 +44,9 @@
             <span>Data Operator</span></a>
     </li>
 
+    @endif
+
+
     @php
     $active = '';
     $menuopen = '';
@@ -65,8 +68,13 @@
         <div id="collapseTwo" class="collapse @if ($isactive) show @endif" aria-labelledby="headingTwo"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                @if (session('akseslevel') == 'Admin')
+
                 <a class="collapse-item {{ $menu == 'kabupaten' ? 'active' : '' }}"
                     href="{{ url('kabupaten') }}">Kabupaten</a>
+
+                @endif
+
                 <a class="collapse-item {{ $menu == 'kecamatan' ? 'active' : '' }}"
                     href="{{ url('kecamatan') }}">Kecamatan</a>
                 <a class="collapse-item {{ $menu == 'kelurahan' ? 'active' : '' }}"
@@ -75,6 +83,7 @@
         </div>
     </li>
 
+    @if (session('akseslevel') == 'Admin')
 
     <li class="nav-item">
         <a class="nav-link {{ $menu == 'pengaturan' ? 'active' : '' }}" href="{{ url('pengaturan') }}">

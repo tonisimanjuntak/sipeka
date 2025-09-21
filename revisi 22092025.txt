@@ -1,0 +1,16 @@
+desa muncul jumlah penduduk dan kk , wilayah, di detail
+jumlah kelurahan di count aja,
+umur kecamatan
+
+
+propinsi ganti jadi provinsi (OK)
+
+
+raperda jadi ranperda (OK)
+tgl dan nomor ranperda bisa di edit propinsi(gak jadi)
+
+telaahan hukum 
+revisi muncul telahaan hukum dan teknis (OK)
+
+
+status jumlah penduduk kk dan wilayah (memenuhi syarat/ tidak memenuhi syarat)

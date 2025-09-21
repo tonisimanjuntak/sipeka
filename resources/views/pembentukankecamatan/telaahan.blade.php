@@ -14,7 +14,7 @@
 
                 <div class="col-12">
                     <div class="form-group row">
-                        <label for="" class="col-md-3">Status Raperda</label>
+                        <label for="" class="col-md-3">Status Ranperda</label>
                         <div class="col-md-9">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input radio-verifikasi-raperda" type="radio"
@@ -25,15 +25,15 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input radio-verifikasi-raperda" type="radio"
                                     name="statusraperda" id="statusraperda2" value="2">
-                                <label class="form-check-label" for="statusraperda2">Revisi Raperda</label>
+                                <label class="form-check-label" for="statusraperda2">Revisi Ranperda</label>
                             </div>
                         </div>
                     </div>
                 </div>
 
 
-                <div class="col-12 setujui-lanjutkan-raperda">
-                    <div class="form-group row">
+                <div class="col-12">
+                    <div class="form-group setujui-lanjutkan-raperda row">
                         <label for="nomorregister" class="col-md-3">Nomor Register</label>
                         <div class="col-md-3">
                             <input type="text" class="form-control" id="nomorregister" name="nomorregister"
@@ -42,13 +42,17 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="tglregister" class="col-md-3">Tanggal Register</label>
+                        <label for="tglregister" class="col-md-3" id="lbltglregister">Tanggal Register</label>
                         <div class="col-md-3">
                             <input type="date" class="form-control" id="tglregister" name="tglregister"
                                 value="{{ date('Y-m-d') }}">
                         </div>
                     </div>
 
+
+                </div>
+
+                <div class="col-12">
                     <div class="form-group row">
                         <label for="" class="col-md-3">Telaahan Hukum</label><label class="col-md-9"><input type="file"
                                 class="form-control" id="filetelaahanhukum" name="filetelaahanhukum"></label>
@@ -62,7 +66,7 @@
 
                 <div class="col-12 mt-3 deskripsi-revisi-raperda" style="display: none;">
                     <div class="form-group row">
-                        <label for="" class="col-md-3">Deskripsi Revisi Raperda</label>
+                        <label for="" class="col-md-3">Deskripsi Revisi Ranperda</label>
                         <div class="col-md-9">
                             <textarea name="deskripsirevisiraperda" id="deskripsirevisiraperda" class="form-control"
                                 rows="10" placeholder="Deskripsikan apa saja yang perlu direvisi"></textarea>

@@ -546,29 +546,7 @@ class PembentukankecamatanController extends Controller
             $idstatuspengajuannext = $this->pembentukankecamatan->createStatusPembentukan($idstatuspengajuan);
             $deskripsirevisiraperda = null;
 
-            //upload raperda
-            $filetelaahanhukum = $request->file('filetelaahanhukum');
-            $filetelaahanhukum_lama = $request->get('filetelaahanhukum_lama');
-            $uploads = Uploads::startUpload('uploads/pengajuan', $filetelaahanhukum, $filetelaahanhukum_lama, 1000);
-            if ($uploads['status'] == 'success') {
-                $filetelaahanhukum = $uploads['file_name'];
-            } else {
-                return response()->json([
-                    'message' => 'File raperda gagal disimpan! Error: ' . $uploads['message']
-                ]);
-            }
-    
-    
-            $filetelaahanteknis = $request->file('filetelaahanteknis');
-            $filetelaahanteknis_lama = $request->get('filetelaahanteknis_lama');
-            $uploads = Uploads::startUpload('uploads/pengajuan', $filetelaahanteknis, $filetelaahanteknis_lama, 1000);
-            if ($uploads['status'] == 'success') {
-                $filetelaahanteknis = $uploads['file_name'];
-            } else {
-                return response()->json([
-                    'message' => 'File raperda gagal disimpan! Error: ' . $uploads['message']
-                ]);
-            }
+            
 
         }else{
             $idstatuspengajuanterakhir = '003';
@@ -576,6 +554,30 @@ class PembentukankecamatanController extends Controller
             $nomorregister = null;
             $filetelaahanhukum = '';
             $filetelaahanteknis = '';        
+        }
+
+        //upload raperda
+        $filetelaahanhukum = $request->file('filetelaahanhukum');
+        $filetelaahanhukum_lama = $request->get('filetelaahanhukum_lama');
+        $uploads = Uploads::startUpload('uploads/pengajuan', $filetelaahanhukum, $filetelaahanhukum_lama, 1000);
+        if ($uploads['status'] == 'success') {
+            $filetelaahanhukum = $uploads['file_name'];
+        } else {
+            return response()->json([
+                'message' => 'File raperda gagal disimpan! Error: ' . $uploads['message']
+            ]);
+        }
+
+
+        $filetelaahanteknis = $request->file('filetelaahanteknis');
+        $filetelaahanteknis_lama = $request->get('filetelaahanteknis_lama');
+        $uploads = Uploads::startUpload('uploads/pengajuan', $filetelaahanteknis, $filetelaahanteknis_lama, 1000);
+        if ($uploads['status'] == 'success') {
+            $filetelaahanteknis = $uploads['file_name'];
+        } else {
+            return response()->json([
+                'message' => 'File raperda gagal disimpan! Error: ' . $uploads['message']
+            ]);
         }
 
 

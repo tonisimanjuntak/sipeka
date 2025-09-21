@@ -34,8 +34,8 @@
                 </div>
 
 
-                <div class="col-12 setujui-lanjutkan-permohonankode">
-                    <div class="form-group row">
+                <div class="col-12">
+                    <div class="form-group setujui-lanjutkan-permohonankode row">
                         <label for="norekomendasigubernur" class="col-md-3">Nomor Rekomendasi</label>
                         <div class="col-md-9">
                             <input type="text" class="form-control" id="norekomendasigubernur"
@@ -44,14 +44,15 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="tglrekomendasigubernur" class="col-md-3">Tanggal Rekomendasi</label>
+                        <label for="tglrekomendasigubernur" class="col-md-3" id="lbltglrekomendasigubernur">Tanggal
+                            Rekomendasi</label>
                         <div class="col-md-3">
                             <input type="date" class="form-control" id="tglrekomendasigubernur"
                                 name="tglrekomendasigubernur" value="{{ date('Y-m-d') }}">
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group setujui-lanjutkan-permohonankode row">
                         <label for="" class="col-md-3">Upload File Rekomendasi</label><label class="col-md-9"><input
                                 type="file" class="form-control" id="filerekomendasigubernur"
                                 name="filerekomendasigubernur"></label>

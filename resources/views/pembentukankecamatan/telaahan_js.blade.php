@@ -6,9 +6,11 @@
             if ($(this).val() == '2') {
                 $('.deskripsi-revisi-raperda').show();
                 $('.setujui-lanjutkan-raperda').hide();
+                $('#lbltglregister').html('Tanggal Revisi')
             } else {
                 $('.deskripsi-revisi-raperda').hide();
                 $('.setujui-lanjutkan-raperda').show();
+                $('#lbltglregister').html('Tanggal Register')
             }
         });
         
@@ -61,42 +63,16 @@
                 },
                 filetelaahanhukum: {
                     validators: {
-                        callback: {
-                                message: "File telaahan hukum tidak boleh kosong",
-                                callback: function(value, validator, filetelaahanhukum) {
-
-                                    if ($('input[name="statusraperda"]:checked').val() == '1') {
-                                        
-                                        if ($('#filetelaahanhukum').val() == '') {
-                                            return {
-                                                valid: false,
-                                                message: "File telaahan hukum tidak boleh kosong"
-                                            }
-                                        }
-                                    }
-                                    return true
-                                }
-                            }
+                        notEmpty: {
+                            message: 'File tlaahan hukum tidak boleh kosong'
+                        }
                     }
                 },
                 filetelaahanteknis: {
                     validators: {
-                        callback: {
-                                message: "File telaahan teknis tidak boleh kosong",
-                                callback: function(value, validator, filetelaahanteknis) {
-
-                                    if ($('input[name="statusraperda"]:checked').val() == '1') {
-                                        
-                                        if ($('#filetelaahanteknis').val() == '') {
-                                            return {
-                                                valid: false,
-                                                message: "File telaahan teknis tidak boleh kosong"
-                                            }
-                                        }
-                                    }
-                                    return true
-                                }
-                            }
+                        notEmpty: {
+                            message: 'File tlaahan teknis tidak boleh kosong'
+                        }
                     }
                 },
                 deskripsirevisiraperda: {

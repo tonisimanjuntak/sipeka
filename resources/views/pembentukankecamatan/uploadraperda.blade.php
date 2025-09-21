@@ -8,7 +8,7 @@
         <div class="card-body card-wizard">
             <div class="row">
                 <div class="col-12 mb-5">
-                    <h5 class="text-primary">UPLOAD RAPERDA <button type="button"
+                    <h5 class="text-primary">UPLOAD RANPERDA <button type="button"
                             class="btn btn-info btn-sm float-right btn-detail-pengajuan"
                             data-nopengajuan="{{ $nopengajuan }}">Lihat Detail Pengajuan</button></h5>
                 </div>
@@ -16,7 +16,7 @@
                 <div class="col-12">
 
                     <div class="form-group row">
-                        <label for="nomorraperda" class="col-md-3">Nomor Raperda</label>
+                        <label for="nomorraperda" class="col-md-3">Nomor Ranperda</label>
                         <div class="col-md-9">
                             <input type="text" class="form-control" id="nomorraperda" name="nomorraperda"
                                 placeholder="Nomor Raperda">
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="tglraperda" class="col-md-3">Tanggal Raperda</label>
+                        <label for="tglraperda" class="col-md-3">Tanggal Ranperda</label>
                         <div class="col-md-3">
                             <input type="date" class="form-control" id="tglraperda" name="tglraperda"
                                 value="{{ date('Y-m-d') }}">
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="" class="col-md-3">File Raperda</label><label class="col-md-9"><input type="file"
+                        <label for="" class="col-md-3">File Ranperda</label><label class="col-md-9"><input type="file"
                                 class="form-control" id="fileraperda" name="fileraperda"></label>
                     </div>
                 </div>
@@ -52,13 +52,13 @@
     <div class="card-body card-wizard">
         <div class="row">
             <div class="col-12 mb-5">
-                <h5 class="text-primary">UPLOAD RAPERDA <button type="button"
+                <h5 class="text-primary">UPLOAD RANPERDA <button type="button"
                         class="btn btn-info btn-sm float-right btn-detail-pengajuan"
                         data-nopengajuan="{{ $nopengajuan }}">Lihat Detail Pengajuan</button></h5>
             </div>
 
             <div class="col-12 text-center mt-5">
-                <h5>Harap Menunggu. Kabupaten Sedang Progres Upload Raperda</h5>
+                <h5>Harap Menunggu. Kabupaten Sedang Progres Upload Ranperda</h5>
             </div>
 
         </div>
