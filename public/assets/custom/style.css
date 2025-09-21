@@ -75,3 +75,34 @@
 .card-wizard {
     min-height: 50vh;
 }
+
+.table-rapat {
+    font-size: 13px;
+    border-collapse: collapse; /* Menggabungkan border tabel sehingga tidak ada jarak antar sel */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.table-rapat th,
+.table-rapat td {
+    padding: 4px 6px; /* Padding minimal di dalam sel */
+    vertical-align: top; /* Mengatur konten tetap di atas */
+    line-height: 1.2; /* Mengurangi jarak antar baris teks */
+}
+
+/* Menghilangkan border jika tidak diperlukan */
+.table-rapat th,
+.table-rapat td {
+    /* border: none;  */
+}
+
+/* Opsional: Jika ingin baris tabel memiliki warna selang-seling yang tetap rapat */
+.table-rapat tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* Untuk menghilangkan spacing ekstra pada tabel dalam tabel */
+.table-rapat .table-rapat {
+    margin: 0;
+}

@@ -50,6 +50,17 @@ class PenggunaController extends Controller
         return view('pengguna.form', $data);
     }
 
+    public function ubahpassword()
+    {
+        $idpengguna = session('idpengguna');
+        
+        $data['menu'] = 'pengguna';
+        $data['rsPangkat'] = App::getPangkat();
+        $data['rsKabupaten'] = App::getKabupaten();
+        $data['idpengguna'] = $idpengguna;
+        return view('pengguna.ubahpassword', $data);
+    }
+
     public function listindex(Request $request)
     {
         // Query dasar
@@ -240,6 +251,44 @@ class PenggunaController extends Controller
             return redirect('pengguna')->with('success', $simpan['message']);
         } else {
             return redirect('pengguna')->with('fail', 'Data gagal disimpan! Error: ' . $simpan['message']);
+        }
+    }
+
+
+    public function simpanUbahPassword(Request $request)
+    {
+        $idpengguna = session('idpengguna');
+        $kodekabupaten = $request->get('kodekabupaten');
+        $password = $request->get('password');
+        $password2 = $request->get('password2');
+        $updated_date = date('Y-m-d H:i:s');
+
+        if ($password != $password2) {
+            return redirect('pengguna/ubahpassword')->with('fail', 'Password tidak sama!');
+        }
+
+        $foto = $request->file('foto');
+        $foto_lama = $request->get('foto_lama');
+        $uploads = Uploads::startUpload('uploads/pengguna', $foto, $foto_lama, 200);
+        if ($uploads['status'] == 'success') {
+            $fotopengguna = $uploads['file_name'];
+        } else {
+            return redirect('pengguna')->with('fail', 'Foto pengguna disimpan! Error: ' . $uploads['message']);
+        }
+
+        $data = array(
+            'idpengguna' => $idpengguna,
+            'password' => bcrypt($password),
+            'foto' => $fotopengguna,
+            'updated_date' => $updated_date,
+        );
+        $simpan = $this->pengguna->updateData($data, $idpengguna);
+
+        // dd(htmlspecialchars($simpan['message']));
+        if ($simpan['status'] == 'success') {
+            return redirect('dashboard')->with('success', $simpan['message']);
+        } else {
+            return redirect('dashboard')->with('fail', 'Data gagal disimpan! Error: ' . $simpan['message']);
         }
     }
 

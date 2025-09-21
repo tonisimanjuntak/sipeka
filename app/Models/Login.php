@@ -10,7 +10,7 @@ class Login extends Model
 {
     public function cekEmail($email)
     {
-        return DB::table('pengguna')
+        return DB::table('v_pengguna')
             ->where('email', $email)
             ->first();
     }

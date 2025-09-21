@@ -35,6 +35,8 @@ class LoginController extends Controller
             Session::put('namalengkap', $user->namalengkap);
             Session::put('email', $user->email);
             Session::put('kodekabupaten', $user->kodekabupaten);
+            Session::put('namakabupaten', $user->namakabupaten);
+            Session::put('akseslevel', $user->akseslevel);
 
             if (!empty($user->foto)) {
                 $foto = asset('uploads/pengguna/' . $user->foto);

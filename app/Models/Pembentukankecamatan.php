@@ -12,7 +12,7 @@ class Pembentukankecamatan extends Model
     use HasFactory;
 
     protected $table = 'v_pembentukankecamatan';
-    protected $primaryKey = 'idpengajuan';
+    protected $primaryKey = 'nopengajuan';
     protected $keyType = 'char';
 
     public $timestamps = false; // Menonaktifkan timestamps
@@ -27,52 +27,269 @@ class Pembentukankecamatan extends Model
         $this->App = new App;
     }
 
-    public function simpanData($data)
+    public function simpanPengajuan($data, $persyaratanDasar, $persyaratanAdministratif, $persyaratanTeknis, $dataKelurahan)
     {
+
         try {
+            DB::beginTransaction();
             DB::table('pembentukankecamatan')
                 ->insert($data);
 
-            $this->App->riwayatAktifitas($data, 'pembentukankecamatan', 'simpanDatapembentukankecamatan');
+            DB::table('pembentukanpersyaratandasar')
+                ->insert($persyaratanDasar);
 
-            return ['status' => 'success', 'message' => "Data berhasil disimpan"];
-        } catch (QueryException $e) {
-            return ['status' => 'error', 'message' => $e->getMessage()];
-        } catch (\Exception $e) {
-            return ['status' => 'error', 'message' => 'Terjadi kesalahan: ' . $e->getMessage()];
-        }
-    }
+            DB::table('pembentukanpersyaratanadministratif')
+                ->insert($persyaratanAdministratif);
 
-    public function updateData($data, $idpengajuan)
-    {
-        try {
-            DB::beginTransaction();
-            DB::table('pembentukankecamatan')
-                ->where('idpengajuan', $idpengajuan)
-                ->update($data);
-            $this->App->riwayatAktifitas($data, 'pembentukankecamatan', 'updateDatapembentukankecamatan');
+            DB::table('pembentukanpersyaratanteknis')
+                ->insert($persyaratanTeknis);
 
+            DB::table('pembentukankelurahanterpilih')
+                ->insert($dataKelurahan);
+
+            // Buat ID status berikutnya
+            $idstatuspengajuannext = $this->createStatusPembentukan($data['idstatuspengajuanterakhir']);
+            if (!$idstatuspengajuannext) {
+                throw new \Exception("Gagal generate ID status selanjutnya.");
+            }
+
+            // Buat ID riwayat — PERBAIKAN: gunakan $data['nopengajuan']
+            $idriwayat = $this->createIDRiwayat($data['nopengajuan']);
+            if (!$idriwayat) {
+                throw new \Exception("Gagal generate ID riwayat.");
+            }
+
+
+            $riwayat = array(
+                'idriwayat' => $idriwayat,
+                'nopengajuan' => $data['nopengajuan'],
+                'idstatuspengajuan' => $data['idstatuspengajuanterakhir'],
+                'tglstatuspengajuan' => $data['tglpengajuan'],
+                'deskripsi' => '',
+                'idstatuspengajuannext' => $idstatuspengajuannext,
+                'statusapprove' => '1',
+                'idpengguna' => session('idpengguna'),
+                'inserted_date' => date('Y-m-d H:i:s'),
+            );
+            DB::table('pembentukanriwayat')
+                ->insert($riwayat);
+                
+
+            $this->App->riwayatAktifitas($data, 'pembentukankecamatan', 'simpanPengajuanPembentukan');
+        
             DB::commit();
-            return ['status' => 'success', 'message' => "Data berhasil disimpan"];
+            return ['status' => 'success', 'message' => 'Data berhasil'];
         } catch (QueryException $e) {
             DB::rollBack();
             return ['status' => 'error', 'message' => $e->getMessage()];
-        } catch (\Exception $e) {
+        } catch (xception $e) {
             DB::rollBack();
             return ['status' => 'error', 'message' => 'Terjadi kesalahan: ' . $e->getMessage()];
         }
+
     }
 
-    public function hapusData($idpengajuan, $rspengajuan)
+
+    public function simpanVerifikasiPropinsi($data, $riwayat)
     {
+
         try {
             DB::beginTransaction();
 
             DB::table('pembentukankecamatan')
-                ->where('idpengajuan', $idpengajuan)
+                ->where('nopengajuan', $data['nopengajuan'])
+                ->update($data);
+            
+            DB::table('pembentukanriwayat')
+                ->insert($riwayat);
+                
+
+            $this->App->riwayatAktifitas($data, 'pembentukankecamatan', 'simpanVerifikasiPropinsi');
+        
+            DB::commit();
+            return ['status' => 'success', 'message' => 'Data berhasil'];
+        } catch (QueryException $e) {
+            DB::rollBack();
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        } catch (xception $e) {
+            DB::rollBack();
+            return ['status' => 'error', 'message' => 'Terjadi kesalahan: ' . $e->getMessage()];
+        }
+
+    }
+
+    public function simpanRaperda($data, $riwayat)
+    {
+
+        try {
+            DB::beginTransaction();
+
+            DB::table('pembentukankecamatan')
+                ->where('nopengajuan', $data['nopengajuan'])
+                ->update($data);
+            
+            DB::table('pembentukanriwayat')
+                ->insert($riwayat);
+                
+
+            $this->App->riwayatAktifitas($data, 'pembentukankecamatan', 'simpanRaperda');
+        
+            DB::commit();
+            return ['status' => 'success', 'message' => 'Data berhasil'];
+        } catch (QueryException $e) {
+            DB::rollBack();
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        } catch (xception $e) {
+            DB::rollBack();
+            return ['status' => 'error', 'message' => 'Terjadi kesalahan: ' . $e->getMessage()];
+        }
+
+    }
+
+
+    public function simpanTelaahan($data, $riwayat)
+    {
+
+        try {
+            DB::beginTransaction();
+
+            DB::table('pembentukankecamatan')
+                ->where('nopengajuan', $data['nopengajuan'])
+                ->update($data);
+            
+            DB::table('pembentukanriwayat')
+                ->insert($riwayat);
+                
+
+            $this->App->riwayatAktifitas($data, 'pembentukankecamatan', 'simpanTelaahan');
+        
+            DB::commit();
+            return ['status' => 'success', 'message' => 'Data berhasil'];
+        } catch (QueryException $e) {
+            DB::rollBack();
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        } catch (xception $e) {
+            DB::rollBack();
+            return ['status' => 'error', 'message' => 'Terjadi kesalahan: ' . $e->getMessage()];
+        }
+
+    }
+
+
+    public function simpanPermohonanKode($data, $riwayat)
+    {
+
+        try {
+            DB::beginTransaction();
+
+            DB::table('pembentukankecamatan')
+                ->where('nopengajuan', $data['nopengajuan'])
+                ->update($data);
+            
+            DB::table('pembentukanriwayat')
+                ->insert($riwayat);
+                
+
+            $this->App->riwayatAktifitas($data, 'pembentukankecamatan', 'simpanPermohonanKode');
+        
+            DB::commit();
+            return ['status' => 'success', 'message' => 'Data berhasil'];
+        } catch (QueryException $e) {
+            DB::rollBack();
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        } catch (xception $e) {
+            DB::rollBack();
+            return ['status' => 'error', 'message' => 'Terjadi kesalahan: ' . $e->getMessage()];
+        }
+
+    }
+
+    public function simpanRekomendasiGubernur($data, $riwayat)
+    {
+
+        try {
+            DB::beginTransaction();
+
+            DB::table('pembentukankecamatan')
+                ->where('nopengajuan', $data['nopengajuan'])
+                ->update($data);
+            
+            DB::table('pembentukanriwayat')
+                ->insert($riwayat);
+                
+
+            $this->App->riwayatAktifitas($data, 'pembentukankecamatan', 'simpanRekomendasiGubernur');
+        
+            DB::commit();
+            return ['status' => 'success', 'message' => 'Data berhasil'];
+        } catch (QueryException $e) {
+            DB::rollBack();
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        } catch (xception $e) {
+            DB::rollBack();
+            return ['status' => 'error', 'message' => 'Terjadi kesalahan: ' . $e->getMessage()];
+        }
+
+    }
+
+    public function simpanKirimSuratKeKemendagri($data, $riwayat)
+    {
+
+        try {
+            DB::beginTransaction();
+
+            DB::table('pembentukankecamatan')
+                ->where('nopengajuan', $data['nopengajuan'])
+                ->update($data);
+            
+            DB::table('pembentukanriwayat')
+                ->insert($riwayat);
+                
+
+            $this->App->riwayatAktifitas($data, 'pembentukankecamatan', 'simpanKirimSuratKeKemendagri');
+        
+            DB::commit();
+            return ['status' => 'success', 'message' => 'Data berhasil'];
+        } catch (QueryException $e) {
+            DB::rollBack();
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        } catch (xception $e) {
+            DB::rollBack();
+            return ['status' => 'error', 'message' => 'Terjadi kesalahan: ' . $e->getMessage()];
+        }
+
+    }
+
+    public function hapusData($nopengajuan, $rspengajuan)
+    {
+        try {
+            DB::beginTransaction();
+            
+            DB::table('pembentukanriwayat')
+                ->where('nopengajuan', $nopengajuan)
                 ->delete();
 
-            $this->App->riwayatAktifitas($rspengajuan, 'pembentukankecamatan', 'hapusDatapembentukankecamatan');
+            DB::table('pembentukanpersyaratandasar')
+                ->where('nopengajuan', $nopengajuan)
+                ->delete();
+
+            DB::table('pembentukanpersyaratanadministratif')
+                ->where('nopengajuan', $nopengajuan)
+                ->delete();
+
+            DB::table('pembentukanpersyaratanteknis')
+                ->where('nopengajuan', $nopengajuan)
+                ->delete();
+
+            DB::table('pembentukankelurahanterpilih')
+                ->where('nopengajuan', $nopengajuan)
+                ->delete();            
+
+            DB::table('pembentukankecamatan')
+                ->where('nopengajuan', $nopengajuan)
+                ->delete();
+
+            $this->App->riwayatAktifitas($rspengajuan, 'pembentukankecamatan', 'hapusPengajuanPembentukan');
 
             DB::commit();
             return ['status' => 'success', 'message' => "Data berhasil dihapus"];
@@ -85,33 +302,68 @@ class Pembentukankecamatan extends Model
         }
     }
 
+    
+
     public function createID()
     {
-        return DB::select("SELECT create_idpengajuan() AS id")[0]->id;
+        return DB::select("SELECT create_nopengajuan_pembentukan() AS id")[0]->id;
     }
 
-    public function getPersyaratanDasar()
+    public function createIDRiwayat($nopengajuan)
     {
-        return DB::table('persyaratandasar')
-            ->where('statusaktif', 'Aktif')
-            ->orderBy('idpersyaratandasar', 'asc')
+        return DB::select("SELECT create_noriwayat_pembentukan('$nopengajuan') AS id")[0]->id;
+    }
+
+    public function createStatusPembentukan($idstatuspengajuan)
+    {
+        return DB::select("SELECT createStatusPembentukan('$idstatuspengajuan') AS id")[0]->id;        
+    }
+
+    public function getPersyaratanTeknis($nopengajuan)
+    {
+        return DB::table('pembentukanpersyaratanteknis')
+            ->where('nopengajuan', $nopengajuan)
             ->get();
     }
 
-
-    public function getPersyaratanAdministratif()
+    public function getPersyaratanAdministratif($nopengajuan)
     {
-        return DB::table('persyaratanadministratif')
-            ->where('statusaktif', 'Aktif')
-            ->orderBy('idpersyaratanadministratif', 'asc')
+        return DB::table('pembentukanpersyaratanadministratif')
+            ->where('nopengajuan', $nopengajuan)
             ->get();
     }
 
-    public function getPersyaratanTeknis()
+    public function getPersyaratanDasar($nopengajuan)
     {
-        return DB::table('persyaratanteknis')
-            ->where('statusaktif', 'Aktif')
-            ->orderBy('idpersyaratanteknis', 'asc')
+        return DB::table('pembentukanpersyaratandasar')
+            ->where('nopengajuan', $nopengajuan)
             ->get();
+    }
+
+    public function getDesaTerpilih($nopengajuan)
+    {
+        return DB::table('v_pembentukankelurahanterpilih')
+            ->orderBy('kelurahanterpilihid', 'asc')
+            ->where('nopengajuan', $nopengajuan)
+            ->get();
+    }
+
+    public function tanggalStatusInvalid($nopengajuan, $tglverifikasipropinsi)
+    {
+        $rsPengajuan = DB::table('pembentukanriwayat')
+            ->where('nopengajuan', $nopengajuan)
+            ->orderBy('tglstatuspengajuan', 'desc')
+            ->limit(1)
+            ->get();
+
+        if (count($rsPengajuan) > 0) {
+            if ($rsPengajuan[0]->tglstatuspengajuan > $tglverifikasipropinsi) {
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 }

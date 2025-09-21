@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<querybuilder version="8.3">
+<source>
+<database charset="utf8mb4" collation="utf8mb4_general_ci">sipeka</database>
+</source>
+<canvas>
+<table tablename="pembentukankelurahanterpilih" alias="" left="10" top="21" width="150" height="158" />
+<table tablename="kelurahan" alias="" left="244" top="18" width="150" height="113" />
+<join type = "Inner Join">
+<from tablename = "pembentukankelurahanterpilih" alias = "">kodekelurahan</from>
+<to tablename = "kelurahan" alias = "">kodekelurahan</to>
+</join>
+</canvas>
+<grid>
+<column id="1">
+<table tablename="pembentukankelurahanterpilih"></table>
+<field>kelurahanterpilihid</field>
+<alias></alias>
+<show>true</show>
+<sortorder></sortorder>
+<sort></sort>
+<groupby>false</groupby>
+<aggfunct></aggfunct>
+<criteria></criteria>
+<or1></or1>
+<or2></or2>
+<or3></or3>
+<or4></or4>
+</column>
+<column id="2">
+<table tablename="pembentukankelurahanterpilih"></table>
+<field>nopengajuan</field>
+<alias></alias>
+<show>true</show>
+<sortorder></sortorder>
+<sort></sort>
+<groupby>false</groupby>
+<aggfunct></aggfunct>
+<criteria></criteria>
+<or1></or1>
+<or2></or2>
+<or3></or3>
+<or4></or4>
+</column>
+<column id="3">
+<table tablename="pembentukankelurahanterpilih"></table>
+<field>kodekelurahan</field>
+<alias></alias>
+<show>true</show>
+<sortorder></sortorder>
+<sort></sort>
+<groupby>false</groupby>
+<aggfunct></aggfunct>
+<criteria></criteria>
+<or1></or1>
+<or2></or2>
+<or3></or3>
+<or4></or4>
+</column>
+<column id="4">
+<table tablename="kelurahan"></table>
+<field>namakelurahan</field>
+<alias></alias>
+<show>true</show>
+<sortorder></sortorder>
+<sort></sort>
+<groupby>false</groupby>
+<aggfunct></aggfunct>
+<criteria></criteria>
+<or1></or1>
+<or2></or2>
+<or3></or3>
+<or4></or4>
+</column>
+<column id="5">
+<table tablename="kelurahan"></table>
+<field>kodekecamatan</field>
+<alias></alias>
+<show>true</show>
+<sortorder></sortorder>
+<sort></sort>
+<groupby>false</groupby>
+<aggfunct></aggfunct>
+<criteria></criteria>
+<or1></or1>
+<or2></or2>
+<or3></or3>
+<or4></or4>
+</column>
+</grid>
+</querybuilder>

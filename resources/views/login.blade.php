@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/Kalbar-01.png') }}" />
+
+    <title>SIPEKA - SISTEM INFORMASI PEMBENTUKAN KECAMATAN</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+
 
 
 
     <style>
-
         body {
             color: #000;
             overflow-x: hidden;
@@ -112,7 +114,8 @@
             font-weight: 300
         }
 
-        input, textarea {
+        input,
+        textarea {
             padding: 10px 12px 10px 12px;
             border: 1px solid lightgrey;
             border-radius: 2px;
@@ -125,7 +128,8 @@
             letter-spacing: 1px;
         }
 
-        input:focus, textarea:focus {
+        input:focus,
+        textarea:focus {
             -moz-box-shadow: none !important;
             -webkit-box-shadow: none !important;
             box-shadow: none !important;
@@ -181,66 +185,75 @@
                 margin: 0px 15px;
             }
         }
+    </style>
 
+    <style>
+        /* CSS untuk image-kiri - mengisi seluruh area */
+        .image-kiri {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Gambar akan menutupi seluruh area tanpa distorsi */
+            display: block;
+            border-radius: 0;
+            /* Sesuaikan jika perlu */
+        }
     </style>
 </head>
+
 <body>
-    
+
     <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
         <form action="{{ url('login/login') }}" method="POST">
             @csrf
             <div class="card card0 border-0">
                 <div class="row d-flex">
                     <div class="col-lg-6">
-                        <div class="card1 pb-5">
-                            <div class="row">
-                                <img src="{{ url('images/logo.png') }}" class="logo">
-                            </div>
-                            <div class="row px-3 justify-content-center mt-4 mb-5 border-line">
-                                <img src="{{ url('images/exam2.jpg') }}" class="image">
-                            </div>
-                        </div>
+                        <img src="{{ url('images/1_SIPEKA.png') }}" class="image image-kiri">
                     </div>
                     <div class="col-lg-6">
                         <div class="card2 card border-0 px-4 py-5">
                             <div class="row mb-4 px-3">
-                                <h6 class="mb-0 mr-4 mt-2">Sign in with</h6>
-                                <div class="facebook text-center mr-3"><div class="fa fa-facebook"></div></div>
-                                <div class="twitter text-center mr-3"><div class="fa fa-twitter"></div></div>
-                                <div class="linkedin text-center mr-3"><div class="fa fa-linkedin"></div></div>
+                                <div class="col-12 text-center">
+                                    <h5>SELAMAT DATANG</h5>
+                                    <p>Silahkan Login Untuk Melanjutkan</p>
+                                </div>
                             </div>
                             <div class="row px-3 mb-4">
                                 <div class="line"></div>
-                                <small class="or text-center">Or</small>
+                                <small class="or text-center">|</small>
                                 <div class="line"></div>
                             </div>
                             <div class="row px-3">
-                                <label class="mb-1"><h6 class="mb-0 text-sm">Email Address</h6></label>
-                                <input class="mb-4" type="text" name="email" id="email" placeholder="Enter a valid email address" autofocus="">
+                                <label class="mb-1">
+                                    <h6 class="mb-0 text-sm">Email Address</h6>
+                                </label>
+                                <input class="mb-4" type="text" name="email" id="email"
+                                    placeholder="Enter a valid email address" autofocus="">
                             </div>
                             <div class="row px-3">
-                                <label class="mb-1"><h6 class="mb-0 text-sm">Password</h6></label>
+                                <label class="mb-1">
+                                    <h6 class="mb-0 text-sm">Password</h6>
+                                </label>
                                 <input type="password" name="password" placeholder="Enter password">
                             </div>
                             <div class="row px-3 mb-4">
                                 <div class="custom-control custom-checkbox custom-control-inline">
-                                    <input id="chk1" type="checkbox" name="chk" class="custom-control-input"> 
+                                    <input id="chk1" type="checkbox" name="chk" class="custom-control-input">
                                     <label for="chk1" class="custom-control-label text-sm">Remember me</label>
                                 </div>
-                                <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
+                                {{-- <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a> --}}
                             </div>
                             <div class="row mb-3 px-3">
                                 <button type="submit" class="btn btn-blue text-center">Login</button>
-                            </div>
-                            <div class="row mb-4 px-3">
-                                <small class="font-weight-bold">Don't have an account? <a class="text-danger ">Register</a></small>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="bg-blue py-4">
                     <div class="row px-3">
-                        <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2019. All rights reserved.</small>
+                        <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2025. Biro Pemerintahan Setda Prov.
+                            Kalbar</small>
                         <div class="social-contact ml-4 ml-sm-auto">
                             <span class="fa fa-facebook mr-4 text-sm"></span>
                             <span class="fa fa-google-plus mr-4 text-sm"></span>
@@ -257,9 +270,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
-     <!-- sweet Alert -->
+    <!-- sweet Alert -->
     <script src="{{ asset('') }}assets/sweetalert/sweetalert.min.js"></script>
-    
+
     @if (session('message'))
     <script>
         swal("Informasi", "{{ session('message') }}", "info")
@@ -270,4 +283,5 @@
     @endif
 
 </body>
+
 </html>

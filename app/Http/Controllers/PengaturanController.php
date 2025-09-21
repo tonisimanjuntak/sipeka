@@ -38,7 +38,7 @@ class PengaturanController extends Controller
             $prefix = Crypt::decrypt($prefix);
             $rsKategori = Pengaturan::findOrFail($prefix);
         } catch (ModelNotFoundException $e) {
-            return redirect('admin/pengaturan')->with('other', 'Data tidak ditemukan!');
+            return redirect('pengaturan')->with('other', 'Data tidak ditemukan!');
         }
         $data['menu'] = 'pengaturan';
         $data['prefix'] = $prefix;
@@ -102,7 +102,7 @@ class PengaturanController extends Controller
                 'prefix' => $row->prefix,
                 'values' => $row->values,
                 'deskripsi' => $row->deskripsi,
-                'action' => '<a href="' . url('admin/pengaturan/edit/' . Crypt::encrypt($row->prefix)) . '" class="btn btn-warning"><i class="fa fa-edit mr-1"></i>Edit</a>',
+                'action' => '<a href="' . url('pengaturan/edit/' . Crypt::encrypt($row->prefix)) . '" class="btn btn-warning"><i class="fa fa-edit mr-1"></i>Edit</a>',
 
             ];
         }
@@ -148,9 +148,9 @@ class PengaturanController extends Controller
 
         // dd(htmlspecialchars($simpan['message']));
         if ($simpan['status'] == 'success') {
-            return redirect('admin/pengaturan')->with('success', $simpan['message']);
+            return redirect('pengaturan')->with('success', $simpan['message']);
         } else {
-            return redirect('admin/pengaturan')->with('fail', 'Data gagal disimpan! Error: ' . $simpan['message']);
+            return redirect('pengaturan')->with('fail', 'Data gagal disimpan! Error: ' . $simpan['message']);
         }
     }
 
@@ -162,14 +162,14 @@ class PengaturanController extends Controller
         try {
             $rsKategori = Pengaturan::findOrFail($prefix);
         } catch (ModelNotFoundException $e) {
-            return redirect('admin/pengaturan')->with('other', 'Data tidak ditemukan!');
+            return redirect('pengaturan')->with('other', 'Data tidak ditemukan!');
         }
 
         $hapus = $this->pengaturan->hapusData($prefix, $rsKategori);
         if ($hapus['status'] == 'success') {
-            return redirect('admin/pengaturan')->with('success', $hapus['message']);
+            return redirect('pengaturan')->with('success', $hapus['message']);
         } else {
-            return redirect('admin/pengaturan')->with('fail', 'Data gagal dihapus! Error: ' . $hapus['message']);
+            return redirect('pengaturan')->with('fail', 'Data gagal dihapus! Error: ' . $hapus['message']);
         }
     }
 

@@ -11,6 +11,7 @@ use App\Http\Controllers\PersyaratandasarController;
 use App\Http\Controllers\PersyaratanadministratifController;
 use App\Http\Controllers\PersyaratanteknisController;
 use App\Http\Controllers\PembentukankecamatanController;
+use App\Http\Controllers\LappembentukanController;
 use App\Http\Controllers\Select2Controller;
 use Illuminate\Support\Facades\Route;
 
@@ -36,10 +37,12 @@ use Illuminate\Support\Facades\Route;
         Route::get('/pengguna', 'index');
         Route::get('/pengguna/tambah', 'tambah');
         Route::get('/pengguna/edit/{IdPrimary}', 'edit');
+        Route::get('/pengguna/ubahpassword', 'ubahpassword');
         Route::get('/pengguna/listindex', 'listindex');
         Route::get('/pengguna/hapus/{IdPrimary}', 'hapus');
         Route::get('/pengguna/getId/', 'getId');
         Route::post('/pengguna/simpan', 'simpan');
+        Route::post('/pengguna/simpanUbahPassword', 'simpanUbahPassword');
     });
 
     Route::controller(KabupatenController::class)->group(function () {
@@ -116,10 +119,24 @@ use Illuminate\Support\Facades\Route;
     Route::controller(PembentukankecamatanController::class)->group(function () {
         Route::get('/pembentukankecamatan', 'index');
         Route::get('/pembentukankecamatan/tambah', 'tambah');
-        Route::get('/pembentukankecamatan/edit/{IdPrimary}', 'edit');
+        Route::get('/pembentukankecamatan/progress/{IdPrimary}', 'progress');
         Route::get('/pembentukankecamatan/listindex', 'listindex');
         Route::get('/pembentukankecamatan/hapus/{IdPrimary}', 'hapus');
         Route::get('/pembentukankecamatan/getId/', 'getId');
-        Route::post('/pembentukankecamatan/simpan', 'simpan');
+        Route::get('/pembentukankecamatan/getKelurahan', 'getKelurahan');
         Route::post('/pembentukankecamatan/simpanPengajuan', 'simpanPengajuan');
+        Route::post('/pembentukankecamatan/simpanVerifikasiPropinsi', 'simpanVerifikasiPropinsi');
+        Route::post('/pembentukankecamatan/simpanRaperda', 'simpanRaperda');
+        Route::post('/pembentukankecamatan/simpanTelaahan', 'simpanTelaahan');
+        Route::post('/pembentukankecamatan/simpanPermohonanKode', 'simpanPermohonanKode');
+        Route::post('/pembentukankecamatan/simpanRekomendasiGubernur', 'simpanRekomendasiGubernur');
+        Route::post('/pembentukankecamatan/simpanKirimSuratKeKemendagri', 'simpanKirimSuratKeKemendagri');
+        Route::post('/pembentukankecamatan/simpanSkKemendagri', 'simpanSkKemendagri');
+        Route::get('/pembentukankecamatan/getPengajuanPembentukan', 'getPengajuanPembentukan');
+    });
+
+
+    Route::controller(LappembentukanController::class)->group(function () {
+        Route::get('/lappembentukan', 'index');
+        Route::get('/lappembentukan/cetak/{jenisCetakan}/{tglawal}/{tglakhir}', 'cetak');            
     });

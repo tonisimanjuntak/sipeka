@@ -43,5 +43,25 @@ class App extends Model
         return $rsTemp->get();
     }
 
+    public static function getStepNumber($idstatuspengajuanterakhir = "")
+    {
+        if (empty($idstatuspengajuanterakhir)) {
+            $stepNumber = 0;
+        }else{
+            $rsStatusPengajuan = DB::table('statuspengajuan')
+                ->where('statusaktif', 'Aktif')
+                ->orderBy('urut', 'asc')
+                ->get();
+            $stepNumber = 1; //dimulai dari 1 karena ambil step nextnya
+            foreach ($rsStatusPengajuan as $row) {
+                if ($row->idstatuspengajuan == $idstatuspengajuanterakhir) {
+                    break; // Keluar dari loop foreach
+                }
+                $stepNumber++;
+            }
+        }
+
+        return $stepNumber;
+    }
     
 }
