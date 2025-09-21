@@ -59,6 +59,10 @@ class KelurahanController extends Controller
         // Query dasar
         $query = Kelurahan::select("*");
 
+        if (session('akseslevel') == 'Operator Kabupaten') {
+            $query->where('kodekabupaten', session('kodekabupaten'));
+        }
+
         // Cek apakah ada pencarian
         if ($request->has('search') && !empty($request->input('search.value'))) {
             $search = $request->input('search.value');
