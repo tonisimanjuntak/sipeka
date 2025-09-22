@@ -118,6 +118,9 @@
                         <input type="hidden" name="kodekelurahan[]" value="${kodekelurahan}">
                 </td>
                 <td>${namakelurahan}</td>
+                <td><input type="number" class="jumlahpenduduk" name="jumlahpenduduk[]" value="" placeholder="Jumlah penduduk"></td>
+                <td><input type="number" class="jumlahkk" name="jumlahkk[]" value="" placeholder="Jumlah kk"></td>
+                <td><input type="text" class="luaswilayah" name="luaswilayah[]" value="" placeholder="Luas Wilayah"></td>
                 <td style="text-align: center;">
                     <button type="button" class="btn btn-sm btn-danger btn-hapus-kelurahan"><i class="fa fa-trash mr-1"></i>Hapus</button>
                 </td>

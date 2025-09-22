@@ -50,31 +50,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 mt-3 mb-1">
-                    <h5>List Desa Yang Masuk Ke Dalam Kecamatan Baru <button type="button"
-                            class="btn btn-primary btn-sm float-right" id="btnTambahKelurahan"><i
-                                class="fa fa-plus mr-1"></i>Tambah Kelurahan/ Desa</button></h5>
-                </div>
 
-                <div class="col-12">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped" id="tableDesa">
-                            <thead>
-                                <tr>
-                                    <th style="width: 15%; text-align: center;">Kode</th>
-                                    <th style="text-align: center;">Nama Desa</th>
-                                    <th style="width: 10%; text-align: center;">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbodyDesa">
-                                <tr>
-                                    <td style="width: 100%; text-align: center;" colspan="4">Belum ada desa yang
-                                        dipilih...</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
@@ -83,39 +59,46 @@
                         <div class="card-body">
                             <div class="row">
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="">Jumlah Penduduk</label>
-                                        <input type="number" name="jumlahpenduduk" id="jumlahpenduduk"
-                                            class="form-control" placeholder="0">
+                                <div class="col-12 mt-3 mb-3">
+                                    <h5>List Desa Yang Masuk Ke Dalam Kecamatan Baru <button type="button"
+                                            class="btn btn-primary btn-sm float-right" id="btnTambahKelurahan"><i
+                                                class="fa fa-plus mr-1"></i>Tambah Kelurahan/ Desa</button></h5>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="tableDesa">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 15%; text-align: center;">Kode</th>
+                                                    <th style="text-align: center;">Nama Desa</th>
+                                                    <th style="width: 15%; text-align: center;">Jumlah Penduduk</th>
+                                                    <th style="width: 15%; text-align: center;">Jumlah KK</th>
+                                                    <th style="width: 15%; text-align: center;">Luas Wilayah</th>
+                                                    <th style="width: 10%; text-align: center;">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbodyDesa">
+                                                <tr>
+                                                    <td style="width: 100%; text-align: center;" colspan="6">Belum ada
+                                                        desa yang
+                                                        dipilih...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="">Jumlah KK</label>
-                                        <input type="number" name="jumlahkk" id="jumlahkk" class="form-control"
-                                            placeholder="0">
-                                    </div>
-                                </div>
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="">Luas Wilayah</label>
-                                        <input type="text" name="luaswilayah" id="luaswilayah" class="form-control"
-                                            placeholder="0">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
+                                <div class="col-md-3" style="display: none">
                                     <div class="form-group">
                                         <label for="">Jumlah Kelurahan</label>
                                         <input type="number" name="jumlahkelurahan" id="jumlahkelurahan"
-                                            class="form-control" placeholder="0">
+                                            class="form-control" placeholder="0" readonly>
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-9 mt-3">
                                     <div class="form-group">
                                         <label for="">Upload File Pendukung (.pdf)</label>
                                         <input type="file" name="filepersyaratandasar" id="filepersyaratandasar"

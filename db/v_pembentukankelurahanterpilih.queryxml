@@ -4,7 +4,7 @@
 <database charset="utf8mb4" collation="utf8mb4_general_ci">sipeka</database>
 </source>
 <canvas>
-<table tablename="pembentukankelurahanterpilih" alias="" left="10" top="21" width="150" height="158" />
+<table tablename="pembentukankelurahanterpilih" alias="" left="10" top="21" width="150" height="308" />
 <table tablename="kelurahan" alias="" left="244" top="18" width="150" height="113" />
 <join type = "Inner Join">
 <from tablename = "pembentukankelurahanterpilih" alias = "">kodekelurahan</from>
@@ -58,6 +58,96 @@
 <or4></or4>
 </column>
 <column id="4">
+<table tablename="pembentukankelurahanterpilih"></table>
+<field>jumlahpenduduk</field>
+<alias></alias>
+<show>true</show>
+<sortorder></sortorder>
+<sort></sort>
+<groupby>false</groupby>
+<aggfunct></aggfunct>
+<criteria></criteria>
+<or1></or1>
+<or2></or2>
+<or3></or3>
+<or4></or4>
+</column>
+<column id="5">
+<table tablename="pembentukankelurahanterpilih"></table>
+<field>jumlahpendudukminimal</field>
+<alias></alias>
+<show>true</show>
+<sortorder></sortorder>
+<sort></sort>
+<groupby>false</groupby>
+<aggfunct></aggfunct>
+<criteria></criteria>
+<or1></or1>
+<or2></or2>
+<or3></or3>
+<or4></or4>
+</column>
+<column id="6">
+<table tablename="pembentukankelurahanterpilih"></table>
+<field>jumlahkk</field>
+<alias></alias>
+<show>true</show>
+<sortorder></sortorder>
+<sort></sort>
+<groupby>false</groupby>
+<aggfunct></aggfunct>
+<criteria></criteria>
+<or1></or1>
+<or2></or2>
+<or3></or3>
+<or4></or4>
+</column>
+<column id="7">
+<table tablename="pembentukankelurahanterpilih"></table>
+<field>jumlahkkminimal</field>
+<alias></alias>
+<show>true</show>
+<sortorder></sortorder>
+<sort></sort>
+<groupby>false</groupby>
+<aggfunct></aggfunct>
+<criteria></criteria>
+<or1></or1>
+<or2></or2>
+<or3></or3>
+<or4></or4>
+</column>
+<column id="8">
+<table tablename="pembentukankelurahanterpilih"></table>
+<field>luaswilayah</field>
+<alias></alias>
+<show>true</show>
+<sortorder></sortorder>
+<sort></sort>
+<groupby>false</groupby>
+<aggfunct></aggfunct>
+<criteria></criteria>
+<or1></or1>
+<or2></or2>
+<or3></or3>
+<or4></or4>
+</column>
+<column id="9">
+<table tablename="pembentukankelurahanterpilih"></table>
+<field>luaswilayahminimal</field>
+<alias></alias>
+<show>true</show>
+<sortorder></sortorder>
+<sort></sort>
+<groupby>false</groupby>
+<aggfunct></aggfunct>
+<criteria></criteria>
+<or1></or1>
+<or2></or2>
+<or3></or3>
+<or4></or4>
+</column>
+<column id="10">
 <table tablename="kelurahan"></table>
 <field>namakelurahan</field>
 <alias></alias>
@@ -72,7 +162,7 @@
 <or3></or3>
 <or4></or4>
 </column>
-<column id="5">
+<column id="11">
 <table tablename="kelurahan"></table>
 <field>kodekecamatan</field>
 <alias></alias>

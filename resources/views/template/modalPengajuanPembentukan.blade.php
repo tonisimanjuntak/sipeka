@@ -33,6 +33,26 @@
                                 <div class="col-12 mt-3">
                                     <label>PERSYARATAN DASAR</label>
                                 </div>
+                                <div class="col-12 mb-3">
+                                    <div class="table-responsive">
+                                        <table class="table text-sm table-rapat" id="tableDesaTerpilih">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5%; text-align: center;">NO</th>
+                                                    <th style="width: 35%; text-align: left;">Nama Desa/ Kelurahan
+                                                    </th>
+                                                    <th style="width: 20%; text-align: center;">Jumlah Penduduk</th>
+                                                    <th style="width: 20%; text-align: center;">Jumlah KK</th>
+                                                    <th style="width: 20%; text-align: center;">Luas Wilayah</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbodyDesaTerpilih">
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <div class="table-responsive">
                                         <table class="table text-sm table-rapat" id="tablePersyaratanDasar">
@@ -258,47 +278,64 @@
                         <td style="width: 5%; text-align: center;">:</td>
                         <td style="width: 75%; text-align: left;">` + rsPersyaratanTeknis[0]['namakecamatan'] + `</td>
                     </tr>
-                    <tr>
-                        <td style="width: 20%; text-align: left;">Nama Desa</td>
-                        <td style="width: 5%; text-align: center;">:</td>
-                        <td style="width: 75%; text-align: left;">
                 `;
+                $('#tableInfoPengajuan').html(addText);
 
+
+
+
+                var addText = ``;
                 var nodesa = 1;
                 for (var i = 0; i < rsDesaTerpilih.length; i++) {
-                    if (nodesa > 1) {
-                        addText += `<br>`;
-                    }
-                    addText += nodesa + `. ` + rsDesaTerpilih[i].namakelurahan;
+
+                    if (parseInt(rsDesaTerpilih[i]['jumlahpenduduk']) >= parseInt(rsDesaTerpilih[i]['jumlahpendudukminimal']) ) {
+                        var jumlahpendudukstatus = `<i class="fa fa-check-circle text-success ml-1"></i>`;
+                    }else{
+                        var jumlahpendudukstatus = `<i class="fa fa-times-circle text-danger ml-1"></i><span class="ml-1 text-danger">Minimal: ` + rsDesaTerpilih[i]['jumlahpendudukminimal'] + `</span>`;
+                    }    
+
+                    if (parseInt(rsDesaTerpilih[i]['jumlahkk']) >= parseInt(rsDesaTerpilih[i]['jumlahkkminimal']) ) {
+                        var jumlahkkstatus = `<i class="fa fa-check-circle text-success ml-1"></i>`;
+                    }else{
+                        var jumlahkkstatus = `<i class="fa fa-times-circle text-danger ml-1"></i><span class="ml-1 text-danger">Minimal: ` + rsDesaTerpilih[i]['jumlahkkminimal'] + `</span>`;
+                    }   
+                    
+                    if (parseFloat(rsDesaTerpilih[i]['luaswilayah']) >= parseFloat(rsDesaTerpilih[i]['luaswilayahminimal']) ) {
+                        var luaswilayahstatus = `<i class="fa fa-check-circle text-success ml-1"></i>`;
+                    }else{
+                        var luaswilayahstatus = `<i class="fa fa-times-circle text-danger ml-1"></i><span class="ml-1 text-danger">Minimal: ` + rsDesaTerpilih[i]['luaswilayahminimal'] + `</span>`;
+                    }   
+
+                    addText += `
+                        <tr>
+                            <td style="width: 5%; text-align: center;">` + nodesa + `</td>
+                            <td style="width: 35%; text-align: left;">` + rsDesaTerpilih[i]['namakelurahan']  + `</td>
+                            <td style="width: 20%; text-align: center;">` + rsDesaTerpilih[i]['jumlahpenduduk'] + jumlahpendudukstatus + `</td>
+                            <td style="width: 20%; text-align: center;">` + rsDesaTerpilih[i]['jumlahkk'] + jumlahkkstatus + `</td>
+                            <td style="width: 20%; text-align: center;">` + rsDesaTerpilih[i]['luaswilayah'] + luaswilayahstatus + `</td>
+                        </tr>
+                    `;
                     nodesa++;
                 }
-                addText += `</td></tr>`;
+                $('#tbodyDesaTerpilih').html(addText);
+                
 
-                $('#tableInfoPengajuan').html(addText);
 
                 var addText = ``;
                 for (var i = 0; i < rsPersyaratanDasar.length; i++) {
                     // console.log(rsPersyaratanDasar[i]);
+
+                    if (rsPersyaratanDasar[i]['jumlahkelurahan'] >= rsPersyaratanDasar[i]['jumlahkelurahanminimal']) {
+                        var jumlahkelurahanstatus = `<i class="fa fa-check-circle text-success ml-1"></i>`;
+                    }else{
+                        var jumlahkelurahanstatus = `<i class="fa fa-times-circle text-danger ml-1"></i><span class="ml-1 text-danger">Minimal: ` + rsPersyaratanDasar[i]['jumlahkelurahanminimal'] + `</span>`;
+                    }
+
                     addText += `
-                        <tr>
-                            <td style="width: 20%; text-align: left;">Jumlah Penduduk</td>
-                            <td style="width: 5%; text-align: center;">:</td>
-                            <td style="width: 75%; text-align: left;">` + rsPersyaratanDasar[i].jumlahpenduduk + `</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 20%; text-align: left;">Jumlah KK</td>
-                            <td style="width: 5%; text-align: center;">:</td>
-                            <td style="width: 75%; text-align: left;">` + rsPersyaratanDasar[i].jumlahkk + `</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 20%; text-align: left;">Luas Wilayah</td>
-                            <td style="width: 5%; text-align: center;">:</td>
-                            <td style="width: 75%; text-align: left;">` + rsPersyaratanDasar[i].luaswilayah + `</td>
-                        </tr>
                         <tr>
                             <td style="width: 20%; text-align: left;">Jumlah Kelurahan</td>
                             <td style="width: 5%; text-align: center;">:</td>
-                            <td style="width: 75%; text-align: left;">` + rsPersyaratanDasar[i].jumlahkelurahan + `</td>
+                            <td style="width: 75%; text-align: left;">` + rsPersyaratanDasar[i].jumlahkelurahan + jumlahkelurahanstatus + `</td>
                         </tr>
                         <tr>
                             <td style="width: 20%; text-align: left;">File Pendukung</td>
@@ -511,6 +548,8 @@
                 $('#tableRekomendasi').html('');
                 $('#tableKirimkeKemendagri').html('');
                 $('#tableSKKemendagri').html('');
+                $('#tbodyDesaTerpilih').html('');
+
             });
         });
     });

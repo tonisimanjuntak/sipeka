@@ -599,7 +599,7 @@
 </column>
 <column id="38">
 <table tablename="pembentukanpersyaratandasar"></table>
-<field>jumlahpenduduk</field>
+<field>jumlahkelurahan</field>
 <alias></alias>
 <show>true</show>
 <sortorder></sortorder>
@@ -614,7 +614,7 @@
 </column>
 <column id="39">
 <table tablename="pembentukanpersyaratandasar"></table>
-<field>jumlahpendudukminimal</field>
+<field>jumlahkelurahanminimal</field>
 <alias></alias>
 <show>true</show>
 <sortorder></sortorder>
@@ -629,96 +629,6 @@
 </column>
 <column id="40">
 <table tablename="pembentukanpersyaratandasar"></table>
-<field>jumlahkk</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="41">
-<table tablename="pembentukanpersyaratandasar"></table>
-<field>jumlahkkminimal</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="42">
-<table tablename="pembentukanpersyaratandasar"></table>
-<field>luaswilayah</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="43">
-<table tablename="pembentukanpersyaratandasar"></table>
-<field>luaswilayahminimal</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="44">
-<table tablename="pembentukanpersyaratandasar"></table>
-<field>jumlahkelurahan</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="45">
-<table tablename="pembentukanpersyaratandasar"></table>
-<field>jumlahkelurahanminimal</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="46">
-<table tablename="pembentukanpersyaratandasar"></table>
 <field>filepersyaratan</field>
 <alias></alias>
 <show>true</show>
@@ -732,7 +642,7 @@
 <or3></or3>
 <or4></or4>
 </column>
-<column id="47">
+<column id="41">
 <table tablename="pembentukanpersyaratanteknis"></table>
 <field>filekemampuankeuangan</field>
 <alias></alias>
@@ -747,7 +657,7 @@
 <or3></or3>
 <or4></or4>
 </column>
-<column id="48">
+<column id="42">
 <table tablename="pembentukanpersyaratanteknis"></table>
 <field>filesaranadanprasarana</field>
 <alias></alias>
@@ -762,7 +672,7 @@
 <or3></or3>
 <or4></or4>
 </column>
-<column id="49">
+<column id="43">
 <table tablename="pembentukanpersyaratanteknis"></table>
 <field>bataswilayah</field>
 <alias></alias>
@@ -777,7 +687,7 @@
 <or3></or3>
 <or4></or4>
 </column>
-<column id="50">
+<column id="44">
 <table tablename="pembentukanpersyaratanteknis"></table>
 <field>namakecamatan</field>
 <alias>namakecamatanbaru</alias>
@@ -792,7 +702,7 @@
 <or3></or3>
 <or4></or4>
 </column>
-<column id="51">
+<column id="45">
 <table tablename="pembentukanpersyaratanteknis"></table>
 <field>kesesuaiantataruang</field>
 <alias></alias>
@@ -807,7 +717,7 @@
 <or3></or3>
 <or4></or4>
 </column>
-<column id="52">
+<column id="46">
 <table tablename="pembentukanpersyaratanteknis"></table>
 <field>perbupbataswilayah</field>
 <alias></alias>

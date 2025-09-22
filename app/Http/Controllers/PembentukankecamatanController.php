@@ -177,11 +177,11 @@ class PembentukankecamatanController extends Controller
         $tglpengajuan = $request->get('tglpengajuan');
         $namakecamatanbaru = $request->get('namakecamatanbaru');
         $kodekecamatan = $request->get('kodekecamatan');
-        $kodekelurahan = $request->get('kodekelurahan');        
+        $kodekelurahan = $request->get('kodekelurahan');                
+        $jumlahkelurahan = $request->get('jumlahkelurahan');     
         $jumlahpenduduk = $request->get('jumlahpenduduk');     
         $jumlahkk = $request->get('jumlahkk');     
         $luaswilayah = $request->get('luaswilayah');     
-        $jumlahkelurahan = $request->get('jumlahkelurahan');     
         $idstatuspengajuan = '001';
         
 
@@ -327,15 +327,10 @@ class PembentukankecamatanController extends Controller
             $luaswilayahminimal = session()->get('luas_wilayah_kabupaten');
             $jumlahkelurahanminimal = session()->get('jumlah_kelurahan_desa_kabupaten');
         }
+
         $persyaratanDasar = array(
             'nopengajuan' => $nopengajuan,
-            'jumlahpenduduk' => $jumlahpenduduk,
-            'jumlahpendudukminimal' => $jumlahpendudukminimal,
-            'jumlahkk' => $jumlahkk,
-            'jumlahkkminimal' => $jumlahkkminimal,
-            'luaswilayah' => $luaswilayah,
-            'luaswilayahminimal' => $luaswilayahminimal,
-            'jumlahkelurahan' => $jumlahkelurahan,
+            'jumlahkelurahan' => count($kodekelurahan),
             'jumlahkelurahanminimal' => $jumlahkelurahanminimal,
             'filepersyaratan' => $filepersyaratandasar,
         );
@@ -363,11 +358,19 @@ class PembentukankecamatanController extends Controller
         // ]);
 
         $dataKelurahan = [];
+        $i = 0;
         foreach ($kodekelurahan as $value) {
             $dataKelurahan[] = array(
                 'nopengajuan' => $nopengajuan,
-                'kodekelurahan' => $value,
+                'kodekelurahan' => $kodekelurahan[$i],
+                'jumlahpenduduk' => $jumlahpenduduk[$i],
+                'jumlahkk' => $jumlahkk[$i],
+                'luaswilayah' => $luaswilayah[$i],
+                'jumlahpendudukminimal' => $jumlahpendudukminimal,
+                'jumlahkkminimal' => $jumlahkkminimal,
+                'luaswilayahminimal' => $luaswilayahminimal
             );
+            $i++;
         }
 
         $simpan = $this->pembentukankecamatan->simpanPengajuan($data, $persyaratanDasar, $persyaratanAdministratif, $persyaratanTeknis, $dataKelurahan);

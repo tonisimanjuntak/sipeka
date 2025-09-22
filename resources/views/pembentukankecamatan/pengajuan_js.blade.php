@@ -1,4 +1,24 @@
 <script>
+    $(document).ready(function () {
+        $(document).on('input', '.luaswilayah', function () {
+            // Mengambil nilai input saat ini
+            let value = $(this).val();
+
+            // Menggunakan regex untuk memvalidasi input: hanya angka dan titik yang diperbolehkan
+            let sanitizedValue = value.replace(/[^0-9.]/g, '');
+
+            // Memastikan hanya ada satu titik dalam input
+            let parts = sanitizedValue.split('.');
+            if (parts.length > 2) {
+                // Jika lebih dari satu titik, hapus titik tambahan
+                sanitizedValue = parts[0] + '.' + parts.slice(1).join('');
+            }
+
+            // Memperbarui nilai input dengan nilai yang sudah divalidasi
+            $(this).val(sanitizedValue);
+        });
+    });
+
     $('#formPengajuan').bootstrapValidator({
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
@@ -24,34 +44,6 @@
                 validators: {
                     notEmpty: {
                         message: 'File surat pengantar tidak boleh kosong'
-                    }
-                }
-            },
-            jumlahpenduduk: {
-                validators: {
-                    notEmpty: {
-                        message: 'Jumlah penduduk tidak boleh kosong'
-                    }
-                }
-            },
-            jumlahkk: {
-                validators: {
-                    notEmpty: {
-                        message: 'Jumlah kk tidak boleh kosong'
-                    }
-                }
-            },
-            luaswilayah: {
-                validators: {
-                    notEmpty: {
-                        message: 'Luas wilayah tidak boleh kosong'
-                    }
-                }
-            },
-            jumlahkelurahan: {
-                validators: {
-                    notEmpty: {
-                        message: 'Jumlah desa/kelurahan tidak boleh kosong'
                     }
                 }
             },
@@ -115,11 +107,37 @@
     })
     .on('success.form.bv', function(e) {
         e.preventDefault(); // Cegah submit default
-
+        
         const $form = $(e.target);
         const formData = new FormData($form[0]); // Ambil semua input, termasuk file
 
         $('#btnSimpan').prop('disabled', true).html('<i class="fa fa-spin fa-spinner"></i> Menyimpan...');
+
+
+        var jumlahRow = $("#tableDesa tbody tr").length;
+        if (jumlahRow == 1 && $('#tbodyDesa tr').find('td').eq(1).text() == '') {
+            swal("Informasi!", "Pilih Desa terlebih dahulu!", "info");
+            $('#btnSimpan').prop('disabled', false).html('<i class="fa fa-save mr-1"></i> Simpan dan Lanjutkan');            
+            return false;
+        }        
+
+        let isValid = true;        
+        $('#tbodyDesa tr').each(function () {
+            let jumlahpenduduk = $(this).find('.jumlahpenduduk').val().trim();
+            let jumlahkk = $(this).find('.jumlahkk').val().trim();
+            let luaswilayah = $(this).find('.luaswilayah').val().trim();
+            // Cek apakah ada input yang kosong
+            if (!jumlahpenduduk || !jumlahkk || !luaswilayah) {
+                isValid = false;                
+            }
+        });
+
+        if (!isValid) {
+            swal("Informasi!", "Input jumlah penduduk, jumlah KK, dan luas wilayah tidak boleh kosong!", "info");
+                $('#btnSimpan').prop('disabled', false).html('<i class="fa fa-save mr-1"></i> Simpan dan Lanjutkan');            
+                return false; // Keluar dari loop
+        }
+
 
         // Kirim via AJAX
         $.ajax({
@@ -169,7 +187,7 @@
 
     $(document).on('change', '#kodekecamatan', function() {
         $('#tbodyDesa').html(`<tr>
-                                    <td style="width: 100%; text-align: center;" colspan="4">Belum ada desa yang
+                                    <td style="width: 100%; text-align: center;" colspan="6">Belum ada desa yang
                                         dipilih...</td>
                                 </tr>`);
     });
@@ -182,4 +200,6 @@
     $(document).on('click', '.btn-hapus-kelurahan', function() {
         $(this).closest('tr').remove();
     });
+
+    
 </script>
