@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Penggabungankecamatan;
+use App\Models\Penyesuaiankecamatan;
 use App\Models\Kelurahan;
 use App\Models\App;
 use App\Models\Uploads;
@@ -11,54 +11,54 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Hash;
 
-class PenggabunganKecamatanController extends Controller
+class PenyesuaiankecamatanController extends Controller
 {
-    var $penggabungankecamatan;
+    var $penyesuaiankecamatan;
 
     public function __construct()
     {
-        $this->penggabungankecamatan = new Penggabungankecamatan;
+        $this->penyesuaiankecamatan = new Penyesuaiankecamatan;
         $this->isLogin();
     }
 
     public function index()
     {        
-        $data['menu'] = 'penggabungankecamatan';
-        return view('penggabungankecamatan.indextemp', $data);
+        $data['menu'] = 'penyesuaiankecamatan';
+        return view('penyesuaiankecamatan.indextemp', $data);
     }
 
     public function tambah()
     {
         if (session('akseslevel') != 'Operator Kabupaten') {
-            return redirect('penggabungankecamatan')->with('other', 'Hanya Operator Kabupaten yang dapat mengakses!');            
+            return redirect('penyesuaiankecamatan')->with('other', 'Hanya Operator Kabupaten yang dapat mengakses!');            
         }
         $data['stepNumber'] = App::getStepNumber();
         $data['nopengajuan'] = '';
-        $data['menu'] = 'penggabungankecamatan';
+        $data['menu'] = 'penyesuaiankecamatan';
         $data['ltambah'] = true;
-        return view('penggabungankecamatan.form', $data);
+        return view('penyesuaiankecamatan.form', $data);
     }
 
     public function progress($nopengajuan)
     {
         try {
             $nopengajuan = Crypt::decrypt($nopengajuan);
-            $rsPenggabungankecamatan = Penggabungankecamatan::findOrFail($nopengajuan);
+            $rsPembentukanKecamatan = Pembentukankecamatan::findOrFail($nopengajuan);
         } catch (ModelNotFoundException $e) {
-            return redirect('penggabungankecamatan')->with('other', 'Data tidak ditemukan!');
+            return redirect('penyesuaiankecamatan')->with('other', 'Data tidak ditemukan!');
         }
 
-        $data['stepNumber'] = App::getStepNumber($rsPenggabungankecamatan->idstatuspengajuanterakhir);
-        $data['menu'] = 'penggabungankecamatan';
+        $data['stepNumber'] = App::getStepNumber($rsPembentukanKecamatan->idstatuspengajuanterakhir);
+        $data['menu'] = 'penyesuaiankecamatan';
         $data['nopengajuan'] = $nopengajuan;
         $data['ltambah'] = false;
-        return view('penggabungankecamatan.form', $data);
+        return view('penyesuaiankecamatan.form', $data);
     }
 
     public function listindex(Request $request)
     {
         // Query dasar
-        $query = Penggabungankecamatan::select("*");
+        $query = Pembentukankecamatan::select("*");
 
         if (session('akseslevel') == 'Operator Kabupaten') {
             $query->where('kodekabupaten', session('kodekabupaten'));
@@ -102,7 +102,7 @@ class PenggabunganKecamatanController extends Controller
 
 
         // Hitung total data tanpa filter
-        $totalData = Penggabungankecamatan::count();
+        $totalData = Pembentukankecamatan::count();
 
         // Hitung total data setelah filter (jika ada pencarian)
         $totalFiltered = $query->count();
@@ -135,7 +135,7 @@ class PenggabunganKecamatanController extends Controller
 
             if ($row->idstatuspengajuanterakhir == '001') {
                 $button .= '
-                    <a href="' . url('penggabungankecamatan/hapus/' . Crypt::encrypt($row->nopengajuan)) . '" class="dropdown-item" id="btnHapus">Hapus</a>
+                    <a href="' . url('penyesuaiankecamatan/hapus/' . Crypt::encrypt($row->nopengajuan)) . '" class="dropdown-item" id="btnHapus">Hapus</a>
                 ';                
             }
 
@@ -156,7 +156,7 @@ class PenggabunganKecamatanController extends Controller
                                     ' . $button . '
                                     </div>
                                 </div>
-                                <a href="' . url('penggabungankecamatan/progress/' . Crypt::encrypt($row->nopengajuan)) . '" class="btn btn-warning">Progress</a>                                
+                                <a href="' . url('penyesuaiankecamatan/progress/' . Crypt::encrypt($row->nopengajuan)) . '" class="btn btn-warning">Progress</a>                                
                             </div>',
 
             ];
@@ -177,11 +177,11 @@ class PenggabunganKecamatanController extends Controller
         $tglpengajuan = $request->get('tglpengajuan');
         $namakecamatanbaru = $request->get('namakecamatanbaru');
         $kodekecamatan = $request->get('kodekecamatan');
-        $kodekelurahan = $request->get('kodekelurahan');        
+        $kodekelurahan = $request->get('kodekelurahan');                
+        $jumlahkelurahan = $request->get('jumlahkelurahan');     
         $jumlahpenduduk = $request->get('jumlahpenduduk');     
         $jumlahkk = $request->get('jumlahkk');     
         $luaswilayah = $request->get('luaswilayah');     
-        $jumlahkelurahan = $request->get('jumlahkelurahan');     
         $idstatuspengajuan = '001';
         
 
@@ -296,7 +296,7 @@ class PenggabunganKecamatanController extends Controller
             ]);
         }
 
-        $nopengajuan = $this->penggabungankecamatan->createID();
+        $nopengajuan = $this->pembentukankecamatan->createID();
 
         $ltambah = $request->get('ltambah');
         $inserted_date = date('Y-m-d H:i:s');
@@ -327,15 +327,10 @@ class PenggabunganKecamatanController extends Controller
             $luaswilayahminimal = session()->get('luas_wilayah_kabupaten');
             $jumlahkelurahanminimal = session()->get('jumlah_kelurahan_desa_kabupaten');
         }
+
         $persyaratanDasar = array(
             'nopengajuan' => $nopengajuan,
-            'jumlahpenduduk' => $jumlahpenduduk,
-            'jumlahpendudukminimal' => $jumlahpendudukminimal,
-            'jumlahkk' => $jumlahkk,
-            'jumlahkkminimal' => $jumlahkkminimal,
-            'luaswilayah' => $luaswilayah,
-            'luaswilayahminimal' => $luaswilayahminimal,
-            'jumlahkelurahan' => $jumlahkelurahan,
+            'jumlahkelurahan' => count($kodekelurahan),
             'jumlahkelurahanminimal' => $jumlahkelurahanminimal,
             'filepersyaratan' => $filepersyaratandasar,
         );
@@ -363,14 +358,22 @@ class PenggabunganKecamatanController extends Controller
         // ]);
 
         $dataKelurahan = [];
+        $i = 0;
         foreach ($kodekelurahan as $value) {
             $dataKelurahan[] = array(
                 'nopengajuan' => $nopengajuan,
-                'kodekelurahan' => $value,
+                'kodekelurahan' => $kodekelurahan[$i],
+                'jumlahpenduduk' => $jumlahpenduduk[$i],
+                'jumlahkk' => $jumlahkk[$i],
+                'luaswilayah' => $luaswilayah[$i],
+                'jumlahpendudukminimal' => $jumlahpendudukminimal,
+                'jumlahkkminimal' => $jumlahkkminimal,
+                'luaswilayahminimal' => $luaswilayahminimal
             );
+            $i++;
         }
 
-        $simpan = $this->penggabungankecamatan->simpanPengajuan($data, $persyaratanDasar, $persyaratanAdministratif, $persyaratanTeknis, $dataKelurahan);
+        $simpan = $this->pembentukankecamatan->simpanPengajuan($data, $persyaratanDasar, $persyaratanAdministratif, $persyaratanTeknis, $dataKelurahan);
         
 
         // dd(htmlspecialchars($simpan['message']));
@@ -398,9 +401,9 @@ class PenggabunganKecamatanController extends Controller
         $updated_date = date('Y-m-d H:i:s');
         $idstatuspengajuan = '003';
 
-        $rsPengajuan = Penggabungankecamatan::find($nopengajuan);
+        $rsPengajuan = Pembentukankecamatan::find($nopengajuan);
 
-        if ($this->penggabungankecamatan->tanggalStatusInvalid($nopengajuan, $tglverifikasipropinsi)) {
+        if ($this->pembentukankecamatan->tanggalStatusInvalid($nopengajuan, $tglverifikasipropinsi)) {
             return response()->json([
                 'message' => 'Tanggal verifikasi propinsi tidak boleh lebih kecil dari tanggal pengajuan!'
             ]);
@@ -409,7 +412,7 @@ class PenggabunganKecamatanController extends Controller
 
         if ($statusverifikasipropinsi == '1') {
             $idstatuspengajuanterakhir = $idstatuspengajuan;
-            $idstatuspengajuannext = $this->penggabungankecamatan->createStatusPembentukan($idstatuspengajuan);
+            $idstatuspengajuannext = $this->pembentukankecamatan->createStatusPembentukan($idstatuspengajuan);
             $deskripsirevisipropinsi = null;
         }else{
             $idstatuspengajuanterakhir = null;
@@ -423,7 +426,7 @@ class PenggabunganKecamatanController extends Controller
             'tglverifikasipropinsi' => $tglverifikasipropinsi,
         );
 
-        $idriwayat = $this->penggabungankecamatan->createIDRiwayat($nopengajuan);
+        $idriwayat = $this->pembentukankecamatan->createIDRiwayat($nopengajuan);
         $riwayat = array(
                 'idriwayat' => $idriwayat,
                 'nopengajuan' => $nopengajuan,
@@ -436,7 +439,7 @@ class PenggabunganKecamatanController extends Controller
                 'inserted_date' => date('Y-m-d H:i:s'),
             );
 
-        $simpan = $this->penggabungankecamatan->simpanVerifikasiPropinsi($data, $riwayat);        
+        $simpan = $this->pembentukankecamatan->simpanVerifikasiPropinsi($data, $riwayat);        
 
         // dd(htmlspecialchars($simpan['message']));
         if ($simpan['status'] == 'success') {
@@ -462,14 +465,14 @@ class PenggabunganKecamatanController extends Controller
         $updated_date = date('Y-m-d H:i:s');
         $idstatuspengajuan = '005';
 
-        if ($this->penggabungankecamatan->tanggalStatusInvalid($nopengajuan, $tglraperda)) {
+        if ($this->pembentukankecamatan->tanggalStatusInvalid($nopengajuan, $tglraperda)) {
             return response()->json([
                 'message' => 'Tanggal raperda tidak boleh lebih kecil dari tanggal verifikasi propinsi!'
             ]);
         }
 
         $idstatuspengajuanterakhir = $idstatuspengajuan;
-        $idstatuspengajuannext = $this->penggabungankecamatan->createStatusPembentukan($idstatuspengajuan);
+        $idstatuspengajuannext = $this->pembentukankecamatan->createStatusPembentukan($idstatuspengajuan);
 
         //upload raperda
         $fileraperda = $request->file('fileraperda');
@@ -491,7 +494,7 @@ class PenggabunganKecamatanController extends Controller
             'fileraperda' => $fileraperda,
         );
 
-        $idriwayat = $this->penggabungankecamatan->createIDRiwayat($nopengajuan);
+        $idriwayat = $this->pembentukankecamatan->createIDRiwayat($nopengajuan);
         $riwayat = array(
                 'idriwayat' => $idriwayat,
                 'nopengajuan' => $nopengajuan,
@@ -504,7 +507,7 @@ class PenggabunganKecamatanController extends Controller
                 'inserted_date' => date('Y-m-d H:i:s'),
             );
 
-        $simpan = $this->penggabungankecamatan->simpanRaperda($data, $riwayat);        
+        $simpan = $this->pembentukankecamatan->simpanRaperda($data, $riwayat);        
 
         // dd(htmlspecialchars($simpan['message']));
         if ($simpan['status'] == 'success') {
@@ -533,7 +536,7 @@ class PenggabunganKecamatanController extends Controller
         $updated_date = date('Y-m-d H:i:s');
         $idstatuspengajuan = '010';
 
-        if ($this->penggabungankecamatan->tanggalStatusInvalid($nopengajuan, $tglregister)) {
+        if ($this->pembentukankecamatan->tanggalStatusInvalid($nopengajuan, $tglregister)) {
             return response()->json([
                 'message' => 'Tanggal raperda tidak boleh lebih kecil dari tanggal verifikasi propinsi!'
             ]);
@@ -543,32 +546,10 @@ class PenggabunganKecamatanController extends Controller
         
         if ($statusraperda == '1') {
             $idstatuspengajuanterakhir = $idstatuspengajuan;
-            $idstatuspengajuannext = $this->penggabungankecamatan->createStatusPembentukan($idstatuspengajuan);
+            $idstatuspengajuannext = $this->pembentukankecamatan->createStatusPembentukan($idstatuspengajuan);
             $deskripsirevisiraperda = null;
 
-            //upload raperda
-            $filetelaahanhukum = $request->file('filetelaahanhukum');
-            $filetelaahanhukum_lama = $request->get('filetelaahanhukum_lama');
-            $uploads = Uploads::startUpload('uploads/pengajuan', $filetelaahanhukum, $filetelaahanhukum_lama, 1000);
-            if ($uploads['status'] == 'success') {
-                $filetelaahanhukum = $uploads['file_name'];
-            } else {
-                return response()->json([
-                    'message' => 'File raperda gagal disimpan! Error: ' . $uploads['message']
-                ]);
-            }
-    
-    
-            $filetelaahanteknis = $request->file('filetelaahanteknis');
-            $filetelaahanteknis_lama = $request->get('filetelaahanteknis_lama');
-            $uploads = Uploads::startUpload('uploads/pengajuan', $filetelaahanteknis, $filetelaahanteknis_lama, 1000);
-            if ($uploads['status'] == 'success') {
-                $filetelaahanteknis = $uploads['file_name'];
-            } else {
-                return response()->json([
-                    'message' => 'File raperda gagal disimpan! Error: ' . $uploads['message']
-                ]);
-            }
+            
 
         }else{
             $idstatuspengajuanterakhir = '003';
@@ -576,6 +557,30 @@ class PenggabunganKecamatanController extends Controller
             $nomorregister = null;
             $filetelaahanhukum = '';
             $filetelaahanteknis = '';        
+        }
+
+        //upload raperda
+        $filetelaahanhukum = $request->file('filetelaahanhukum');
+        $filetelaahanhukum_lama = $request->get('filetelaahanhukum_lama');
+        $uploads = Uploads::startUpload('uploads/pengajuan', $filetelaahanhukum, $filetelaahanhukum_lama, 1000);
+        if ($uploads['status'] == 'success') {
+            $filetelaahanhukum = $uploads['file_name'];
+        } else {
+            return response()->json([
+                'message' => 'File raperda gagal disimpan! Error: ' . $uploads['message']
+            ]);
+        }
+
+
+        $filetelaahanteknis = $request->file('filetelaahanteknis');
+        $filetelaahanteknis_lama = $request->get('filetelaahanteknis_lama');
+        $uploads = Uploads::startUpload('uploads/pengajuan', $filetelaahanteknis, $filetelaahanteknis_lama, 1000);
+        if ($uploads['status'] == 'success') {
+            $filetelaahanteknis = $uploads['file_name'];
+        } else {
+            return response()->json([
+                'message' => 'File raperda gagal disimpan! Error: ' . $uploads['message']
+            ]);
         }
 
 
@@ -588,7 +593,7 @@ class PenggabunganKecamatanController extends Controller
             'filetelaahanteknis' => $filetelaahanteknis,
         );
 
-        $idriwayat = $this->penggabungankecamatan->createIDRiwayat($nopengajuan);
+        $idriwayat = $this->pembentukankecamatan->createIDRiwayat($nopengajuan);
         $riwayat = array(
                 'idriwayat' => $idriwayat,
                 'nopengajuan' => $nopengajuan,
@@ -601,7 +606,7 @@ class PenggabunganKecamatanController extends Controller
                 'inserted_date' => date('Y-m-d H:i:s'),
             );
 
-        $simpan = $this->penggabungankecamatan->simpanTelaahan($data, $riwayat);        
+        $simpan = $this->pembentukankecamatan->simpanTelaahan($data, $riwayat);        
 
         // dd(htmlspecialchars($simpan['message']));
         if ($simpan['status'] == 'success') {
@@ -627,14 +632,14 @@ class PenggabunganKecamatanController extends Controller
         $updated_date = date('Y-m-d H:i:s');
         $idstatuspengajuan = '015';
 
-        if ($this->penggabungankecamatan->tanggalStatusInvalid($nopengajuan, $tglpermohonankode)) {
+        if ($this->pembentukankecamatan->tanggalStatusInvalid($nopengajuan, $tglpermohonankode)) {
             return response()->json([
                 'message' => 'Tanggal permohonan kode tidak boleh lebih kecil dari tanggal telaahan!'
             ]);
         }
 
         $idstatuspengajuanterakhir = $idstatuspengajuan;
-        $idstatuspengajuannext = $this->penggabungankecamatan->createStatusPembentukan($idstatuspengajuan);
+        $idstatuspengajuannext = $this->pembentukankecamatan->createStatusPembentukan($idstatuspengajuan);
 
         //upload raperda
         $filepermohonankode = $request->file('filepermohonankode');
@@ -656,7 +661,7 @@ class PenggabunganKecamatanController extends Controller
             'filepermohonankode' => $filepermohonankode,
         );
 
-        $idriwayat = $this->penggabungankecamatan->createIDRiwayat($nopengajuan);
+        $idriwayat = $this->pembentukankecamatan->createIDRiwayat($nopengajuan);
         $riwayat = array(
                 'idriwayat' => $idriwayat,
                 'nopengajuan' => $nopengajuan,
@@ -669,7 +674,7 @@ class PenggabunganKecamatanController extends Controller
                 'inserted_date' => date('Y-m-d H:i:s'),
             );
 
-        $simpan = $this->penggabungankecamatan->simpanPermohonanKode($data, $riwayat);        
+        $simpan = $this->pembentukankecamatan->simpanPermohonanKode($data, $riwayat);        
 
         // dd(htmlspecialchars($simpan['message']));
         if ($simpan['status'] == 'success') {
@@ -698,7 +703,7 @@ class PenggabunganKecamatanController extends Controller
         $updated_date = date('Y-m-d H:i:s');
         $idstatuspengajuan = '020';
 
-        if ($this->penggabungankecamatan->tanggalStatusInvalid($nopengajuan, $tglrekomendasigubernur)) {
+        if ($this->pembentukankecamatan->tanggalStatusInvalid($nopengajuan, $tglrekomendasigubernur)) {
             return response()->json([
                 'message' => 'Tanggal rekomendasi gubernur tidak boleh lebih kecil dari tanggal permohonan kode!'
             ]);
@@ -708,7 +713,7 @@ class PenggabunganKecamatanController extends Controller
         
         if ($statuspermohonankode == '1') {
             $idstatuspengajuanterakhir = $idstatuspengajuan;
-            $idstatuspengajuannext = $this->penggabungankecamatan->createStatusPembentukan($idstatuspengajuan);
+            $idstatuspengajuannext = $this->pembentukankecamatan->createStatusPembentukan($idstatuspengajuan);
             $deskripsirevisipermohonankode = null;
 
             //upload raperda
@@ -739,7 +744,7 @@ class PenggabunganKecamatanController extends Controller
             'filerekomendasigubernur' => $filerekomendasigubernur,
         );
 
-        $idriwayat = $this->penggabungankecamatan->createIDRiwayat($nopengajuan);
+        $idriwayat = $this->pembentukankecamatan->createIDRiwayat($nopengajuan);
         $riwayat = array(
                 'idriwayat' => $idriwayat,
                 'nopengajuan' => $nopengajuan,
@@ -752,7 +757,7 @@ class PenggabunganKecamatanController extends Controller
                 'inserted_date' => date('Y-m-d H:i:s'),
             );
 
-        $simpan = $this->penggabungankecamatan->simpanRekomendasiGubernur($data, $riwayat);        
+        $simpan = $this->pembentukankecamatan->simpanRekomendasiGubernur($data, $riwayat);        
 
         // dd(htmlspecialchars($simpan['message']));
         if ($simpan['status'] == 'success') {
@@ -777,14 +782,14 @@ class PenggabunganKecamatanController extends Controller
         $updated_date = date('Y-m-d H:i:s');
         $idstatuspengajuan = '025';
 
-        if ($this->penggabungankecamatan->tanggalStatusInvalid($nopengajuan, $tglkirimsuratkekemendagri)) {
+        if ($this->pembentukankecamatan->tanggalStatusInvalid($nopengajuan, $tglkirimsuratkekemendagri)) {
             return response()->json([
                 'message' => 'Tanggal kirim surat tidak boleh lebih kecil dari tanggal rekomendasi!'
             ]);
         }
 
         $idstatuspengajuanterakhir = $idstatuspengajuan;
-        $idstatuspengajuannext = $this->penggabungankecamatan->createStatusPembentukan($idstatuspengajuan);
+        $idstatuspengajuannext = $this->pembentukankecamatan->createStatusPembentukan($idstatuspengajuan);
 
         $data = array(
             'nopengajuan' => $nopengajuan,
@@ -792,7 +797,7 @@ class PenggabunganKecamatanController extends Controller
             'tglkirimsuratkekemendagri' => $tglkirimsuratkekemendagri,
         );
 
-        $idriwayat = $this->penggabungankecamatan->createIDRiwayat($nopengajuan);
+        $idriwayat = $this->pembentukankecamatan->createIDRiwayat($nopengajuan);
         $riwayat = array(
                 'idriwayat' => $idriwayat,
                 'nopengajuan' => $nopengajuan,
@@ -805,7 +810,7 @@ class PenggabunganKecamatanController extends Controller
                 'inserted_date' => date('Y-m-d H:i:s'),
             );
 
-        $simpan = $this->penggabungankecamatan->simpanKirimSuratKeKemendagri($data, $riwayat);        
+        $simpan = $this->pembentukankecamatan->simpanKirimSuratKeKemendagri($data, $riwayat);        
 
         // dd(htmlspecialchars($simpan['message']));
         if ($simpan['status'] == 'success') {
@@ -831,7 +836,7 @@ class PenggabunganKecamatanController extends Controller
         $updated_date = date('Y-m-d H:i:s');
         $idstatuspengajuan = '030';
 
-        if ($this->penggabungankecamatan->tanggalStatusInvalid($nopengajuan, $tglskkemendagri)) {
+        if ($this->pembentukankecamatan->tanggalStatusInvalid($nopengajuan, $tglskkemendagri)) {
             return response()->json([
                 'message' => 'Tanggal rekomendasi gubernur tidak boleh lebih kecil dari tanggal permohonan kode!'
             ]);
@@ -840,7 +845,7 @@ class PenggabunganKecamatanController extends Controller
         
         
         $idstatuspengajuanterakhir = $idstatuspengajuan;
-        $idstatuspengajuannext = $this->penggabungankecamatan->createStatusPembentukan($idstatuspengajuan);
+        $idstatuspengajuannext = $this->pembentukankecamatan->createStatusPembentukan($idstatuspengajuan);
 
         //upload sk kemendagri
         $fileskkemendagri = $request->file('fileskkemendagri');
@@ -862,7 +867,7 @@ class PenggabunganKecamatanController extends Controller
             'fileskkemendagri' => $fileskkemendagri,
         );
 
-        $idriwayat = $this->penggabungankecamatan->createIDRiwayat($nopengajuan);
+        $idriwayat = $this->pembentukankecamatan->createIDRiwayat($nopengajuan);
         $riwayat = array(
                 'idriwayat' => $idriwayat,
                 'nopengajuan' => $nopengajuan,
@@ -875,7 +880,7 @@ class PenggabunganKecamatanController extends Controller
                 'inserted_date' => date('Y-m-d H:i:s'),
             );
 
-        $simpan = $this->penggabungankecamatan->simpanRekomendasiGubernur($data, $riwayat);        
+        $simpan = $this->pembentukankecamatan->simpanRekomendasiGubernur($data, $riwayat);        
 
         // dd(htmlspecialchars($simpan['message']));
         if ($simpan['status'] == 'success') {
@@ -895,21 +900,21 @@ class PenggabunganKecamatanController extends Controller
     {
         $nopengajuan = Crypt::decrypt($nopengajuan);
         try {
-            $rsPenggabungankecamatan = Penggabungankecamatan::findOrFail($nopengajuan);
+            $rsPembentukanKecamatan = Pembentukankecamatan::findOrFail($nopengajuan);
         } catch (ModelNotFoundException $e) {
-            return redirect('penggabungankecamatan')->with('other', 'Data tidak ditemukan!');
+            return redirect('penyesuaiankecamatan')->with('other', 'Data tidak ditemukan!');
         }
 
         //untuk hapus file di dari hosting
-        $rsPembentukanPersyaratanDasar = $this->penggabungankecamatan->getPersyaratanDasar($nopengajuan);
-        $rsPembentukanPersyaratanAdministratif = $this->penggabungankecamatan->getPersyaratanAdministratif($nopengajuan);
-        $rsPembentukanPersyaratanTeknis = $this->penggabungankecamatan->getPersyaratanTeknis($nopengajuan);
+        $rsPembentukanPersyaratanDasar = $this->pembentukankecamatan->getPersyaratanDasar($nopengajuan);
+        $rsPembentukanPersyaratanAdministratif = $this->pembentukankecamatan->getPersyaratanAdministratif($nopengajuan);
+        $rsPembentukanPersyaratanTeknis = $this->pembentukankecamatan->getPersyaratanTeknis($nopengajuan);
 
-        $hapus = $this->penggabungankecamatan->hapusData($nopengajuan, $rsPenggabungankecamatan);
+        $hapus = $this->pembentukankecamatan->hapusData($nopengajuan, $rsPembentukanKecamatan);
         if ($hapus['status'] == 'success') {
 
-            if (!empty($rsPenggabungankecamatan->filesuratpengantar)) {
-                Uploads::hapusFile('uploads/pengajuan', $rsPenggabungankecamatan->filesuratpengantar);
+            if (!empty($rsPembentukanKecamatan->filesuratpengantar)) {
+                Uploads::hapusFile('uploads/pengajuan', $rsPembentukanKecamatan->filesuratpengantar);
             }
 
             foreach ($rsPembentukanPersyaratanDasar as $row) {
@@ -958,8 +963,8 @@ class PenggabunganKecamatanController extends Controller
     public function getId(Request $request)
     {
         $nopengajuan = $request->input('nopengajuan');
-        $rsPenggabungankecamatan = Penggabungankecamatan::find($nopengajuan);
-        return response()->json($rsPenggabungankecamatan);
+        $rsPembentukanKecamatan = Pembentukankecamatan::find($nopengajuan);
+        return response()->json($rsPembentukanKecamatan);
     }
 
 
@@ -973,12 +978,12 @@ class PenggabunganKecamatanController extends Controller
     public function getPengajuanPembentukan(Request $request)
     {
         $nopengajuan = $request->input('nopengajuan');
-        $rsPenggabungankecamatan = Penggabungankecamatan::find($nopengajuan);
-        $rsDesaTerpilih = $this->penggabungankecamatan->getDesaTerpilih($nopengajuan);
-        $rsPersyaratanDasar = $this->penggabungankecamatan->getPersyaratanDasar($nopengajuan);
-        $rsPersyaratanAdministratif = $this->penggabungankecamatan->getPersyaratanAdministratif($nopengajuan);
-        $rsPersyaratanTeknis = $this->penggabungankecamatan->getPersyaratanTeknis($nopengajuan);
+        $rsPembentukanKecamatan = Pembentukankecamatan::find($nopengajuan);
+        $rsDesaTerpilih = $this->pembentukankecamatan->getDesaTerpilih($nopengajuan);
+        $rsPersyaratanDasar = $this->pembentukankecamatan->getPersyaratanDasar($nopengajuan);
+        $rsPersyaratanAdministratif = $this->pembentukankecamatan->getPersyaratanAdministratif($nopengajuan);
+        $rsPersyaratanTeknis = $this->pembentukankecamatan->getPersyaratanTeknis($nopengajuan);
 
-        return response()->json(array('rsPenggabungankecamatan' => $rsPenggabungankecamatan, 'rsDesaTerpilih' => $rsDesaTerpilih, 'rsPersyaratanDasar' => $rsPersyaratanDasar, 'rsPersyaratanAdministratif' => $rsPersyaratanAdministratif, 'rsPersyaratanTeknis' => $rsPersyaratanTeknis));
+        return response()->json(array('rsPembentukanKecamatan' => $rsPembentukanKecamatan, 'rsDesaTerpilih' => $rsDesaTerpilih, 'rsPersyaratanDasar' => $rsPersyaratanDasar, 'rsPersyaratanAdministratif' => $rsPersyaratanAdministratif, 'rsPersyaratanTeknis' => $rsPersyaratanTeknis));
     }
 }

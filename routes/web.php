@@ -11,7 +11,11 @@ use App\Http\Controllers\PersyaratandasarController;
 use App\Http\Controllers\PersyaratanadministratifController;
 use App\Http\Controllers\PersyaratanteknisController;
 use App\Http\Controllers\PembentukankecamatanController;
+use App\Http\Controllers\PenggabunganKecamatanController;
+use App\Http\Controllers\PenyesuaiankecamatanController;
 use App\Http\Controllers\LappembentukanController;
+use App\Http\Controllers\LappenggabunganController;
+use App\Http\Controllers\LappenyesuaianController;
 use App\Http\Controllers\Select2Controller;
 use Illuminate\Support\Facades\Route;
 
@@ -135,8 +139,56 @@ use Illuminate\Support\Facades\Route;
         Route::get('/pembentukankecamatan/getPengajuanPembentukan', 'getPengajuanPembentukan');
     });
 
+    Route::controller(PenggabunganKecamatanController::class)->group(function () {
+        Route::get('/penggabungankecamatan', 'index');
+        Route::get('/penggabungankecamatan/tambah', 'tambah');
+        Route::get('/penggabungankecamatan/progress/{IdPrimary}', 'progress');
+        Route::get('/penggabungankecamatan/listindex', 'listindex');
+        Route::get('/penggabungankecamatan/hapus/{IdPrimary}', 'hapus');
+        Route::get('/penggabungankecamatan/getId/', 'getId');
+        Route::get('/penggabungankecamatan/getKelurahan', 'getKelurahan');
+        Route::post('/penggabungankecamatan/simpanPengajuan', 'simpanPengajuan');
+        Route::post('/penggabungankecamatan/simpanVerifikasiPropinsi', 'simpanVerifikasiPropinsi');
+        Route::post('/penggabungankecamatan/simpanRaperda', 'simpanRaperda');
+        Route::post('/penggabungankecamatan/simpanTelaahan', 'simpanTelaahan');
+        Route::post('/penggabungankecamatan/simpanPermohonanKode', 'simpanPermohonanKode');
+        Route::post('/penggabungankecamatan/simpanRekomendasiGubernur', 'simpanRekomendasiGubernur');
+        Route::post('/penggabungankecamatan/simpanKirimSuratKeKemendagri', 'simpanKirimSuratKeKemendagri');
+        Route::post('/penggabungankecamatan/simpanSkKemendagri', 'simpanSkKemendagri');
+        Route::get('/penggabungankecamatan/getPengajuanPembentukan', 'getPengajuanPembentukan');
+    });
+
+    Route::controller(PenyesuaiankecamatanController::class)->group(function () {
+        Route::get('/penyesuaiankecamatan', 'index');
+        Route::get('/penyesuaiankecamatan/tambah', 'tambah');
+        Route::get('/penyesuaiankecamatan/progress/{IdPrimary}', 'progress');
+        Route::get('/penyesuaiankecamatan/listindex', 'listindex');
+        Route::get('/penyesuaiankecamatan/hapus/{IdPrimary}', 'hapus');
+        Route::get('/penyesuaiankecamatan/getId/', 'getId');
+        Route::get('/penyesuaiankecamatan/getKelurahan', 'getKelurahan');
+        Route::post('/penyesuaiankecamatan/simpanPengajuan', 'simpanPengajuan');
+        Route::post('/penyesuaiankecamatan/simpanVerifikasiPropinsi', 'simpanVerifikasiPropinsi');
+        Route::post('/penyesuaiankecamatan/simpanRaperda', 'simpanRaperda');
+        Route::post('/penyesuaiankecamatan/simpanTelaahan', 'simpanTelaahan');
+        Route::post('/penyesuaiankecamatan/simpanPermohonanKode', 'simpanPermohonanKode');
+        Route::post('/penyesuaiankecamatan/simpanRekomendasiGubernur', 'simpanRekomendasiGubernur');
+        Route::post('/penyesuaiankecamatan/simpanKirimSuratKeKemendagri', 'simpanKirimSuratKeKemendagri');
+        Route::post('/penyesuaiankecamatan/simpanSkKemendagri', 'simpanSkKemendagri');
+        Route::get('/penyesuaiankecamatan/getPengajuanPembentukan', 'getPengajuanPembentukan');
+    });
+
 
     Route::controller(LappembentukanController::class)->group(function () {
         Route::get('/lappembentukan', 'index');
         Route::get('/lappembentukan/cetak/{jenisCetakan}/{tglawal}/{tglakhir}', 'cetak');            
+    });
+
+    Route::controller(LappenggabunganController::class)->group(function () {
+        Route::get('/lappenggabungan', 'index');
+        Route::get('/lappenggabungan/cetak/{jenisCetakan}/{tglawal}/{tglakhir}', 'cetak');            
+    });
+
+    Route::controller(LappenyesuaianController::class)->group(function () {
+        Route::get('/lappenyesuaian', 'index');
+        Route::get('/lappenyesuaian/cetak/{jenisCetakan}/{tglawal}/{tglakhir}', 'cetak');            
     });

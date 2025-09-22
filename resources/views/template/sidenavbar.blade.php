@@ -62,7 +62,7 @@
     <li class="nav-item">
         <a class="nav-link @if (!$isactive) collapsed @endif" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="@if ($isactive) false @else true @endif" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="far fa-map"></i>
             <span>Lokasi</span>
         </a>
         <div id="collapseTwo" class="collapse @if ($isactive) show @endif" aria-labelledby="headingTwo"
@@ -105,8 +105,23 @@
     <li class="nav-item">
         <a class="nav-link {{ $menu == 'pembentukankecamatan' ? 'active' : '' }}"
             href="{{ url('pembentukankecamatan') }}">
-            <i class="fab fa-first-order-alt"></i>
+            <i class="fas fa-file-alt"></i>
             <span>Pembentukan Kecamatan</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ $menu == 'penggabungankecamatan' ? 'active' : '' }}"
+            href="{{ url('penggabungankecamatan') }}">
+            <i class="fas fa-clone"></i>
+            <span>Penggabungan Kecamatan</span></a>
+    </li>
+
+
+    <li class="nav-item">
+        <a class="nav-link {{ $menu == 'penyesuaiankecamatan' ? 'active' : '' }}"
+            href="{{ url('penyesuaiankecamatan') }}">
+            <i class="fas fa-pen-square"></i>
+            <span>Penyesuaian Kecamatan</span></a>
     </li>
 
 
@@ -116,7 +131,7 @@
     @php
     $active = '';
     $menuopen = '';
-    if (in_array($menu, ['lappembentukan'])) {
+    if (in_array($menu, ['lappembentukan', 'lappenggabungan', 'lappenyesuaian'])) {
     $isactive = true;
     }else{
     $isactive = false;
@@ -129,7 +144,7 @@
         <a class="nav-link @if (!$isactive) collapsed @endif" href="#" data-toggle="collapse"
             data-target="#collapseFour" aria-expanded="@if ($isactive) false @else true @endif"
             aria-controls="collapseFour">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-book-open"></i>
             <span>Laporan</span>
         </a>
         <div id="collapseFour" class="collapse @if ($isactive) show @endif" aria-labelledby="headingTwo"
@@ -137,6 +152,10 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item {{ $menu == 'lappembentukan' ? 'active' : '' }}"
                     href="{{ url('lappembentukan') }}">Pembentukan Kecamatan</a>
+                <a class="collapse-item {{ $menu == 'lappenggabungan' ? 'active' : '' }}"
+                    href="{{ url('lappenggabungan') }}">Penggabungan Kecamatan</a>
+                <a class="collapse-item {{ $menu == 'lappenyesuaian' ? 'active' : '' }}"
+                    href="{{ url('lappenyesuaian') }}">Penyesuaian Kecamatan</a>
             </div>
         </div>
     </li>

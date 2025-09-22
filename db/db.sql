@@ -1,5 +1,5 @@
 /*
-SQLyog Ultimate v10.42 
+SQLyog Enterprise v10.42 
 MySQL - 8.0.30 : Database - sipeka
 *********************************************************************
 */
@@ -122,8 +122,6 @@ CREATE TABLE `pembentukankecamatan` (
 
 /*Data for the table `pembentukankecamatan` */
 
-insert  into `pembentukankecamatan`(`nopengajuan`,`tglpengajuan`,`idpengguna`,`deskripsi`,`inserted_date`,`updated_date`,`idstatuspengajuanterakhir`,`kodekecamatan`,`filesuratpengantar`,`tglverifikasipropinsi`,`nomorraperda`,`tglraperda`,`fileraperda`,`nomorregister`,`tglregister`,`filetelaahanhukum`,`filetelaahanteknis`,`nopermohonankode`,`tglpermohonankode`,`filepermohonankode`,`norekomendasigubernur`,`tglrekomendasigubernur`,`filerekomendasigubernur`,`tglkirimsuratkekemendagri`,`nomorskkemendagri`,`tglskkemendagri`,`fileskkemendagri`) values ('0001/PB/2025','2025-09-22','DRDA28',NULL,'2025-09-22 14:30:09','2025-09-22 14:30:09','001','610105','ukomsertifikat_guru_pertama_288316319658202280019.pdf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-
 /*Table structure for table `pembentukankelurahanterpilih` */
 
 DROP TABLE IF EXISTS `pembentukankelurahanterpilih`;
@@ -147,8 +145,6 @@ CREATE TABLE `pembentukankelurahanterpilih` (
 
 /*Data for the table `pembentukankelurahanterpilih` */
 
-insert  into `pembentukankelurahanterpilih`(`kelurahanterpilihid`,`nopengajuan`,`kodekelurahan`,`jumlahpenduduk`,`jumlahpendudukminimal`,`jumlahkk`,`jumlahkkminimal`,`luaswilayah`,`luaswilayahminimal`) values (35,'0001/PB/2025','6101051001',100,1500,10,300,10.00,12.50),(36,'0001/PB/2025','6101051002',200,1500,20,300,20.00,12.50);
-
 /*Table structure for table `pembentukanpersyaratanadministratif` */
 
 DROP TABLE IF EXISTS `pembentukanpersyaratanadministratif`;
@@ -163,8 +159,6 @@ CREATE TABLE `pembentukanpersyaratanadministratif` (
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `pembentukanpersyaratanadministratif` */
-
-insert  into `pembentukanpersyaratanadministratif`(`idpersyaratan`,`nopengajuan`,`filesuratkesepakatan`) values (17,'0001/PB/2025','ukomsertifikat_guru_pertama_2024_3073734179511022403371.pdf');
 
 /*Table structure for table `pembentukanpersyaratandasar` */
 
@@ -182,8 +176,6 @@ CREATE TABLE `pembentukanpersyaratandasar` (
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `pembentukanpersyaratandasar` */
-
-insert  into `pembentukanpersyaratandasar`(`idpersyaratan`,`nopengajuan`,`jumlahkelurahan`,`jumlahkelurahanminimal`,`filepersyaratan`) values (18,'0001/PB/2025',2,10,'ukomsertifikat_guru_pertama_2883793112500022708671.pdf');
 
 /*Table structure for table `pembentukanpersyaratanteknis` */
 
@@ -205,8 +197,6 @@ CREATE TABLE `pembentukanpersyaratanteknis` (
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `pembentukanpersyaratanteknis` */
-
-insert  into `pembentukanpersyaratanteknis`(`idpersyaratan`,`nopengajuan`,`filekemampuankeuangan`,`filesaranadanprasarana`,`bataswilayah`,`lokasicalonibukota`,`namakecamatan`,`kesesuaiantataruang`,`perbupbataswilayah`) values (17,'0001/PB/2025','ukomsertifikat_guru_pertama_2024_3073734179511022403372.pdf','ukomsertifikat_guru_pertama_2024_307923419056502270778.pdf','ukomsertifikat_guru_pertama_288822311850702290246.pdf','ukomsertifikat_guru_pertama_2883793112500022708672.pdf','test','ukomsertifikat_guru_pertama_2024_307335410858202210904.pdf','ukomsertifikat_guru_pertama_2883483143582022003681.pdf');
 
 /*Table structure for table `pembentukanriwayat` */
 
@@ -232,8 +222,6 @@ CREATE TABLE `pembentukanriwayat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `pembentukanriwayat` */
-
-insert  into `pembentukanriwayat`(`idriwayat`,`nopengajuan`,`idstatuspengajuan`,`tglstatuspengajuan`,`deskripsi`,`idstatuspengajuannext`,`statusapprove`,`idpengguna`,`inserted_date`) values ('0001/PB/2025/001','0001/PB/2025','001','2025-09-22','','003',1,'DRDA28','2025-09-22 14:30:09');
 
 /*Table structure for table `penataan` */
 
@@ -287,7 +275,7 @@ CREATE TABLE `pengguna` (
 
 /*Data for the table `pengguna` */
 
-insert  into `pengguna`(`idpengguna`,`kodekabupaten`,`nip`,`namalengkap`,`gelardepan`,`gelarbelakang`,`idpangkat`,`jabatan`,`nomorwa`,`email`,`username`,`password`,`nomorsk`,`tglsk`,`filesk`,`inserted_date`,`updated_date`,`lastlogin`,`foto`,`statusaktif`,`akseslevel`) values ('DRDA28','6101','893290392093029030','Budi',NULL,'ST','301','Pranata Komputer','0812000000000','budi@gmail.com',NULL,'$2y$12$xRo.djbF3X.JUUrBw/v4T.U2wpioRAehKNbiAasq.fPciuoaWeXuC','Budi123','2025-09-21','1.pdf','2025-09-21 18:06:44','2025-09-21 18:06:44','2025-09-22 13:18:49',NULL,'Aktif','Operator Kabupaten'),('KM5JZ0',NULL,'000000000000000000','Admin',NULL,NULL,'301','Pranata Komputer','081200000000','admin@gmail.com',NULL,'$2y$12$l/qBi3COmaEoxTbtkF9d/u4HC7FAulEh3Huy2zZsGoVkwqSuMdB/m','3243242','1999-01-01','surat_perjanjian_sewa_bangunan.pdf','2025-09-15 22:14:42','2025-09-21 21:51:06','2025-09-22 10:24:35',NULL,'Aktif','Admin');
+insert  into `pengguna`(`idpengguna`,`kodekabupaten`,`nip`,`namalengkap`,`gelardepan`,`gelarbelakang`,`idpangkat`,`jabatan`,`nomorwa`,`email`,`username`,`password`,`nomorsk`,`tglsk`,`filesk`,`inserted_date`,`updated_date`,`lastlogin`,`foto`,`statusaktif`,`akseslevel`) values ('DRDA28','6101','893290392093029030','Budi',NULL,'ST','301','Pranata Komputer','0812000000000','budi@gmail.com',NULL,'$2y$12$xRo.djbF3X.JUUrBw/v4T.U2wpioRAehKNbiAasq.fPciuoaWeXuC','Budi123','2025-09-21','1.pdf','2025-09-21 18:06:44','2025-09-21 18:06:44','2025-09-22 13:18:49',NULL,'Aktif','Operator Kabupaten'),('KM5JZ0',NULL,'000000000000000000','Admin',NULL,NULL,'301','Pranata Komputer','081200000000','admin@gmail.com',NULL,'$2y$12$l/qBi3COmaEoxTbtkF9d/u4HC7FAulEh3Huy2zZsGoVkwqSuMdB/m','3243242','1999-01-01','surat_perjanjian_sewa_bangunan.pdf','2025-09-15 22:14:42','2025-09-21 21:51:06','2025-09-22 21:13:35',NULL,'Aktif','Admin');
 
 /*Table structure for table `persyaratanadministratif` */
 
@@ -409,7 +397,7 @@ CREATE TABLE `sessions` (
 
 /*Data for the table `sessions` */
 
-insert  into `sessions`(`id`,`user_id`,`ip_address`,`user_agent`,`payload`,`last_activity`) values ('xDbmZACroCTIkgIGYbVvPE7m4VyxqiAV1TYNUnCX',NULL,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36','YToyMDp7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wZW1iZW50dWthbmtlY2FtYXRhbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NjoiX3Rva2VuIjtzOjQwOiJiNFNKbXkwMkg0WnB2clZLeEVLRTU0aGRsTVVNWUtTbHNHY3U3MFYxIjtzOjEwOiJpZHBlbmdndW5hIjtzOjY6IkRSREEyOCI7czoxMToibmFtYWxlbmdrYXAiO3M6NDoiQnVkaSI7czo1OiJlbWFpbCI7czoxNDoiYnVkaUBnbWFpbC5jb20iO3M6MTM6ImtvZGVrYWJ1cGF0ZW4iO3M6NDoiNjEwMSI7czoxMzoibmFtYWthYnVwYXRlbiI7czoxNjoiS2FidXBhdGVuIFNhbWJhcyI7czoxMDoiYWtzZXNsZXZlbCI7czoxODoiT3BlcmF0b3IgS2FidXBhdGVuIjtzOjQ6ImZvdG8iO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9pbWFnZXMvdXNlcnMucG5nIjtzOjMxOiJqdW1sYWhfa2VsdXJhaGFuX2Rlc2Ffa2FidXBhdGVuIjtzOjI6IjEwIjtzOjI2OiJqdW1sYWhfa2VsdXJhaGFuX2Rlc2Ffa290YSI7czoxOiI1IjtzOjE5OiJqdW1sYWhfa2tfa2FidXBhdGVuIjtzOjM6IjMwMCI7czoxNDoianVtbGFoX2trX2tvdGEiO3M6MzoiNDAwIjtzOjMzOiJqdW1sYWhfcGVuZHVkdWtfbWluaW1hbF9rYWJ1cGF0ZW4iO3M6NDoiMTUwMCI7czoyODoianVtbGFoX3BlbmR1ZHVrX21pbmltYWxfa290YSI7czo0OiIyMDAwIjtzOjIyOiJsdWFzX3dpbGF5YWhfa2FidXBhdGVuIjtzOjQ6IjEyLjUiO3M6MTc6Imx1YXNfd2lsYXlhaF9rb3RhIjtzOjQ6IjEyLjUiO3M6MjQ6InVzaWFfa2VjYW1hdGFuX2thYnVwYXRlbiI7czoxOiI1IjtzOjE5OiJ1c2lhX2tlY2FtYXRhbl9rb3RhIjtzOjE6IjUiO30=',1758527920);
+insert  into `sessions`(`id`,`user_id`,`ip_address`,`user_agent`,`payload`,`last_activity`) values ('1Ayay2fvwdZMFr0StkjoGuHiVRfoJk2awUFLfW4b',NULL,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36','YToyMDp7czo2OiJfdG9rZW4iO3M6NDA6Imhtb0YwZVVDOFMxRGZVMGxhakVVaUdKZEpCcVkwVHlSV0FZdk55YmIiO3M6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM2OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvbGFwcGVtYmVudHVrYW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjEwOiJpZHBlbmdndW5hIjtzOjY6IktNNUpaMCI7czoxMToibmFtYWxlbmdrYXAiO3M6NToiQWRtaW4iO3M6NToiZW1haWwiO3M6MTU6ImFkbWluQGdtYWlsLmNvbSI7czoxMzoia29kZWthYnVwYXRlbiI7TjtzOjEzOiJuYW1ha2FidXBhdGVuIjtOO3M6MTA6ImFrc2VzbGV2ZWwiO3M6NToiQWRtaW4iO3M6NDoiZm90byI7czozODoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2ltYWdlcy91c2Vycy5wbmciO3M6MzE6Imp1bWxhaF9rZWx1cmFoYW5fZGVzYV9rYWJ1cGF0ZW4iO3M6MjoiMTAiO3M6MjY6Imp1bWxhaF9rZWx1cmFoYW5fZGVzYV9rb3RhIjtzOjE6IjUiO3M6MTk6Imp1bWxhaF9ra19rYWJ1cGF0ZW4iO3M6MzoiMzAwIjtzOjE0OiJqdW1sYWhfa2tfa290YSI7czozOiI0MDAiO3M6MzM6Imp1bWxhaF9wZW5kdWR1a19taW5pbWFsX2thYnVwYXRlbiI7czo0OiIxNTAwIjtzOjI4OiJqdW1sYWhfcGVuZHVkdWtfbWluaW1hbF9rb3RhIjtzOjQ6IjIwMDAiO3M6MjI6Imx1YXNfd2lsYXlhaF9rYWJ1cGF0ZW4iO3M6NDoiMTIuNSI7czoxNzoibHVhc193aWxheWFoX2tvdGEiO3M6NDoiMTIuNSI7czoyNDoidXNpYV9rZWNhbWF0YW5fa2FidXBhdGVuIjtzOjE6IjUiO3M6MTk6InVzaWFfa2VjYW1hdGFuX2tvdGEiO3M6MToiNSI7fQ==',1758551842);
 
 /*Table structure for table `settings` */
 
@@ -444,7 +432,7 @@ CREATE TABLE `statuspengajuan` (
 
 /*Data for the table `statuspengajuan` */
 
-insert  into `statuspengajuan`(`idstatuspengajuan`,`namastatuspengajuan`,`urut`,`statusaktif`,`namastatuspengajuannext`) values ('001','Pengajuan Surat Penataan',1,'Aktif','Menunggu Verifikasi Surat di Propinsi'),('003','Verifikasi Surat di Propinsi',3,'Aktif','Menunggu Upload RAPERDA'),('005','Upload RAPERDA',5,'Aktif','Menunggu Telaah Propinsi'),('010','Telaah Propinsi',10,'Aktif','Menunggu Upload Surat Permohonan Kode'),('015','Upload Surat Pemohonan Kode',15,'Aktif','Menunggu Rekomendasi Gubernur'),('020','Upload Rekomendasi Gubernur',20,'Aktif','Mengirim Surat Ke Kemendagri'),('025','Mengirim Surat Ke Kemendagri',25,'Aktif','Menunggu Kemendagri Menerbitkan Surat'),('030','Kemendagri Menerbitkan Surat',30,'Aktif','Selesai'),('999','Selesai',99,'Aktif',NULL);
+insert  into `statuspengajuan`(`idstatuspengajuan`,`namastatuspengajuan`,`urut`,`statusaktif`,`namastatuspengajuannext`) values ('001','Pengajuan Surat Penataan',1,'Aktif','Menunggu Verifikasi Surat di Propinsi'),('003','Verifikasi Surat di Provinsi',3,'Aktif','Menunggu Upload RANPERDA'),('005','Upload RANPERDA',5,'Aktif','Menunggu Telaah Provinsi'),('010','Telaah Provinsi',10,'Aktif','Menunggu Upload Surat Permohonan Kode'),('015','Upload Surat Pemohonan Kode',15,'Aktif','Menunggu Rekomendasi Gubernur'),('020','Upload Rekomendasi Gubernur',20,'Aktif','Mengirim Surat Ke Kemendagri'),('025','Mengirim Surat Ke Kemendagri',25,'Aktif','Menunggu Kemendagri Menerbitkan Surat'),('030','Kemendagri Menerbitkan Surat',30,'Aktif','Selesai'),('999','Selesai',99,'Aktif',NULL);
 
 /* Function  structure for function  `createStatusPembentukan` */
 
