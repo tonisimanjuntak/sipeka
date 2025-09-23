@@ -229,14 +229,14 @@
             var nopengajuan = $('.btn-detail-pengajuan').attr('data-nopengajuan');
 
             $.ajax({
-                url: "{{ url('pembentukankecamatan/getPengajuanPembentukan') }}",
+                url: "{{ url('penataan/getPengajuanPenataan') }}",
                 type: 'GET',
                 dataType: 'json',
                 data: {'nopengajuan': nopengajuan},
             })
             .done(function(responsePengajuan) {
                 console.log(responsePengajuan);
-                var rowInfoPengajuan = responsePengajuan['rsPembentukanKecamatan'];
+                var rowInfoPengajuan = responsePengajuan['rsPenataan'];
                 var rsDesaTerpilih = responsePengajuan['rsDesaTerpilih'];
                 var rsPersyaratanDasar = responsePengajuan['rsPersyaratanDasar'];
                 var rsPersyaratanAdministratif = responsePengajuan['rsPersyaratanAdministratif'];

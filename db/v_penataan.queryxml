@@ -4,37 +4,22 @@
 <database charset="utf8mb4" collation="utf8mb4_general_ci">sipeka</database>
 </source>
 <canvas>
-<table tablename="pembentukankecamatan" alias="" left="428" top="43" width="150" height="278" />
-<table tablename="pembentukanpersyaratanadministratif" alias="" left="797" top="11" width="150" height="113" />
-<table tablename="pembentukanpersyaratandasar" alias="" left="844" top="148" width="150" height="113" />
-<table tablename="pembentukanpersyaratanteknis" alias="" left="671" top="191" width="150" height="113" />
-<table tablename="pengguna" alias="" left="204" top="47" width="150" height="113" />
-<table tablename="kabupaten" alias="" left="21" top="23" width="150" height="113" />
-<table tablename="statuspengajuan" alias="" left="5" top="144" width="249" height="113" />
-<table tablename="kecamatan" alias="" left="133" top="210" width="150" height="113" />
-<join type = "Inner Join">
-<from tablename = "pembentukanpersyaratanadministratif" alias = "">nopengajuan</from>
-<to tablename = "pembentukankecamatan" alias = "">nopengajuan</to>
-</join>
-<join type = "Inner Join">
-<from tablename = "pembentukanpersyaratandasar" alias = "">nopengajuan</from>
-<to tablename = "pembentukankecamatan" alias = "">nopengajuan</to>
-</join>
-<join type = "Inner Join">
-<from tablename = "pembentukanpersyaratanteknis" alias = "">nopengajuan</from>
-<to tablename = "pembentukankecamatan" alias = "">nopengajuan</to>
-</join>
+<table tablename="penataan" alias="" left="10" top="21" width="150" height="323" />
+<table tablename="pengguna" alias="" left="403" top="25" width="150" height="158" />
+<table tablename="kabupaten" alias="" left="747" top="36" width="150" height="113" />
+<table tablename="kecamatan" alias="" left="389" top="370" width="150" height="113" />
+<table tablename="statuspengajuan" alias="" left="592" top="280" width="279" height="158" />
 <join type = "Left Join">
-<from tablename = "pembentukankecamatan" alias = "">idpengguna</from>
+<from tablename = "penataan" alias = "">idpengguna</from>
 <to tablename = "pengguna" alias = "">idpengguna</to>
 </join>
-<join type = "Left Join">
-<from tablename = "pembentukankecamatan" alias = "">idstatuspengajuanterakhir</from>
-<to tablename = "statuspengajuan" alias = "">idstatuspengajuan</to>
-</join>
 <join type = "Inner Join">
-<from tablename = "pembentukankecamatan" alias = "">kodekecamatan</from>
+<from tablename = "penataan" alias = "">kodekecamatan</from>
 <to tablename = "kecamatan" alias = "">kodekecamatan</to>
+</join>
+<join type = "Left Join">
+<from tablename = "penataan" alias = "">idstatuspengajuanterakhir</from>
+<to tablename = "statuspengajuan" alias = "">idstatuspengajuan</to>
 </join>
 <join type = "Left Join">
 <from tablename = "pengguna" alias = "">kodekabupaten</from>
@@ -43,7 +28,7 @@
 </canvas>
 <grid>
 <column id="1">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>nopengajuan</field>
 <alias></alias>
 <show>true</show>
@@ -58,7 +43,7 @@
 <or4></or4>
 </column>
 <column id="2">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>tglpengajuan</field>
 <alias></alias>
 <show>true</show>
@@ -73,7 +58,7 @@
 <or4></or4>
 </column>
 <column id="3">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>idpengguna</field>
 <alias></alias>
 <show>true</show>
@@ -88,7 +73,7 @@
 <or4></or4>
 </column>
 <column id="4">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>deskripsi</field>
 <alias></alias>
 <show>true</show>
@@ -103,7 +88,7 @@
 <or4></or4>
 </column>
 <column id="5">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>inserted_date</field>
 <alias></alias>
 <show>true</show>
@@ -118,7 +103,7 @@
 <or4></or4>
 </column>
 <column id="6">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>updated_date</field>
 <alias></alias>
 <show>true</show>
@@ -133,7 +118,7 @@
 <or4></or4>
 </column>
 <column id="7">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>idstatuspengajuanterakhir</field>
 <alias></alias>
 <show>true</show>
@@ -148,7 +133,7 @@
 <or4></or4>
 </column>
 <column id="8">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>kodekecamatan</field>
 <alias></alias>
 <show>true</show>
@@ -163,7 +148,7 @@
 <or4></or4>
 </column>
 <column id="9">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>filesuratpengantar</field>
 <alias></alias>
 <show>true</show>
@@ -178,7 +163,7 @@
 <or4></or4>
 </column>
 <column id="10">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>tglverifikasipropinsi</field>
 <alias></alias>
 <show>true</show>
@@ -193,7 +178,7 @@
 <or4></or4>
 </column>
 <column id="11">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>nomorraperda</field>
 <alias></alias>
 <show>true</show>
@@ -208,7 +193,7 @@
 <or4></or4>
 </column>
 <column id="12">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>tglraperda</field>
 <alias></alias>
 <show>true</show>
@@ -223,7 +208,7 @@
 <or4></or4>
 </column>
 <column id="13">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>fileraperda</field>
 <alias></alias>
 <show>true</show>
@@ -238,7 +223,7 @@
 <or4></or4>
 </column>
 <column id="14">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>nomorregister</field>
 <alias></alias>
 <show>true</show>
@@ -253,7 +238,7 @@
 <or4></or4>
 </column>
 <column id="15">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>tglregister</field>
 <alias></alias>
 <show>true</show>
@@ -268,7 +253,7 @@
 <or4></or4>
 </column>
 <column id="16">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>filetelaahanhukum</field>
 <alias></alias>
 <show>true</show>
@@ -283,7 +268,7 @@
 <or4></or4>
 </column>
 <column id="17">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>filetelaahanteknis</field>
 <alias></alias>
 <show>true</show>
@@ -298,7 +283,7 @@
 <or4></or4>
 </column>
 <column id="18">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>nopermohonankode</field>
 <alias></alias>
 <show>true</show>
@@ -313,7 +298,7 @@
 <or4></or4>
 </column>
 <column id="19">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>tglpermohonankode</field>
 <alias></alias>
 <show>true</show>
@@ -328,7 +313,7 @@
 <or4></or4>
 </column>
 <column id="20">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>filepermohonankode</field>
 <alias></alias>
 <show>true</show>
@@ -343,7 +328,7 @@
 <or4></or4>
 </column>
 <column id="21">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>norekomendasigubernur</field>
 <alias></alias>
 <show>true</show>
@@ -358,7 +343,7 @@
 <or4></or4>
 </column>
 <column id="22">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>tglrekomendasigubernur</field>
 <alias></alias>
 <show>true</show>
@@ -373,7 +358,7 @@
 <or4></or4>
 </column>
 <column id="23">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>filerekomendasigubernur</field>
 <alias></alias>
 <show>true</show>
@@ -388,7 +373,7 @@
 <or4></or4>
 </column>
 <column id="24">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>tglkirimsuratkekemendagri</field>
 <alias></alias>
 <show>true</show>
@@ -403,7 +388,7 @@
 <or4></or4>
 </column>
 <column id="25">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>nomorskkemendagri</field>
 <alias></alias>
 <show>true</show>
@@ -418,7 +403,7 @@
 <or4></or4>
 </column>
 <column id="26">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>tglskkemendagri</field>
 <alias></alias>
 <show>true</show>
@@ -433,7 +418,7 @@
 <or4></or4>
 </column>
 <column id="27">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>fileskkemendagri</field>
 <alias></alias>
 <show>true</show>
@@ -448,7 +433,7 @@
 <or4></or4>
 </column>
 <column id="28">
-<table tablename="pembentukankecamatan"></table>
+<table tablename="penataan"></table>
 <field>jenispenataan</field>
 <alias></alias>
 <show>true</show>
@@ -463,8 +448,8 @@
 <or4></or4>
 </column>
 <column id="29">
-<table tablename="pengguna"></table>
-<field>nip</field>
+<table tablename="kecamatan"></table>
+<field>namakecamatan</field>
 <alias></alias>
 <show>true</show>
 <sortorder></sortorder>
@@ -553,21 +538,6 @@
 <or4></or4>
 </column>
 <column id="35">
-<table tablename="kecamatan"></table>
-<field>namakecamatan</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="36">
 <table tablename="statuspengajuan"></table>
 <field>namastatuspengajuan</field>
 <alias></alias>
@@ -582,159 +552,9 @@
 <or3></or3>
 <or4></or4>
 </column>
-<column id="37">
+<column id="36">
 <table tablename="statuspengajuan"></table>
 <field>namastatuspengajuannext</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="38">
-<table tablename="pembentukanpersyaratanadministratif"></table>
-<field>filesuratkesepakatan</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="39">
-<table tablename="pembentukanpersyaratandasar"></table>
-<field>jumlahkelurahan</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="40">
-<table tablename="pembentukanpersyaratandasar"></table>
-<field>jumlahkelurahanminimal</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="41">
-<table tablename="pembentukanpersyaratandasar"></table>
-<field>filepersyaratan</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="42">
-<table tablename="pembentukanpersyaratanteknis"></table>
-<field>filekemampuankeuangan</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="43">
-<table tablename="pembentukanpersyaratanteknis"></table>
-<field>filesaranadanprasarana</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="44">
-<table tablename="pembentukanpersyaratanteknis"></table>
-<field>bataswilayah</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="45">
-<table tablename="pembentukanpersyaratanteknis"></table>
-<field>namakecamatan</field>
-<alias>namakecamatanbaru</alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="46">
-<table tablename="pembentukanpersyaratanteknis"></table>
-<field>kesesuaiantataruang</field>
-<alias></alias>
-<show>true</show>
-<sortorder></sortorder>
-<sort></sort>
-<groupby>false</groupby>
-<aggfunct></aggfunct>
-<criteria></criteria>
-<or1></or1>
-<or2></or2>
-<or3></or3>
-<or4></or4>
-</column>
-<column id="47">
-<table tablename="pembentukanpersyaratanteknis"></table>
-<field>perbupbataswilayah</field>
 <alias></alias>
 <show>true</show>
 <sortorder></sortorder>

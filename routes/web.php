@@ -10,8 +10,8 @@ use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\PersyaratandasarController;
 use App\Http\Controllers\PersyaratanadministratifController;
 use App\Http\Controllers\PersyaratanteknisController;
-use App\Http\Controllers\PembentukankecamatanController;
-use App\Http\Controllers\PenggabunganKecamatanController;
+use App\Http\Controllers\PenataanController;
+use App\Http\Controllers\PenggabungankecamatanController;
 use App\Http\Controllers\PenyesuaiankecamatanController;
 use App\Http\Controllers\LappembentukanController;
 use App\Http\Controllers\LappenggabunganController;
@@ -120,61 +120,23 @@ use Illuminate\Support\Facades\Route;
     });
 
 
-    Route::controller(PembentukankecamatanController::class)->group(function () {
-        Route::get('/pembentukankecamatan', 'index');
-        Route::get('/pembentukankecamatan/tambah', 'tambah');
-        Route::get('/pembentukankecamatan/progress/{IdPrimary}', 'progress');
-        Route::get('/pembentukankecamatan/listindex', 'listindex');
-        Route::get('/pembentukankecamatan/hapus/{IdPrimary}', 'hapus');
-        Route::get('/pembentukankecamatan/getId/', 'getId');
-        Route::get('/pembentukankecamatan/getKelurahan', 'getKelurahan');
-        Route::post('/pembentukankecamatan/simpanPengajuan', 'simpanPengajuan');
-        Route::post('/pembentukankecamatan/simpanVerifikasiPropinsi', 'simpanVerifikasiPropinsi');
-        Route::post('/pembentukankecamatan/simpanRaperda', 'simpanRaperda');
-        Route::post('/pembentukankecamatan/simpanTelaahan', 'simpanTelaahan');
-        Route::post('/pembentukankecamatan/simpanPermohonanKode', 'simpanPermohonanKode');
-        Route::post('/pembentukankecamatan/simpanRekomendasiGubernur', 'simpanRekomendasiGubernur');
-        Route::post('/pembentukankecamatan/simpanKirimSuratKeKemendagri', 'simpanKirimSuratKeKemendagri');
-        Route::post('/pembentukankecamatan/simpanSkKemendagri', 'simpanSkKemendagri');
-        Route::get('/pembentukankecamatan/getPengajuanPembentukan', 'getPengajuanPembentukan');
-    });
-
-    Route::controller(PenggabunganKecamatanController::class)->group(function () {
-        Route::get('/penggabungankecamatan', 'index');
-        Route::get('/penggabungankecamatan/tambah', 'tambah');
-        Route::get('/penggabungankecamatan/progress/{IdPrimary}', 'progress');
-        Route::get('/penggabungankecamatan/listindex', 'listindex');
-        Route::get('/penggabungankecamatan/hapus/{IdPrimary}', 'hapus');
-        Route::get('/penggabungankecamatan/getId/', 'getId');
-        Route::get('/penggabungankecamatan/getKelurahan', 'getKelurahan');
-        Route::post('/penggabungankecamatan/simpanPengajuan', 'simpanPengajuan');
-        Route::post('/penggabungankecamatan/simpanVerifikasiPropinsi', 'simpanVerifikasiPropinsi');
-        Route::post('/penggabungankecamatan/simpanRaperda', 'simpanRaperda');
-        Route::post('/penggabungankecamatan/simpanTelaahan', 'simpanTelaahan');
-        Route::post('/penggabungankecamatan/simpanPermohonanKode', 'simpanPermohonanKode');
-        Route::post('/penggabungankecamatan/simpanRekomendasiGubernur', 'simpanRekomendasiGubernur');
-        Route::post('/penggabungankecamatan/simpanKirimSuratKeKemendagri', 'simpanKirimSuratKeKemendagri');
-        Route::post('/penggabungankecamatan/simpanSkKemendagri', 'simpanSkKemendagri');
-        Route::get('/penggabungankecamatan/getPengajuanPembentukan', 'getPengajuanPembentukan');
-    });
-
-    Route::controller(PenyesuaiankecamatanController::class)->group(function () {
-        Route::get('/penyesuaiankecamatan', 'index');
-        Route::get('/penyesuaiankecamatan/tambah', 'tambah');
-        Route::get('/penyesuaiankecamatan/progress/{IdPrimary}', 'progress');
-        Route::get('/penyesuaiankecamatan/listindex', 'listindex');
-        Route::get('/penyesuaiankecamatan/hapus/{IdPrimary}', 'hapus');
-        Route::get('/penyesuaiankecamatan/getId/', 'getId');
-        Route::get('/penyesuaiankecamatan/getKelurahan', 'getKelurahan');
-        Route::post('/penyesuaiankecamatan/simpanPengajuan', 'simpanPengajuan');
-        Route::post('/penyesuaiankecamatan/simpanVerifikasiPropinsi', 'simpanVerifikasiPropinsi');
-        Route::post('/penyesuaiankecamatan/simpanRaperda', 'simpanRaperda');
-        Route::post('/penyesuaiankecamatan/simpanTelaahan', 'simpanTelaahan');
-        Route::post('/penyesuaiankecamatan/simpanPermohonanKode', 'simpanPermohonanKode');
-        Route::post('/penyesuaiankecamatan/simpanRekomendasiGubernur', 'simpanRekomendasiGubernur');
-        Route::post('/penyesuaiankecamatan/simpanKirimSuratKeKemendagri', 'simpanKirimSuratKeKemendagri');
-        Route::post('/penyesuaiankecamatan/simpanSkKemendagri', 'simpanSkKemendagri');
-        Route::get('/penyesuaiankecamatan/getPengajuanPembentukan', 'getPengajuanPembentukan');
+    Route::controller(PenataanController::class)->group(function () {
+        Route::get('/penataan/index/{jenispenataan}', 'index');
+        Route::get('/penataan/tambah/{jenispenataan}', 'tambah');
+        Route::get('/penataan/progress/{IdPrimary}', 'progress');
+        Route::get('/penataan/listindex', 'listindex');
+        Route::get('/penataan/hapus/{IdPrimary}', 'hapus');
+        Route::get('/penataan/getId/', 'getId');
+        Route::get('/penataan/getKelurahan', 'getKelurahan');
+        Route::post('/penataan/simpanPengajuan', 'simpanPengajuan');
+        Route::post('/penataan/simpanVerifikasiPropinsi', 'simpanVerifikasiPropinsi');
+        Route::post('/penataan/simpanRaperda', 'simpanRaperda');
+        Route::post('/penataan/simpanTelaahan', 'simpanTelaahan');
+        Route::post('/penataan/simpanPermohonanKode', 'simpanPermohonanKode');
+        Route::post('/penataan/simpanRekomendasiGubernur', 'simpanRekomendasiGubernur');
+        Route::post('/penataan/simpanKirimSuratKeKemendagri', 'simpanKirimSuratKeKemendagri');
+        Route::post('/penataan/simpanSkKemendagri', 'simpanSkKemendagri');
+        Route::get('/penataan/getPengajuanPenataan', 'getPengajuanPenataan');
     });
 
 

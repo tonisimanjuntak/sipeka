@@ -105,14 +105,14 @@
 
     <li class="nav-item">
         <a class="nav-link {{ $menu == 'pembentukankecamatan' ? 'active' : '' }}"
-            href="{{ url('pembentukankecamatan') }}">
+            href="{{ url('penataan/index/pembentukan') }}">
             <i class="fas fa-file-alt"></i>
             <span>Pembentukan Kecamatan</span></a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link {{ $menu == 'penggabungankecamatan' ? 'active' : '' }}"
-            href="{{ url('penggabungankecamatan') }}">
+            href="{{ url('penataan/index/penggabungan') }}">
             <i class="fas fa-clone"></i>
             <span>Penggabungan Kecamatan</span></a>
     </li>
@@ -120,7 +120,7 @@
 
     <li class="nav-item">
         <a class="nav-link {{ $menu == 'penyesuaiankecamatan' ? 'active' : '' }}"
-            href="{{ url('penyesuaiankecamatan') }}">
+            href="{{ url('penataan/index/penyesuaian') }}">
             <i class="fas fa-pen-square"></i>
             <span>Penyesuaian Kecamatan</span></a>
     </li>
